@@ -221,6 +221,23 @@ in
       }
     ];
   };
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      Seccl = {
+        hostname = "github.com";
+        forwardAgent = true;
+        identitiesOnly = true;
+        identityFile = "~/.ssh/seccl_rsa";
+      };
+      Personal = {
+        hostname = "github.com";
+        forwardAgent = true;
+        identitiesOnly = true;
+        identityFile = "~/.ssh/seccl_rsa";
+      };
+    };
+  };
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
@@ -276,6 +293,7 @@ in
       })
     ];
   };
+  programs.tealdeer.enable = true;
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;

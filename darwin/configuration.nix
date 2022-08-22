@@ -5,7 +5,7 @@ in {
   environment.variables = {
     SHELL = "${pkgs.fish}/bin/fish";
     TERMINFO_DIRS =
-        "${pkgs.alacritty.terminfo.outPath}/share/terminfo";
+      "${pkgs.ncurses.out}/share/terminfo:${pkgs.alacritty.terminfo.outPath}/share/terminfo";
   };
 
   environment.systemPackages = with pkgs; [
@@ -16,10 +16,12 @@ in {
     # mongodb-compass
     postman
     # slack
+    teams
 
     # Global utils
     fd
     fzf
+    ncurses
     nix-prefetch-git
     ripgrep
   ];
@@ -27,7 +29,8 @@ in {
   environment.shells = with pkgs; [ fish ];
 
   environment.pathsToLink = [
-    "/share/doc/"
+    "/share/doc"
+    "/share/terminfo"
   ];
 
   environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";

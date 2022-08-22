@@ -7,22 +7,44 @@ let
     rev = "172c7800c3ec3d64a29f9b4bb17408b53ad931e1";
   };
   lxs_tmux_config = builtins.readFile (builtins.toPath "${lxs_dotfiles}/tmux/.tmux.conf");
+  lxs_neovim_config = builtins.readFile (builtins.toPath "${lxs_dotfiles}/nvim/init.lua");
+  lxs_git_commit_template = builtins.toPath "${lxs_dotfiles}/git/.git-commit-template";
 in
 {
   manual.manpages.enable = true;
 
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
+    }))
+  ];
+
   home.username = "lukexaviersymington";
   home.homeDirectory = "/Users/lukexaviersymington";
   home.packages = with pkgs; [
+    ansible
+    awscli
+    aws-sam-cli
+    cachix
     delta
+    docker
     fd
     figlet
     gojq
+    imagemagick
+    inetutils
+    llvm
+    mongodb-tools
+    mongosh
     multimarkdown
     pandoc
     pinentry
     pinentry_mac
+    pritunl-ssh
+    shellcheck
+    terminal-notifier
     xh
+    yarn
   ];
   home.stateVersion = "22.11";
   home.shellAliases = {
@@ -94,13 +116,21 @@ in
       {
         name = "replay";
         src = pkgs.fetchFromGitHub {
-            owner = "jorgebucaran";
-            repo = "replay.fish";
-            rev = "bd8e5b89ec78313538e747f0292fcaf631e87bd2";
-            sha256 = "0inniabgdbd7yq71rpmpnzhbk8y23ggvlk4jhaapc7bz0yhbxkkc";
+          owner = "jorgebucaran";
+          repo = "replay.fish";
+          rev = "bd8e5b89ec78313538e747f0292fcaf631e87bd2";
+          sha256 = "0inniabgdbd7yq71rpmpnzhbk8y23ggvlk4jhaapc7bz0yhbxkkc";
         };
       }
     ];
+  };
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    withNodeJs = true;
+    withPython3 = true;
   };
   programs.git = {
     enable = true;
@@ -208,7 +238,7 @@ in
         };
       };
       commit = {
-        template = "~/.git-commit-template";
+        template = lxs_git_commit_template;
         verbose = true;
       };
       safe = {
@@ -253,12 +283,20 @@ in
         forwardAgent = true;
         identitiesOnly = true;
         identityFile = "~/.ssh/seccl_rsa";
+        extraOptions = {
+          AddKeysToAgent = "yes";
+          UseKeychain = "yes";
+        }; 
       };
       Personal = {
         hostname = "github.com";
         forwardAgent = true;
         identitiesOnly = true;
         identityFile = "~/.ssh/seccl_rsa";
+        extraOptions = {
+          AddKeysToAgent = "yes";
+          UseKeychain = "yes";
+        }; 
       };
     };
   };

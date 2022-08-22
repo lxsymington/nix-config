@@ -13,9 +13,21 @@ in
 
   home.username = "lukexaviersymington";
   home.homeDirectory = "/Users/lukexaviersymington";
+  home.packages = with pkgs; [
+    delta
+    fd
+    figlet
+    gojq
+    multimarkdown
+    pandoc
+    pinentry
+    pinentry_mac
+    xh
+  ];
   home.stateVersion = "22.11";
   home.shellAliases = {
-    "renix" = "darwin-rebuild switch --flake ~/.config/nixpkgs#";
+    renix = "darwin-rebuild switch --flake ~/.config/nixpkgs#";
+    jq = "gojq";
   };
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -39,6 +51,9 @@ in
   };
   programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+        fish_vi_key_bindings
+    '';
     plugins = [
       {
         name = "done";
@@ -220,6 +235,15 @@ in
         };
       }
     ];
+  };
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh";
+      prompt = "enabled";
+      editor = "${pkgs.vim}/bin/vim";
+      pager = "${pkgs.delta}/bin/delta";
+    };
   };
   programs.ssh = {
     enable = true;

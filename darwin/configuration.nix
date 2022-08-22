@@ -3,7 +3,9 @@
 let main_user = "lukexaviersymington";
 in {
   environment.variables = {
-    SHELL = "fish";
+    SHELL = "${pkgs.fish}/bin/fish";
+    TERMINFO_DIRS =
+        "${pkgs.alacritty.terminfo.outPath}/share/terminfo";
   };
 
   environment.systemPackages = with pkgs; [
@@ -21,6 +23,8 @@ in {
     nix-prefetch-git
     ripgrep
   ];
+  
+  environment.shells = with pkgs; [ fish ];
 
   environment.pathsToLink = [
     "/share/doc/"
@@ -46,6 +50,8 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   programs.nix-index.enable = true;
+  programs.bash.enable = true;
+  programs.zsh.enable = true;
   programs.fish = {
     enable = true;
     vendor = {
@@ -66,7 +72,6 @@ in {
     enable = true;
     enableSensible = true;
   };
-  programs.zsh.enable = true;
 
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToControl = true;

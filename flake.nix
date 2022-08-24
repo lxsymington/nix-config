@@ -12,7 +12,7 @@
   outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
     darwinConfigurations = {
       # This needs to reflect the system `hostname`
-      ip-192-168-1-218 = darwin.lib.darwinSystem {
+      seccl-macbook = darwin.lib.darwinSystem {
         system = "x86_64-darwin";
         modules = [
           ./darwin/configuration.nix

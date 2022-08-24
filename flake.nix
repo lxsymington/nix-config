@@ -1,32 +1,93 @@
 {
-  description = "Luke Xavier Symington's Home Manager configuration";
+  description = "System configurations";
 
   inputs = {
+    darwin = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:lnl7/nix-darwin";
+    };
+    home-manager = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    darwin.url = "github:lnl7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    stable.url = "github:nixos/nixpkgs/nixos-21.11";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
-    darwinConfigurations = {
-      # This needs to reflect the system `hostname`
-      seccl-macbook = darwin.lib.darwinSystem {
-        system = "x86_64-darwin";
-        modules = [
-          ./darwin/configuration.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.lukexaviersymington = import ./home.nix;
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }:
+    let
+      inherit (darwin.lib) darwinSystem;
+      inherit (home-manager.lib) homeManagerConfiguration;
+      inherit (builtins) listToAttrs map;
 
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
+      isDarwin = system: (builtins.elem system nixpkgs.lib.platforms.darwin);
+      homePrefix = system: if isDarwin system then "/Users" else "/home";
+
+      # generate a base darwin configuration with the specified hostname,
+      # overlays and any extraModules applied
+      mkDarwinConfig = {
+        system ? "aarch64-darwin",
+        nixpkgs ? inputs.nixpkgs,
+        stable ? inputs.stable,
+        baseModules ? [
+            home-manager.darwinModules.home-manager
+            ./modules/darwin
+          ],
+        extraModules ? []
+      }: darwinSystem {
+        inherit system;
+        modules = baseModules ++ extraModules;
+        specialArgs = { inherit inputs nixpkgs stable; };
+      };
+
+      # generate a home-manager configuration usable on any unix system
+      # with overlays and any extraModules applied
+      mkHomeConfig = {
+        username,
+        system ? "x86_64-linux",
+        nixpkgs ? inputs.nixpkgs,
+        stable ? inputs.stable,
+        baseModules ? [
+          ./modules/home-manager
+          {
+            home = {
+              inherit username;
+              homeDirectory = "${homePrefix system}/${username}";
+              sessionVariables = {
+                NIX_PATH =
+                  "nixpkgs=${nixpkgs}:stable=${stable}\${NIX_PATH:+:}$NIX_PATH";
+              };
+            };
           }
-        ];
+        ],
+        extraModules ? [ ]
+      }: homeManagerConfiguration rec {
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+        extraSpecialArgs = { inherit inputs nixpkgs stable; };
+        modules = baseModules ++ extraModules ++ [ ./modules/overlays.nix ];
+      };
+    in {
+      darwinConfigurations = {
+        seccl-macbook = mkDarwinConfig {
+          system = "x86_64-darwin";
+          extraModules = [./profiles/lukexaviersymington-work.nix];
+        };
+        lxs-seccl-macbook = mkDarwinConfig {
+          extraModules = [./profiles/lxs-work.nix];
+        };
+      };
+
+      homeConfigurations = {
+        seccl2020 = mkHomeConfig {
+          username = "lukexaviersymington";
+          extraModules = [];
+        };
+        seccl2022 = mkHomeConfig {
+          username = "lxs";
+          extraModules = [];
+        };
       };
     };
-  };
 }

@@ -7,6 +7,7 @@ let
     rev = "327698d20d33ecd7f5848004a5585b95027c409e";
   };
   lxs_neovim_config = builtins.readFile (builtins.toPath "${dotfiles}/nvim/init.lua");
+  build_alacritty_config = import ./alacritty.nix;
   build_fish_config = import ./fish.nix;
   build_git_config = import ./git.nix;
   build_tmux_config = import ./tmux.nix;
@@ -59,6 +60,7 @@ in
 
   programs = {
     home-manager.enable = true;
+    alacritty = build_alacritty_config { inherit dotfiles config pkgs; };
     bat = {
       enable = true;
       config = {
@@ -99,7 +101,7 @@ in
           hostname = "github.com";
           forwardAgent = true;
           identitiesOnly = true;
-          identityFile = "~/.ssh/seccl_rsa";
+          identityFile = "~/.ssh/seccl_ed25519";
           extraOptions = {
             AddKeysToAgent = "yes";
             UseKeychain = "yes";
@@ -109,7 +111,7 @@ in
           hostname = "github.com";
           forwardAgent = true;
           identitiesOnly = true;
-          identityFile = "~/.ssh/seccl_rsa";
+          identityFile = "~/.ssh/personal_ed25519";
           extraOptions = {
             AddKeysToAgent = "yes";
             UseKeychain = "yes";

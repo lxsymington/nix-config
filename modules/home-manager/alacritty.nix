@@ -1,6 +1,9 @@
 { dotfiles, config, pkgs, ... }:
 
-{
+let
+  isDarwin = pkgs.stdenvNoCC.isDarwin;
+  fontFamily = if isDarwin then "JetBrainsMono Nerd Font" else "JetBrainsMonoNL Nerd Font";
+in {
   enable = true;
   settings = {
     env = {
@@ -17,8 +20,8 @@
 	y = 20;
       };
       dynamic_padding = true;
-      decorations = "full";
-      startup_mode = "Maximised";
+      decorations = if isDarwin then "transparent" else "full";
+      startup_mode = "Maximized";
       dynamic_title = true;
     };
 
@@ -31,7 +34,7 @@
       animation = "EaseOutExpo";
       duration = 300;
       color = "#a3293d";
-    }
+    };
 
     selection = {
       semantic_escape_chars = ",│`|:\"' ()[]{}<>\t";
@@ -65,30 +68,45 @@
       hide_when_typing = true;
     };
 
-    hints = {
-      alphabet = "jfkdls;ahgurieowpq";
-      enabled: [
-        {
-          regex: "(mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+";
-          command = "xdg-open";
-          post_processing = true;
-          mouse = {
-            enabled = true;
-            mods = "None";
-	  };
-          binding = {
-            key = "U";
-            mods = "Control|Shift";
-	  };
-	};
-      ];
-    };
-
     mouse_bindings = [
       {
         mouse = "Middle";
 	action = "PasteSelection";
-      };
+      }
     ];
+
+    font = {
+      normal = {
+        family = fontFamily;
+        style = "Regular";
+      };
+
+      bold = {
+        family = fontFamily;
+        style = "Extra Bold";
+      };
+
+      italic = {
+        family = fontFamily;
+        style = "Italic";
+      };
+
+      bold_italic = {
+        family = fontFamily;
+        style = "Extra Bold Italic";
+      };
+
+      size = 12.0;
+
+      offset = {
+        x = 0;
+        y = 8;
+      };
+
+      glyph_offset = {
+        x = 0;
+        y = 4;
+      };
+    };
   };
 }

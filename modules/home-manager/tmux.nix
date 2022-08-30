@@ -76,7 +76,7 @@ in {
   keyMode = "vi";
   historyLimit = 50000;
   prefix = "C-a";
-  terminal = "tmux256-color";
+  terminal = "tmux-256color";
   plugins = with pkgs.tmuxPlugins; [
     cpu
     net-speed

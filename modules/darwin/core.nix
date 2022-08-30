@@ -10,7 +10,7 @@ in {
     variables = {
       SHELL = "${pkgs.fish}/bin/fish";
       TERMINFO_DIRS =
-        "${pkgs.ncurses.out}/share/terminfo:${pkgs.alacritty.terminfo.outPath}/share/terminfo";
+        "${pkgs.ncurses.outPath}/share/terminfo:${pkgs.alacritty.terminfo.outPath}/share/terminfo";
     };
 
     systemPackages = with pkgs; [
@@ -20,6 +20,7 @@ in {
       emacs
       # mongodb-compass
       postman
+      pritunl-ssh
       # slack
       teams
 

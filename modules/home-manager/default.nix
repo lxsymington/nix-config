@@ -24,24 +24,38 @@ in
   home = {
     packages = with pkgs; [
       ansible
-      awscli
       aws-sam-cli
+      awscli
       cachix
+      cargo
       delta
+      # deno
       docker
+      emscripten
       fd
       figlet
+      glib
+      go
       gojq
       imagemagick
       inetutils
       llvm
+      luajit
+      luajitPackages.luarocks
       mongodb-tools
       mongosh
       multimarkdown
+      nghttp2
+      nodePackages.typescript
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted
+      nodePackages.yaml-language-server
       pandoc
+      pcre
       pinentry
       pinentry_mac
       pritunl-ssh
+      reattach-to-user-namespace
       shellcheck
       terminal-notifier
       xh
@@ -64,7 +78,7 @@ in
     bat = {
       enable = true;
       config = {
-        theme = "Solarized (light)";
+        theme = "Solarized";
         italic-text = "always";
         pager = "less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse";
         map-syntax = [ ".ignore:Git Ignore" ];
@@ -74,14 +88,6 @@ in
     exa = {
       enable = true;
       enableAliases = true;
-    };
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      withNodeJs = true;
-      withPython3 = true;
     };
     fish = build_fish_config { inherit dotfiles config pkgs; };
     gh = {
@@ -94,6 +100,17 @@ in
       };
     };
     git = build_git_config { inherit dotfiles config pkgs; };
+    gpg = {
+        enable = true;
+    };
+    neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+      withNodeJs = true;
+      withPython3 = true;
+    };
     starship = {
       enable = true;
       enableFishIntegration = true;

@@ -72,10 +72,10 @@
       darwinConfigurations = {
         seccl-macbook = mkDarwinConfig {
           system = "x86_64-darwin";
-          extraModules = [./profiles/lukexaviersymington-work.nix];
+          extraModules = [ ./profiles/lukexaviersymington-work.nix ];
         };
         lxs-seccl-macbook = mkDarwinConfig {
-          extraModules = [./profiles/lxs-work.nix];
+          extraModules = [ ./profiles/lxs-work.nix ];
         };
       };
 

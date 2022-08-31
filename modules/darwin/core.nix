@@ -2,15 +2,18 @@
 let
   prefix = "/run/current-system/sw/bin";
   inherit (pkgs.stdenvNoCC) isAarch64 isAarch32;
-in {
+in
+{
   environment = {
     etc = {
-      darwin.source = "${inputs.darwin}"; 
+      darwin.source = "${inputs.darwin}";
     };
     variables = {
       SHELL = "${pkgs.fish}/bin/fish";
-      TERMINFO_DIRS =
-        "${pkgs.ncurses.outPath}/share/terminfo:${pkgs.alacritty.terminfo.outPath}/share/terminfo";
+      TERMINFO_DIRS = [
+        "$HOME/.local/share/terminfo"
+        "/run/current-system/sw/share/terminfo"
+      ];
     };
 
     systemPackages = with pkgs; [
@@ -31,7 +34,7 @@ in {
       nix-prefetch-git
       ripgrep
     ];
-  
+
     pathsToLink = [
       "/Applcations"
       "/share/doc"

@@ -2,7 +2,8 @@
 
 let
   lxs_git_commit_template = builtins.toPath "${dotfiles}/git/.git-commit-template";
-in {
+in
+{
   enable = true;
   userName = "Luke Xavier Symington";
   userEmail = "lukexaviersymington@gmail.com";
@@ -38,7 +39,7 @@ in {
     enable = true;
     options = {
       features = "side-by-side line-numbers decorations";
-      syntax-theme = "Solarized (Light)";
+      syntax-theme = "TwoDark";
       decorations = {
         commit-decoration-style = "bold purple box ul";
         file-style = "bold purple ul";
@@ -46,10 +47,10 @@ in {
         hunk-header-decoration-style = "black box ul";
       };
       line-numbers = {
-            line-numbers-left-style = "black";
-            line-numbers-right-style = "black";
-            line-numbers-minus-style = "124";
-            line-numbers-plus-style = "28";
+        line-numbers-left-style = "black";
+        line-numbers-right-style = "black";
+        line-numbers-minus-style = "124";
+        line-numbers-plus-style = "28";
       };
     };
   };
@@ -77,12 +78,12 @@ in {
       ui = true;
     };
     diff = {
-          tool = "nvim";
+      tool = "nvim";
       conflictstyle = "diff2";
-          algorithm = "patience";
-          indentHeuristic = true;
-          compactionHeuristic = true;
-          colorMoved = "default";
+      algorithm = "patience";
+      indentHeuristic = true;
+      compactionHeuristic = true;
+      colorMoved = "default";
     };
     merge = {
       tool = "nvim";

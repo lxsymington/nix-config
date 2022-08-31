@@ -78,7 +78,7 @@ in
     bat = {
       enable = true;
       config = {
-        theme = "Solarized";
+        theme = "TwoDark";
         italic-text = "always";
         pager = "less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse";
         map-syntax = [ ".ignore:Git Ignore" ];
@@ -101,7 +101,7 @@ in
     };
     git = build_git_config { inherit dotfiles config pkgs; };
     gpg = {
-        enable = true;
+      enable = true;
     };
     neovim = {
       enable = true;

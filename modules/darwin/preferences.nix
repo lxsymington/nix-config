@@ -18,7 +18,7 @@
     # trackpad settings
     trackpad = {
       # silent clicking = 0, default = 1
-      ActuationStrength = 0;
+      ActuationStrength = 1;
       # enable tap to click
       Clicking = true;
       # firmness level, 0 = lightest, 2 = heaviest
@@ -26,9 +26,9 @@
       # firmness level for force touch
       SecondClickThreshold = 1;
       # don't allow positional right click
-      TrackpadRightClick = false;
+      TrackpadRightClick = true;
       # three finger drag for space switching
-      # TrackpadThreeFingerDrag = true;
+      TrackpadThreeFingerDrag = true;
     };
 
     # firewall settings

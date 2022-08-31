@@ -7,10 +7,10 @@
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
-      experimental-features = nix-command flakes
     '';
     settings = {
       allowed-users = [ "${config.user.name}" "root" "@admin" "@wheel" ];
+      experimental-features = [ "nix-command" "flakes" ];
       max-jobs = 8;
       trusted-users = [ "${config.user.name}" "root" "@admin" "@wheel" ];
     };

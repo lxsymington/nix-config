@@ -72,6 +72,8 @@ in
     };
   };
 
+  xdg.enable = true;
+
   programs = {
     home-manager.enable = true;
     alacritty = build_alacritty_config { inherit dotfiles config pkgs; };
@@ -102,6 +104,10 @@ in
     git = build_git_config { inherit dotfiles config pkgs; };
     gpg = {
       enable = true;
+      settings = {
+        utf8-strings = true;
+        auto-key-locate = "local";
+      };
     };
     neovim = {
       enable = true;

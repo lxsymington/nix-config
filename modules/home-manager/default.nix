@@ -15,12 +15,6 @@ in
 {
   manual.manpages.enable = true;
 
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
-    }))
-  ];
-
   home = {
     packages = with pkgs; [
       ansible
@@ -107,6 +101,15 @@ in
       settings = {
         utf8-strings = true;
         auto-key-locate = "local";
+      };
+    };
+    helix = {
+      enable = true;
+      settings = {
+        lsp.display-messages = true;
+        keys.normal = {
+          space.space = "file_picker";
+        };
       };
     };
     neovim = {

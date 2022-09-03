@@ -106,7 +106,14 @@ in
     helix = {
       enable = true;
       settings = {
-        lsp.display-messages = true;
+      	editor = {
+	  cursor-shape = {
+	    normal = "block";
+	    insert = "bar";
+	    select = "underline";
+	  };
+          lsp.display-messages = true;
+	};
         keys.normal = {
           space.space = "file_picker";
         };

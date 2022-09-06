@@ -12,9 +12,13 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-21.11";
+    lxs-neovim = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:lxsymington/lxs-neovim";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, lxs-neovim, ... }:
     let
       inherit (darwin.lib) darwinSystem;
       inherit (home-manager.lib) homeManagerConfiguration;
@@ -64,6 +68,9 @@
       }: homeManagerConfiguration rec {
         pkgs = import nixpkgs {
           inherit system;
+          overlays = [
+            (final: prev: { neovim-nightly = lxs-neovim.defaultPackage.${final.system}; })
+          ];
         };
         extraSpecialArgs = { inherit inputs nixpkgs stable; };
         modules = baseModules ++ extraModules ++ [ ./modules/overlays.nix ];

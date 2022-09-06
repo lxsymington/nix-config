@@ -36,9 +36,28 @@ in
     ];
 
     pathsToLink = [
-      "/Applcations"
+      "/Applications"
       "/share/doc"
       "/share/terminfo"
+    ];
+  };
+  
+  homebrew = {
+    enable = true;
+    autoUpdate = true;
+    cleanup = "zap";
+    global = {
+      brewfile = true;
+      noLock = true;
+    };
+    taps = [
+      "homebrew/core"
+      "homebrew/cask"
+      "homebrew/cask-drivers"
+    ];
+    casks = [
+      "mongodb-compass"
+      "pritunl"
     ];
   };
 

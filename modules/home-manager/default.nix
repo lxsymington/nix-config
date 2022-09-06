@@ -6,7 +6,6 @@ let
     ref = "main";
     rev = "327698d20d33ecd7f5848004a5585b95027c409e";
   };
-  lxs_neovim_config = builtins.readFile (builtins.toPath "${dotfiles}/nvim/init.lua");
   build_alacritty_config = import ./alacritty.nix;
   build_fish_config = import ./fish.nix;
   build_git_config = import ./git.nix;
@@ -23,7 +22,6 @@ in
       cachix
       cargo
       delta
-      # deno
       docker
       emscripten
       fd
@@ -34,16 +32,10 @@ in
       imagemagick
       inetutils
       llvm
-      luajit
-      luajitPackages.luarocks
       mongodb-tools
       mongosh
       multimarkdown
       nghttp2
-      nodePackages.typescript
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
-      nodePackages.yaml-language-server
       pandoc
       pcre
       pinentry
@@ -60,10 +52,10 @@ in
       renix = "darwin-rebuild switch --flake ~/.config/nixpkgs";
       jq = "gojq";
     };
-    sessionVariables = {
-      EDITOR = "nvim";
-      MANPAGER = "nvim +Man!";
-    };
+    #sessionVariables = {
+      #EDITOR = "nvim";
+      #MANPAGER = "nvim +Man!";
+    #};
   };
 
   xdg.enable = true;
@@ -118,14 +110,6 @@ in
           space.space = "file_picker";
         };
       };
-    };
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      withNodeJs = true;
-      withPython3 = true;
     };
     starship = {
       enable = true;

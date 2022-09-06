@@ -47,9 +47,6 @@
   # environment setup
   environment = {
     systemPackages = with pkgs; [
-      # editors
-      neovim
-
       # standard toolset
       coreutils-full
       curl

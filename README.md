@@ -11,3 +11,12 @@ darwin-rebuild switch --flake ~/.config/nixpkgs
 
 Use `nix-prefetch-git` to get information about git repositories that will be useful for
 configuration. 
+
+### Notes
+
+Programs/Applications not currently managed via Nix
+
+ - Slack
+ - MongoDB Compass
+ - Brave Browser
+ - PriTunl

@@ -5,6 +5,22 @@
   interactiveShellInit = ''
       fish_vi_key_bindings
   '';
+  functions = {
+    update_nix_index = {
+      description = "Update the nix-index for `comma`";
+      # Currently there is no index available for `aarch64-darwin`
+      # onEvent = "fish_prompt";
+      body = ''
+        set -l filename "index-${pkgs.system}"
+        mkdir -p ~/.cache/nix-index
+        pushd ~/.cache/nix-index
+        # -N will only download a new version if there is an update.
+        wget -q -N https://github.com/Mic92/nix-index-database/releases/latest/download/$filename
+        ln -f $filename files
+        popd
+      '';
+    };
+  };
   plugins = [
     {
       name = "done";

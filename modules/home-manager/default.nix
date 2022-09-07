@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }@inputs:
 
 let
   dotfiles = builtins.fetchGit {
@@ -21,6 +21,7 @@ in
       awscli
       cachix
       cargo
+      comma
       delta
       docker
       emscripten
@@ -36,6 +37,7 @@ in
       mongosh
       multimarkdown
       nghttp2
+      nix-index
       pandoc
       pcre
       pinentry
@@ -53,13 +55,12 @@ in
       jq = "gojq";
     };
     #sessionVariables = {
-      #EDITOR = "nvim";
       #MANPAGER = "nvim +Man!";
     #};
   };
 
   xdg.enable = true;
-
+    
   programs = {
     home-manager.enable = true;
     alacritty = build_alacritty_config { inherit dotfiles config pkgs; };

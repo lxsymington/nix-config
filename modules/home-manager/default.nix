@@ -100,13 +100,13 @@ in
       enable = true;
       settings = {
       	editor = {
-	  cursor-shape = {
-	    normal = "block";
-	    insert = "bar";
-	    select = "underline";
-	  };
+        cursor-shape = {
+          normal = "block";
+          insert = "bar";
+          select = "underline";
+        };
           lsp.display-messages = true;
-	};
+        };
         keys.normal = {
           space.space = "file_picker";
         };
@@ -118,6 +118,65 @@ in
     };
     tealdeer.enable = true;
     tmux = build_tmux_config { inherit dotfiles config pkgs; };
+    vscode = {
+      enable = true;
+      userSettings = {
+        editor = {
+          fontFamily = "JetBrainsMono Nerd Font";
+          fontLigatures = true;
+        };
+        liveshare = {
+          allowGuestTaskControl = true;
+          allowGuestDebugControl = true;
+          guestApprovalRequired = true;
+          joinDebugSessionOption = "Prompt";
+          languages = {
+            allowGuestCommandControl = true;
+          };
+          launcherClient = "visualStudioCode";
+          presence = true;
+        };
+        terminal = {
+          external.osxExec = "Alacritty.app";
+          explorerKind = "external";
+          integrated = {
+            localEchoStyle = "dim";
+          };
+        };
+        testExplorer = {
+          addToEditorContextMenu = true;
+          mergeSuites = true;
+          sort = "byLocation";
+          useNativeTesting = true;
+        };
+        vim = {
+          highlightedyank.enable = true;
+          hlsearch = true;
+          incsearch = true;
+          insertModeKeyBindings = [
+            {
+              before = ["j" "j"];
+              after = ["<Esc>"];
+            }
+          ];
+          leader = "<space>";
+          useCtrlKeys = true;
+          useSystemClipboard = false;
+        };
+        window.zoomLevel = 1;
+        workbench.colorTheme = "Catppuccin Latte";
+      };
+      extensions = with pkgs.vscode-extensions; [
+        bbenoist.nix
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "catppuccin-vsc";
+          publisher = "Catppuccin";
+          version = "2.1.1";
+          sha256 = "0x5gnzmn8mzqzf636jzqnld47mbbwml1ramiz290bpylbxvh553h";
+        }
+      ];
+    };
     zoxide = {
       enable = true;
       enableFishIntegration = true;

@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }: {
+{ self, inputs, config, lib, pkgs, ... }: {
   imports = [ ./primary.nix ./nixpkgs.nix ];
 
   programs.nix-index.enable = true;
@@ -38,7 +38,7 @@
 
   # let nix manage home-manager profiles and use global nixpkgs
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit self inputs; };
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";

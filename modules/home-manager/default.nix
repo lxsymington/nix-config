@@ -1,4 +1,4 @@
-{ config, pkgs, ... }@inputs:
+{ self, inputs, config, pkgs, ... }:
 
 let
   dotfiles = builtins.fetchGit {
@@ -33,6 +33,7 @@ in
       imagemagick
       inetutils
       llvm
+      lxs-neovim
       mongodb-tools
       mongosh
       multimarkdown
@@ -44,6 +45,7 @@ in
       pinentry_mac
       pritunl-ssh
       reattach-to-user-namespace
+      rnix-lsp
       shellcheck
       terminal-notifier
       xh
@@ -54,15 +56,23 @@ in
       renix = "darwin-rebuild switch --flake ~/.config/nixpkgs";
       jq = "gojq";
     };
-    #sessionVariables = {
-      #MANPAGER = "nvim +Man!";
-    #};
+    # sessionVariables = {
+    #   EDITOR = "nvim";
+    #   MANPAGER = "nvim +Man!";
+    # };
+  };
+  
+  nixpkgs.config = {
+    allowUnfree = true;
   };
 
   xdg.enable = true;
     
   programs = {
-    home-manager.enable = true;
+    home-manager = {
+      enable = true;
+      path = "${config.home.homeDirectory}/.nixpkgs/modules/home-manager";
+    };
     alacritty = build_alacritty_config { inherit dotfiles config pkgs; };
     bat = {
       enable = true;
@@ -105,12 +115,20 @@ in
           insert = "bar";
           select = "underline";
         };
-          lsp.display-messages = true;
+        lsp.display-messages = true;
         };
         keys.normal = {
           space.space = "file_picker";
         };
       };
+      languages = [{
+        name = "nix";
+        file-types = ["nix"];
+        comment-token = "#";
+        language-server = {
+          command = "${pkgs.rnix-lsp}/bin/nil";
+        };
+      }];
     };
     starship = {
       enable = true;

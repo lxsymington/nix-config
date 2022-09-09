@@ -4,7 +4,8 @@ let
   lxs_tmux_config = builtins.readFile (builtins.toPath "${dotfiles}/tmux/.tmux.conf");
   lxs_tmux_darwin_config = builtins.toPath "${dotfiles}/tmux/.tmux.macos.conf";
   lxs_tmux_linux_config = builtins.toPath "${dotfiles}/tmux/.tmux.linux.conf";
-in {
+in
+{
   enable = true;
   extraConfig = ''
     # Create a history file for Tmux
@@ -108,14 +109,14 @@ in {
       '';
     }
     (mkTmuxPlugin {
-     pluginName = "simple-git-status";
-     version = "master";
-     src = pkgs.fetchFromGitHub {
-      owner = "kristijanhusak";
-      repo = "tmux-simple-git-status";
-      rev = "287da42f47d7204618b62f2c4f8bd60b36d5c7ed";
-      sha256 = "04vs4afxcr118p78mw25nnzvlms7pmgmi2a80h92vw5pzw9a0msq";
-     };
+      pluginName = "simple-git-status";
+      version = "master";
+      src = pkgs.fetchFromGitHub {
+        owner = "kristijanhusak";
+        repo = "tmux-simple-git-status";
+        rev = "287da42f47d7204618b62f2c4f8bd60b36d5c7ed";
+        sha256 = "04vs4afxcr118p78mw25nnzvlms7pmgmi2a80h92vw5pzw9a0msq";
+      };
     })
   ];
 }

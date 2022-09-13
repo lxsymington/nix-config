@@ -39,6 +39,12 @@ in
       multimarkdown
       nghttp2
       nix-index
+      nodejs-slim-14_x
+      nodePackages.npm
+      nodePackages.typescript
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted
+      nodePackages.yaml-language-server
       pandoc
       pcre
       pinentry
@@ -121,14 +127,85 @@ in
           space.space = "file_picker";
         };
       };
-      languages = [{
-        name = "nix";
-        file-types = ["nix"];
-        comment-token = "#";
-        language-server = {
-          command = "${pkgs.rnix-lsp}/bin/nil";
-        };
-      }];
+      languages = [
+        {
+          name = "nix";
+          file-types = ["nix"];
+          comment-token = "#";
+          auto-format = true;
+          language-server = {
+            command = "${pkgs.rnix-lsp}/bin/nil";
+          };
+        }
+        # {
+        #   name = "typescript";
+        #   file-types = ["typescript"];
+        #   comment-token = "//";
+        #   auto-format = true;
+        #   roots = ["package.json" "tsconfig.json" "jsconfig.json" ".git"];
+        #   language-server = {
+        #     command = "typescript-language-server";
+        #     args = ["--stdio"];
+        #   };
+        # }
+        # {
+        #   name = "eslint";
+        #   file-types = ["typescript" "javascript"];
+        #   auto-format = true;
+        #   roots = ["package.json" "tsconfig.json" "jsconfig.json" ".git"];
+        #   language-server = {
+        #     command = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server";
+        #     };
+        # }
+        # {
+        #   name = "json";
+        #   file-types = ["json"];
+        #   auto-format = true;
+        #   roots = [".git"];
+        #   language-server = {
+        #     command = "vscode-json-language-server";
+        #     args = ["--stdio"];
+        #   };
+        # }
+        # {
+        #   name = "html";
+        #   file-types = ["html"];
+        #   auto-format = true;
+        #   roots = [".git"];
+        #   language-server = {
+        #     command = "vscode-html-language-server";
+        #     args = ["--stdio"];
+        #   };
+        # }
+        # {
+        #   name = "css";
+        #   file-types = ["css"];
+        #   auto-format = true;
+        #   roots = [".git"];
+        #   language-server = {
+        #     command = "vscode-css-language-server";
+        #     args = ["--stdio"];
+        #   };
+        # }
+        # {
+        #   name = "markdown";
+        #   file-types = ["markdown"];
+        #   auto-format = true;
+        #   roots = [".git"];
+        #   language-server = {
+        #     command = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-markdown-language-server";
+        #   };
+        # }
+        # {
+        #   name = "yaml";
+        #   file-types = ["yaml"];
+        #   auto-format = true;
+        #   roots = [".git"];
+        #   language-server = {
+        #     command = "${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server";
+        #   };
+        # }
+      ];
     };
     starship = {
       enable = true;
@@ -141,7 +218,13 @@ in
       userSettings = {
         editor = {
           fontFamily = "JetBrainsMono Nerd Font";
+          auto-format = true;
           fontLigatures = true;
+          lineHighlightBackground = "#ffffff0A";
+          renderLineHighlightOnlyWhenFocus = true;
+        };
+        githubPullRequests = {
+          pushBranch = "always";
         };
         liveshare = {
           allowGuestTaskControl = true;
@@ -168,6 +251,16 @@ in
           useNativeTesting = true;
         };
         vim = {
+          argumentObjectOpeningDelimeters = ["(" "[" "{"];
+          argumentObjectClosingDelimeters = [")" "]" "}"];
+          cursorStylePerMode = {
+            insert = "line-thin";
+            normal = "block";
+            replace = "underline";
+            visual = "block-outline";
+            visualblock = "block-outline";
+            visualline = "block-outline";
+          };
           highlightedyank.enable = true;
           hlsearch = true;
           incsearch = true;
@@ -178,11 +271,15 @@ in
             }
           ];
           leader = "<space>";
+          matchpairs = "(:),{:},[:],<:>";
+          showMarksInGutter = true;
+          smartRelativeLine = true;
           useCtrlKeys = true;
           useSystemClipboard = false;
+          visualstar = true;
         };
         window.zoomLevel = 1;
-        workbench.colorTheme = "Catppuccin Latte";
+        workbench.colorTheme = "Catppuccin Frappé";
       };
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix

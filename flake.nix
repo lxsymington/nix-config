@@ -52,7 +52,7 @@
             };
             overlays = [
               (final: prev: {
-                lxs-neovim = lxs-neovim.defaultPackage.${final.system};
+                lxs-neovim = builtins.trace lxs-neovim.packages lxs-neovim.packages.${final.system}.default;
                 rnix-lsp = lsp-nil.packages.${final.system}.default;
               })
             ];

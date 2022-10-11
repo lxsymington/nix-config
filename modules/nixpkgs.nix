@@ -1,7 +1,6 @@
 { inputs, config, lib, pkgs, ... }:
 {
   nix = {
-    package = pkgs.nixFlakes;
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true

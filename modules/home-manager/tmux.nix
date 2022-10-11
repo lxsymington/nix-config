@@ -1,7 +1,6 @@
 { dotfiles, config, pkgs, ... }:
 
 let
-  lxs_tmux_config = builtins.readFile (builtins.toPath "${dotfiles}/tmux/.tmux.conf");
   lxs_tmux_darwin_config = builtins.toPath "${dotfiles}/tmux/.tmux.macos.conf";
   lxs_tmux_linux_config = builtins.toPath "${dotfiles}/tmux/.tmux.linux.conf";
 in
@@ -53,6 +52,9 @@ in
 
     # Enable focus events in Tmux
     set -g focus-events on
+
+    # make dbus available in tmux
+    set -g update-environment 'DBUS_SESSION_BUS_ADDRESS'
     
     # Make new Tmux windows open at the current working directory
     bind c new-window -c '#{pane_current_path}'

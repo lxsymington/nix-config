@@ -112,6 +112,11 @@ in
       template = lxs_git_commit_template;
       verbose = true;
     };
+    remote = {
+      origin = {
+        fetch = "+refs/archive/*:refs/archive/*";
+      };
+    };
     safe = {
       directory = "~/Tools/neovim";
     };

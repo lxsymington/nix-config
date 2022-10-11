@@ -6,16 +6,24 @@ let
     ref = "main";
     rev = "327698d20d33ecd7f5848004a5585b95027c409e";
   };
+  assume-role = builtins.fetchGit {
+    url = "git@github.com:ibisnetworks/assume-role.git";
+    ref = "master";
+    rev =  "b59b398b6c197eb2442a13cf8afe08936501b881";
+  };
   build_alacritty_config = import ./alacritty.nix;
   build_fish_config = import ./fish.nix;
   build_git_config = import ./git.nix;
   build_tmux_config = import ./tmux.nix;
+  GOPATH = "go";
+  GOBIN = "${GOPATH}/bin";
 in
 {
   manual.manpages.enable = true;
 
   home = {
     packages = with pkgs; [
+      _1password
       ansible
       aws-sam-cli
       awscli
@@ -23,20 +31,18 @@ in
       cargo
       comma
       delta
-      docker
       emscripten
       fd
       figlet
       glib
-      go
       gojq
       imagemagick
       inetutils
       llvm
-      lxs-neovim
       mongodb-tools
       mongosh
       multimarkdown
+      neovim
       nghttp2
       nix-index
       nodejs-slim-14_x
@@ -48,8 +54,6 @@ in
       pandoc
       pcre
       pinentry
-      pinentry_mac
-      pritunl-ssh
       reattach-to-user-namespace
       rnix-lsp
       shellcheck
@@ -62,10 +66,13 @@ in
       renix = "darwin-rebuild switch --flake ~/.config/nixpkgs";
       jq = "gojq";
     };
-    # sessionVariables = {
-    #   EDITOR = "nvim";
-    #   MANPAGER = "nvim +Man!";
-    # };
+    sessionPath = [
+      "${config.home.homeDirectory}/${GOBIN}"
+    ];
+    sessionVariables = {
+      EDITOR = "nvim";
+      MANPAGER = "nvim +Man!";
+    };
   };
   
   nixpkgs.config = {
@@ -73,7 +80,7 @@ in
   };
 
   xdg.enable = true;
-    
+
   programs = {
     home-manager = {
       enable = true;
@@ -105,6 +112,14 @@ in
       };
     };
     git = build_git_config { inherit dotfiles config pkgs; };
+    go = {
+      enable = true;
+      goBin = GOBIN;
+      goPath = GOPATH;
+      packages = {
+        "github.com/ibisnetworks/assume-role" = assume-role;
+      };
+    };
     gpg = {
       enable = true;
       settings = {
@@ -137,74 +152,6 @@ in
             command = "${pkgs.rnix-lsp}/bin/nil";
           };
         }
-        # {
-        #   name = "typescript";
-        #   file-types = ["typescript"];
-        #   comment-token = "//";
-        #   auto-format = true;
-        #   roots = ["package.json" "tsconfig.json" "jsconfig.json" ".git"];
-        #   language-server = {
-        #     command = "typescript-language-server";
-        #     args = ["--stdio"];
-        #   };
-        # }
-        # {
-        #   name = "eslint";
-        #   file-types = ["typescript" "javascript"];
-        #   auto-format = true;
-        #   roots = ["package.json" "tsconfig.json" "jsconfig.json" ".git"];
-        #   language-server = {
-        #     command = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server";
-        #     };
-        # }
-        # {
-        #   name = "json";
-        #   file-types = ["json"];
-        #   auto-format = true;
-        #   roots = [".git"];
-        #   language-server = {
-        #     command = "vscode-json-language-server";
-        #     args = ["--stdio"];
-        #   };
-        # }
-        # {
-        #   name = "html";
-        #   file-types = ["html"];
-        #   auto-format = true;
-        #   roots = [".git"];
-        #   language-server = {
-        #     command = "vscode-html-language-server";
-        #     args = ["--stdio"];
-        #   };
-        # }
-        # {
-        #   name = "css";
-        #   file-types = ["css"];
-        #   auto-format = true;
-        #   roots = [".git"];
-        #   language-server = {
-        #     command = "vscode-css-language-server";
-        #     args = ["--stdio"];
-        #   };
-        # }
-        # {
-        #   name = "markdown";
-        #   file-types = ["markdown"];
-        #   auto-format = true;
-        #   roots = [".git"];
-        #   language-server = {
-        #     command = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-markdown-language-server";
-        #   };
-        # }
-        # {
-        #   name = "yaml";
-        #   file-types = ["yaml"];
-        #   auto-format = true;
-        #   roots = [".git"];
-        #   language-server = {
-        #     command = "${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server";
-        #   };
-        # }
       ];
     };
     starship = {
@@ -216,70 +163,133 @@ in
     vscode = {
       enable = true;
       userSettings = {
-        editor = {
-          fontFamily = "JetBrainsMono Nerd Font";
-          auto-format = true;
-          fontLigatures = true;
-          lineHighlightBackground = "#ffffff0A";
-          renderLineHighlightOnlyWhenFocus = true;
-        };
-        githubPullRequests = {
-          pushBranch = "always";
-        };
-        liveshare = {
-          allowGuestTaskControl = true;
-          allowGuestDebugControl = true;
-          guestApprovalRequired = true;
-          joinDebugSessionOption = "Prompt";
-          languages = {
-            allowGuestCommandControl = true;
-          };
-          launcherClient = "visualStudioCode";
-          presence = true;
-        };
-        terminal = {
-          external.osxExec = "Alacritty.app";
-          explorerKind = "external";
-          integrated = {
-            localEchoStyle = "dim";
-          };
-        };
-        testExplorer = {
-          addToEditorContextMenu = true;
-          mergeSuites = true;
-          sort = "byLocation";
-          useNativeTesting = true;
-        };
-        vim = {
-          argumentObjectOpeningDelimeters = ["(" "[" "{"];
-          argumentObjectClosingDelimeters = [")" "]" "}"];
-          cursorStylePerMode = {
-            insert = "line-thin";
-            normal = "block";
-            replace = "underline";
-            visual = "block-outline";
-            visualblock = "block-outline";
-            visualline = "block-outline";
-          };
-          highlightedyank.enable = true;
-          hlsearch = true;
-          incsearch = true;
-          insertModeKeyBindings = [
-            {
-              before = ["j" "j"];
-              after = ["<Esc>"];
-            }
-          ];
-          leader = "<space>";
-          matchpairs = "(:),{:},[:],<:>";
-          showMarksInGutter = true;
-          smartRelativeLine = true;
-          useCtrlKeys = true;
-          useSystemClipboard = false;
-          visualstar = true;
-        };
-        window.zoomLevel = 1;
-        workbench.colorTheme = "Catppuccin Frappé";
+        "editor.cursorSurroundingLines" = 5;
+        "editor.fontFamily" = "JetBrainsMono Nerd Font";
+        "editor.fontLigatures" = true;
+        "editor.formatOnSave" = true;
+        "editor.lineHighlightBackground" = "#ffffff0A";
+        "editor.renderLineHighlight" = "none";
+        "editor.renderLineHighlightOnlyWhenFocus" = true;
+        "githubPullRequests.pushBranch" = "always";
+        "liveshare.allowGuestDebugControl" = true;
+        "liveshare.allowGuestTaskControl" = true;
+        "liveshare.guestApprovalRequired" = true;
+        "liveshare.joinDebugSessionOption" = "Prompt";
+        "liveshare.languages.allowGuestCommandControl" = true;
+        "liveshare.launcherClient" = "visualStudioCode";
+        "liveshare.presence" = true;
+        "mochaExplorer.exit" = true;
+        "mochaExplorer.parallel" = true;
+        "mochaExplorer.pruneFiles" = true;
+        "mochaExplorer.timeout" = 3000;
+        "terminal.explorerKind" = "external";
+        "terminal.external.osxExec" = "Alacritty.app";
+        "terminal.integrated.localEchoStyle" = "dim";
+        "testExplorer.addToEditorContextMenu" = true;
+        "testExplorer.mergeSuites" = true;
+        "testExplorer.onReload" = "retire";
+        "testExplorer.onStart" = "retire";
+        "testExplorer.showOnRun" = true;
+        "testExplorer.sort" = "byLocationWithSuitesFirst";
+        "testExplorer.useNativeTesting" = true;
+        "typescript.tsdk" = "./node_modules/typescript/lib";
+        "vim.argumentObjectClosingDelimiters" = [")" "]" "}"];
+        "vim.argumentObjectOpeningDelimiters" = ["(" "[" "{"];
+        "vim.cursorStylePerMode.insert" = "line-thin";
+        "vim.cursorStylePerMode.normal" = "block";
+        "vim.cursorStylePerMode.replace" = "underline";
+        "vim.cursorStylePerMode.visual" = "block-outline";
+        "vim.cursorStylePerMode.visualblock" = "block-outline";
+        "vim.cursorStylePerMode.visualline" = "block-outline";
+        "vim.highlightedyank.enable" = true;
+        "vim.hlsearch" = true;
+        "vim.incsearch" = true;
+        "vim.insertModeKeyBindings" = [
+          {
+            before = ["j" "j"];
+            after = ["<Esc>"];
+          }
+        ];
+        "vim.normalModeKeyBindingsNonRecursive" = [
+          {
+            before = ["K"];
+            commands = [
+              "editor.action.showHover"
+            ]; 
+          }
+          {
+            before = ["leader" "@" "d"];
+            commands = [
+              "editor.action.showDefinitionPreviewHover"
+            ]; 
+          }
+          {
+            before = ["leader" "t" "n"];
+            commands = [
+              "testing.runAtCursor"
+            ]; 
+          }
+          {
+            before = ["leader" "t" "f"];
+            commands = [
+              "testing.runCurrentFile"
+            ]; 
+          }
+          {
+            before = ["leader" "t" "d"];
+            commands = [
+              "testing.debugAtCursor"
+            ]; 
+          }
+          {
+            before = ["]" "d"];
+            commands = [
+              "editor.action.marker.next"
+            ];
+          }
+          {
+            before = ["[" "d"];
+            commands = [
+              "editor.action.marker.prev"
+            ];
+          }
+          {
+            before = ["]" "c"];
+            commands = [
+              "workbench.action.editor.nextChange"
+            ];
+          }
+          {
+            before = ["[" "c"];
+            commands = [
+              "workbench.action.editor.previousChange"
+            ];
+          }
+          {
+            before = ["]" "t"];
+            commands = [
+              "testing.goToNextMessage"
+            ];
+          }
+          {
+            before = ["[" "t"];
+            commands = [
+              "testing.goToPreviousMessage"
+            ];
+          }
+        ];
+        "vim.leader" = "<space>";
+        "vim.matchpairs" = "(:),{:},[:],<:>";
+        "vim.showMarksInGutter" = true;
+        "vim.smartRelativeLine" = true;
+        "vim.useCtrlKeys" = true;
+        "vim.useSystemClipboard" = false;
+        "vim.visualstar" = true;
+        "window.autoDetectColorScheme" = true;
+        "window.zoomLevel" = 1;
+        "workbench.colorTheme" = "Catppuccin Latte";
+        "workbench.preferredDarkColorTheme" = "Catppuccin Frappé";
+        "workbench.preferredLightColorTheme" = "Catppuccin Latte";
       };
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix

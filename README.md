@@ -20,3 +20,4 @@ Programs/Applications not currently managed via Nix
  - MongoDB Compass
  - Brave Browser
  - PriTunl
+ - Docker

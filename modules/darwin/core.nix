@@ -1,8 +1,4 @@
 { inputs, config, pkgs, ... }:
-let
-  prefix = "/run/current-system/sw/bin";
-  inherit (pkgs.stdenvNoCC) isAarch64 isAarch32;
-in
 {
   environment = {
     etc = {
@@ -44,11 +40,14 @@ in
   
   homebrew = {
     enable = true;
-    autoUpdate = true;
-    cleanup = "zap";
     global = {
       brewfile = true;
-      noLock = true;
+      lockfiles = false;
+    };
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = true;
     };
     taps = [
       "homebrew/core"
@@ -58,6 +57,7 @@ in
     casks = [
       "mongodb-compass"
       "pritunl"
+      "docker"
     ];
   };
 
@@ -66,10 +66,19 @@ in
   # auto manage nixbld users with nix darwin
   nix.configureBuildUsers = true;
 
-  services.activate-system.enable = true;
+  programs = {
+    gnupg = {
+      agent = {
+        enable = true;
+        enableSSHSupport = true;
+      };
+    };
+  };
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  services = {
+    activate-system.enable = true;
+    nix-daemon.enable = true;
+  };
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

@@ -54,6 +54,10 @@
       "homebrew/cask"
       "homebrew/cask-drivers"
     ];
+    brews = [
+      "ruby" # Required for AUTO_OPS
+      "volta"
+    ];
     casks = [
       "mongodb-compass"
       "pritunl"

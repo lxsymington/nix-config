@@ -3,7 +3,11 @@
 {
   enable = true;
   interactiveShellInit = ''
-      fish_vi_key_bindings
+    fish_vi_key_bindings
+
+    if test -e ~/.seccl/env.sh -a -x ~/.seccl/env.sh
+      replay source ~/.seccl/env.sh
+    end
   '';
   functions = {
     update_nix_index = {
@@ -18,6 +22,39 @@
         wget -q -N https://github.com/Mic92/nix-index-database/releases/latest/download/$filename
         ln -f $filename files
         popd
+      '';
+    };
+    # Required for first time AUTO_OPS setup
+    nvm = {
+      description = "nvm";
+      body = ''
+        replay source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+      '';
+    };
+    nvm_find_nvmrc = {
+      description = "find nvmrc";
+      body = ''
+        replay source ~/.nvm/nvm.sh --no-use ';' nvm_find_nvmrc
+      '';
+    };
+    load_nvm = {
+      description = "load nvmrc";
+      onVariable = "PWD";
+      body = ''
+        set -l default_node_version (nvm version default)
+        set -l node_version (nvm version)
+        set -l nvmrc_path (nvm_find_nvmrc)
+        if test -n "$nvmrc_path"
+          set -l nvmrc_node_version (nvm version (cat $nvmrc_path))
+          if test "$nvmrc_node_version" = "N/A"
+            nvm install (cat $nvmrc_path)
+          else if test "$nvmrc_node_version" != "$node_version"
+            nvm use $nvmrc_node_version
+          end
+        else if test "$node_version" != "$default_node_version"
+          echo "Reverting to default Node version"
+          nvm use default
+        end
       '';
     };
   };

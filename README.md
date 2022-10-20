@@ -12,6 +12,9 @@ darwin-rebuild switch --flake ~/.config/nixpkgs
 Use `nix-prefetch-git` to get information about git repositories that will be useful for
 configuration. 
 
+### NodeJS
+Node is currently a bit of a pain to use with Nix, especially when using global private/scoped packages. Consequently, volta will be used to managed node dependencies.
+
 ### Notes
 
 Programs/Applications not currently managed via Nix
@@ -21,3 +24,4 @@ Programs/Applications not currently managed via Nix
  - Brave Browser
  - PriTunl
  - Docker
+ - Volta*

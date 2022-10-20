@@ -36,6 +36,7 @@ in
       figlet
       glib
       gojq
+      jq
       imagemagick
       inetutils
       llvm
@@ -45,12 +46,6 @@ in
       neovim
       nghttp2
       nix-index
-      nodejs-slim-14_x
-      nodePackages.npm
-      nodePackages.typescript
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
-      nodePackages.yaml-language-server
       pandoc
       pcre
       pinentry
@@ -67,11 +62,25 @@ in
       jq = "gojq";
     };
     sessionPath = [
+      "$HOMEBREW_REPOSITORY/bin"
+      "$HOMEBREW_REPOSITORY/sbin"
+      "$VOLTA_HOME/bin"
       "${config.home.homeDirectory}/${GOBIN}"
+      "${config.home.homeDirectory}/.seccl/bin"
     ];
     sessionVariables = {
+      AUTO_OPS = "${config.home.homeDirectory}/.seccl/auto-ops";
+      AWS_PROFILE = "seccl-master";
+      CORE_ENV = "genshared";
+      STAGE_ENV = "devlsymington";
       EDITOR = "nvim";
+      HOMEBREW_CELLAR = /opt/homebrew/Cellar;
+      HOMEBREW_PREFIX = /opt/homebrew;
+      HOMEBREW_REPOSITORY = /opt/homebrew;
       MANPAGER = "nvim +Man!";
+      # Required for AUTO_OPS first time setup
+      NVM_DIR = "${config.home.homeDirectory}/.nvm";
+      VOLTA_HOME = "${config.home.homeDirectory}/.local/share/volta";
     };
   };
   

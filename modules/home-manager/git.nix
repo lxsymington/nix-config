@@ -69,7 +69,8 @@ in
       diffFilter = "${pkgs.gitAndTools.delta}/bin/delta --color-only";
     };
     push = {
-      default = "upstream";
+      default = "current";
+      autoSetupRemote = true;
     };
     pull = {
       ff = "only";

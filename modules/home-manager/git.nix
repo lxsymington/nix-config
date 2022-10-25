@@ -75,6 +75,9 @@ in
     pull = {
       ff = "only";
     };
+    fetch = {
+      prune = true;
+    };
     color = {
       ui = true;
     };
@@ -115,7 +118,7 @@ in
     };
     remote = {
       origin = {
-        fetch = "+refs/archive/*:refs/archive/*";
+        fetch = "+refs/heads/*:refs/remotes/origin/*";
       };
     };
     safe = {

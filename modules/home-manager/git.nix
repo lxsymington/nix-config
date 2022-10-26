@@ -120,7 +120,6 @@ in
       origin = {
         fetch = [
           "+refs/heads/*:refs/heads/origin/*"
-          "+refs/remotes/*:refs/remotes/origin/*"
         ];
       };
     };

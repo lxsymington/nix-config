@@ -118,7 +118,10 @@ in
     };
     remote = {
       origin = {
-        fetch = "+refs/heads/*:refs/remotes/origin/*";
+        fetch = [
+          "+refs/heads/*:refs/heads/origin/*"
+          "+refs/remotes/*:refs/remotes/origin/*"
+        ];
       };
     };
     safe = {

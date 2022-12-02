@@ -135,11 +135,14 @@ in
   ];
   includes = [
     {
-      condition = "gitdir:~/Development/Seccl";
+      condition = "gitdir:~/Development/Seccl/";
       contents = {
         user = {
           email = "luke.xaviersymington@seccl.tech";
-          signingkey = "1D83A54F7678F650";
+          signingkey = "7A816B2451AAB9A2";
+        };
+        gpg = {
+          program = "${pkgs.gnupg}/bin/gpg";
         };
         commit = {
           gpgSign = true;

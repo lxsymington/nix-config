@@ -296,7 +296,7 @@ in
         "vim.visualstar" = true;
         "window.autoDetectColorScheme" = true;
         "window.zoomLevel" = 1;
-        "workbench.colorTheme" = "Catppuccin Latte";
+        "workbench.colorTheme" = "Catppuccin Frappé";
         "workbench.preferredDarkColorTheme" = "Catppuccin Frappé";
         "workbench.preferredLightColorTheme" = "Catppuccin Latte";
       };

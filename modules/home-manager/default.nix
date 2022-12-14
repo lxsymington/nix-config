@@ -172,6 +172,7 @@ in
     vscode = {
       enable = true;
       userSettings = {
+        "debug.toolBarLocation" = "docked";
         "editor.cursorSurroundingLines" = 5;
         "editor.fontFamily" = "JetBrainsMono Nerd Font";
         "editor.fontLigatures" = true;
@@ -179,6 +180,9 @@ in
         "editor.lineHighlightBackground" = "#ffffff0A";
         "editor.renderLineHighlight" = "none";
         "editor.renderLineHighlightOnlyWhenFocus" = true;
+        "editor.stickyScroll.enabled" = true;
+        "explorer.fileNesting.enabled" = true;
+        "files.insertFinalNewline" = true;
         "githubPullRequests.pushBranch" = "always";
         "liveshare.allowGuestDebugControl" = true;
         "liveshare.allowGuestTaskControl" = true;
@@ -191,8 +195,12 @@ in
         "mochaExplorer.parallel" = true;
         "mochaExplorer.pruneFiles" = true;
         "mochaExplorer.timeout" = 3000;
+        "scm.diffDecorationsGutterWidth" = 1;
+        "search.showLineNumbers" = true;
+        "telemetry.telemetryLevel" = "off";
         "terminal.explorerKind" = "external";
         "terminal.external.osxExec" = "Alacritty.app";
+        "terminal.integrated.cursorBlinking" = true;
         "terminal.integrated.localEchoStyle" = "dim";
         "testExplorer.addToEditorContextMenu" = true;
         "testExplorer.mergeSuites" = true;
@@ -295,8 +303,11 @@ in
         "vim.useSystemClipboard" = false;
         "vim.visualstar" = true;
         "window.autoDetectColorScheme" = true;
+        "window.nativeTabs" = true;
+        "window.newWindowDimensions" = "maximized";
         "window.zoomLevel" = 1;
         "workbench.colorTheme" = "Catppuccin Frappé";
+        "workbench.editor.highlightModifiedTabs" = true;
         "workbench.preferredDarkColorTheme" = "Catppuccin Frappé";
         "workbench.preferredLightColorTheme" = "Catppuccin Latte";
       };

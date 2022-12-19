@@ -10,10 +10,10 @@ in
       enable = true;
       extraConfig = ''
         # Create a history file for Tmux
-        set -g history-file ~/.config/tmux/history
+        set -g history-file ${config.xdg.configHome}/tmux/history
 
         # Binding for sourcing the Tmux config file
-        bind-key r source-file ${pkgs.tmux}/tmux.conf \; display-message "Tmux configuration reloaded"
+        bind-key r source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "Tmux configuration reloaded"
 
         # Enable additional terminal features
         set -as terminal-features ",*:RGB"
@@ -88,7 +88,6 @@ in
         open
         pain-control
         sensible
-        vim-tmux-focus-events
         yank
         {
           plugin = continuum;

@@ -1,6 +1,6 @@
 # Subject line (try to keep under 50 characters)
 
-Subject Line
+⁅Ticket: #����⁆ · Subject Line
 
 # Describe the problem this commit addresses
 
@@ -9,5 +9,3 @@ Multi-line description of commit, feel free to be detailed.
 # Describe the changes or solutions implemented as part of this commit.
 
 - Change 1
-
-[Ticket: #����]

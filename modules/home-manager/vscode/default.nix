@@ -15,6 +15,7 @@
         "editor.renderLineHighlightOnlyWhenFocus" = true;
         "editor.stickyScroll.enabled" = true;
         "explorer.fileNesting.enabled" = true;
+        "explorer.fileNesting.expand" = false;
         "files.insertFinalNewline" = true;
         "githubPullRequests.pushBranch" = "always";
         "liveshare.allowGuestDebugControl" = true;

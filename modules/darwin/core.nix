@@ -15,20 +15,12 @@
     systemPackages = with pkgs; [
       # GUI applications
       alacritty
-      # brave
-      emacs
-      # mongodb-compass
       postman
       pritunl-ssh
-      # slack
       teams
 
       # Global utils
-      fd
-      fzf
       ncurses
-      nix-prefetch-git
-      ripgrep
     ];
 
     pathsToLink = [

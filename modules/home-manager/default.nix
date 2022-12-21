@@ -25,6 +25,7 @@ in
       emscripten
       fd
       figlet
+      fzf
       glib
       gojq
       jq
@@ -37,10 +38,12 @@ in
       neovim
       nghttp2
       nix-index
+      nix-prefetch-git
       pandoc
       pcre
       pinentry
       reattach-to-user-namespace
+      ripgrep
       rnix-lsp
       shellcheck
       terminal-notifier

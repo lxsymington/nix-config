@@ -17,7 +17,9 @@
         "explorer.fileNesting.enabled" = true;
         "explorer.fileNesting.expand" = false;
         "files.insertFinalNewline" = true;
+        "git.mergeEditor" = true;
         "githubPullRequests.pushBranch" = "always";
+        "githubPullRequests.defaultMergeMethod" = "squash";
         "liveshare.allowGuestDebugControl" = true;
         "liveshare.allowGuestTaskControl" = true;
         "liveshare.guestApprovalRequired" = true;
@@ -25,8 +27,8 @@
         "liveshare.languages.allowGuestCommandControl" = true;
         "liveshare.launcherClient" = "visualStudioCode";
         "liveshare.presence" = true;
+        "merge-conflict.autoNavigateNextConflict.enabled" = true;
         "mochaExplorer.exit" = true;
-        "mochaExplorer.parallel" = true;
         "mochaExplorer.pruneFiles" = true;
         "mochaExplorer.timeout" = 3000;
         "scm.diffDecorationsGutterWidth" = 1;

@@ -22,6 +22,7 @@ in
       cargo
       comma
       delta
+      du-dust
       emscripten
       fd
       figlet
@@ -88,6 +89,7 @@ in
     ./alacritty
     ./fish
     ./git
+    ./neovim
     ./tmux
     ./vscode
   ];

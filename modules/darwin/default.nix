@@ -1,4 +1,5 @@
-{ self, inputs, config, pkgs, ... }: {
+{ ... } @ args: 
+{
   imports = [
     ../common.nix
     ./core.nix

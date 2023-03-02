@@ -40,7 +40,7 @@
             home-manager.darwinModules.home-manager
             ./modules/darwin
           ]
-        , extraModules ? [ ]
+        , extraModules ? []
         }: darwinSystem {
           inherit system;
           pkgs = import nixpkgs {
@@ -63,59 +63,62 @@
 
       # generate a home-manager configuration usable on any unix system
       # with overlays and any extraModules applied
-      # mkHomeConfig = {
-      #   username,
-      #   system ? "x86_64-linux",
-      #   nixpkgs ? inputs.nixpkgs,
-      #   stable ? inputs.stable,
-      #   baseModules ? [
-      #     ./modules/home-manager
-      #     {
-      #       home = {
-      #         inherit username;
-      #         homeDirectory = "${homePrefix system}/${username}";
-      #         sessionVariables = {
-      #           NIX_PATH =
-      #             "nixpkgs=${nixpkgs}:stable=${stable}\${NIX_PATH:+:}$NIX_PATH";
-      #         };
-      #       };
-      #     }
-      #   ],
-      #   extraModules ? [ ]
-      # }: homeManagerConfiguration rec {
-      #   pkgs = import nixpkgs {
-      #     inherit system;
-      #     overlays = [
-      #       (final: prev: {
-      #         lxs-neovim = lxs-neovim.defaultPackage.${final.system};
-      #         rnix-lsp = lsp-nil.defaultPackagae.${final.system};
-      #       })
-      #     ];
-      #   };
-      #   extraSpecialArgs = { inherit inputs nixpkgs stable; };
-      #   modules = baseModules ++ extraModules ++ [ ./modules/overlays.nix ];
-      # };
+      mkHomeConfig = {
+        username,
+        system ? "x86_64-linux",
+        nixpkgs ? inputs.nixpkgs,
+        stable ? inputs.stable,
+        baseModules ? [
+          ./modules/home-manager
+          {
+            home = {
+              inherit username;
+              homeDirectory = "${homePrefix system}/${username}";
+              sessionVariables = {
+                NIX_PATH =
+                  "nixpkgs=${nixpkgs}:stable=${stable}\${NIX_PATH:+:}$NIX_PATH";
+              };
+            };
+          }
+        ],
+        extraModules ? [ ]
+      }: homeManagerConfiguration rec {
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            allowUnsupportedSystem = true;
+            allowUnfree = true;
+            allowBroken = false;
+          };
+          overlays = [
+            (final: prev: {
+              lxs-neovim = lxs-neovim.defaultPackage.${final.system};
+              rnix-lsp = lsp-nil.defaultPackagae.${final.system};
+            })
+          ];
+        };
+        modules = baseModules ++ extraModules;
+        specialArgs = { inherit self inputs nixpkgs stable; };
+      };
     in
     {
       darwinConfigurations = {
-        seccl-macbook = mkDarwinConfig {
-          system = "x86_64-darwin";
-          extraModules = [ ./profiles/lukexaviersymington-work.nix ];
-        };
         lxs-seccl-macbook = mkDarwinConfig {
-          extraModules = [ ./profiles/lxs-work.nix ];
+          extraModules = [
+            ./profiles/lxs-work.nix
+            # Looks as if this might have the system before the hm attribute
+            # lxs-neovim.nixosModules
+          ];
         };
       };
 
-      # homeConfigurations = {
-      #   seccl2020 = mkHomeConfig {
-      #     username = "lukexaviersymington";
-      #     extraModules = [];
-      #   };
-      #   seccl2022 = mkHomeConfig {
-      #     username = "lxs";
-      #     extraModules = [];
-      #   };
-      # };
+      homeConfigurations = {
+        lxs = mkHomeConfig {
+          username = "lxs";
+          extraModules = [
+            # lxs-neovim.nixosModules
+          ];
+        };
+      };
     };
 }

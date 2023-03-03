@@ -17,7 +17,7 @@ in
       _1password
       ansible
       aws-sam-cli
-      awscli
+      awscli2
       cachix
       cargo
       comma

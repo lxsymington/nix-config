@@ -15,7 +15,7 @@ in {
         window = {
           dimensions = {
             columns = 240;
-            rows = 80;
+            lines = 80;
           };
           padding = {
             x = 20;
@@ -25,6 +25,7 @@ in {
           decorations = if isDarwin then "transparent" else "full";
           startup_mode = "Maximized";
           dynamic_title = true;
+          option_as_alt = "Both";
         };
 
         scrolling = {
@@ -57,7 +58,6 @@ in {
 
         live_config_reload = true;
         working_directory = "None";
-        alt_send_esc = false;
 
         mouse = {
           hide_when_typing = true;

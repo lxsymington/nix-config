@@ -16,8 +16,8 @@ in
     packages = with pkgs; [
       _1password
       ansible
-      aws-sam-cli
       awscli2
+      aws-sam-cli
       cachix
       cargo
       comma
@@ -29,6 +29,7 @@ in
       fzf
       glib
       gojq
+      graphviz
       jq
       imagemagick
       inetutils

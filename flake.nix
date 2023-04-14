@@ -19,6 +19,9 @@
     lsp-nil = {
       url = "github:oxalica/nil";
     };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+    };
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, lxs-neovim, lsp-nil, ... }@inputs:

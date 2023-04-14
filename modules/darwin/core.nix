@@ -15,6 +15,7 @@
     systemPackages = with pkgs; [
       # GUI applications
       alacritty
+      direnv
       postman
       pritunl-ssh
       teams

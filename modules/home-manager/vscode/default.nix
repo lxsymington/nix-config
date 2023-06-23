@@ -19,17 +19,17 @@ in {
 
         "editor.cursorSurroundingLines" = 5;
         "editor.fontFamily" = "JetBrainsMono Nerd Font";
+        "editor.fontLigatures" = true;
         "editor.fontSize" = 12;
+        "editor.formatOnSave" = true;
         "editor.inlayHints.fontSize" = 8;
         "editor.inlayHints.padding" = true;
-        "editor.fontLigatures" = true;
-        "editor.formatOnSave" = true;
+        "editor.inlineSuggest.enabled" = true;
         "editor.lineHighlightBackground" = "#ffffff0A";
         "editor.renderLineHighlight" = "none";
         "editor.renderLineHighlightOnlyWhenFocus" = true;
         "editor.smoothScrolling" = true;
         "editor.stickyScroll.enabled" = true;
-
         "explorer.fileNesting.enabled" = true;
         "explorer.fileNesting.expand" = false;
 

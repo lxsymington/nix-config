@@ -1,4 +1,4 @@
-{ ... } @ args: 
+{ ... }: 
 {
   imports = [
     ../common.nix

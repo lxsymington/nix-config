@@ -4,19 +4,17 @@
     etc = {
       darwin.source = "${inputs.darwin}";
     };
-    variables = {
-      SHELL = "${pkgs.fish}/bin/fish";
-      TERMINFO_DIRS = [
-        "$HOME/.local/share/terminfo"
-        "/run/current-system/sw/share/terminfo"
-      ];
-    };
 
+    pathsToLink = [
+      "/Applications"
+      "/share/doc"
+      "/share/terminfo"
+    ];
+    
     systemPackages = with pkgs; [
       # GUI applications
       alacritty
       direnv
-      postman
       pritunl-ssh
       teams
 
@@ -24,11 +22,13 @@
       ncurses
     ];
 
-    pathsToLink = [
-      "/Applications"
-      "/share/doc"
-      "/share/terminfo"
-    ];
+    variables = {
+      SHELL = "${pkgs.fish}/bin/fish";
+      TERMINFO_DIRS = [
+        "$HOME/.local/share/terminfo"
+        "/run/current-system/sw/share/terminfo"
+      ];
+    };
   };
   
   homebrew = {
@@ -53,8 +53,10 @@
     ];
     casks = [
       "mongodb-compass"
-      "pritunl"
+      "postman"
       "docker"
+      # "pritunl"
+      "https://raw.githubusercontent.com/Homebrew/homebrew-cask/6bf26425d09c020c4accb5cb958112ead452e5fd/Casks/pritunl.rb" # Pritunl
     ];
   };
 

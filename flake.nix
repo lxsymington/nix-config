@@ -12,10 +12,6 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-21.11";
-    lxs-neovim = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:lxsymington/lxs-neovim";
-    };
     lsp-nil = {
       url = "github:oxalica/nil";
     };
@@ -24,11 +20,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, lxs-neovim, lsp-nil, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, home-manager, lsp-nil, ... }@inputs:
     let
       inherit (darwin.lib) darwinSystem;
       inherit (home-manager.lib) homeManagerConfiguration;
-      inherit (builtins) listToAttrs map elem;
+      inherit (builtins) elem;
 
       isDarwin = system: (elem system nixpkgs.lib.platforms.darwin);
       homePrefix = system: if isDarwin system then "/Users" else "/home";
@@ -55,7 +51,6 @@
             };
             overlays = [
               (final: prev: {
-                lxs-neovim = builtins.trace lxs-neovim.packages lxs-neovim.packages.${final.system}.default;
                 rnix-lsp = lsp-nil.packages.${final.system}.default;
               })
             ];
@@ -85,7 +80,7 @@
           }
         ],
         extraModules ? [ ]
-      }: homeManagerConfiguration rec {
+      }: homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
           config = {
@@ -95,7 +90,6 @@
           };
           overlays = [
             (final: prev: {
-              lxs-neovim = lxs-neovim.defaultPackage.${final.system};
               rnix-lsp = lsp-nil.defaultPackagae.${final.system};
             })
           ];
@@ -109,8 +103,6 @@
         lxs-seccl-macbook = mkDarwinConfig {
           extraModules = [
             ./profiles/lxs-work.nix
-            # Looks as if this might have the system before the hm attribute
-            # lxs-neovim.nixosModules
           ];
         };
       };
@@ -118,9 +110,7 @@
       homeConfigurations = {
         lxs = mkHomeConfig {
           username = "lxs";
-          extraModules = [
-            # lxs-neovim.nixosModules
-          ];
+          extraModules = [ ];
         };
       };
     };

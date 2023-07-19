@@ -1,4 +1,4 @@
-{ self, inputs, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   assume-role = builtins.fetchGit {
@@ -15,7 +15,7 @@ in
   home = {
     packages = with pkgs; [
       _1password
-      ansible
+      # ansible # An ansible test is failing during the build
       awscli2
       aws-sam-cli
       cachix
@@ -30,6 +30,7 @@ in
       glib
       gojq
       graphviz
+      hurl
       jq
       imagemagick
       inetutils
@@ -70,6 +71,7 @@ in
       CORE_ENV = "genshared";
       STAGE_ENV = "devlsymington";
       EDITOR = "nvim";
+      HISTTIMEFORMAT = "%F %T ";
       HOMEBREW_CELLAR = /opt/homebrew/Cellar;
       HOMEBREW_PREFIX = /opt/homebrew;
       HOMEBREW_REPOSITORY = /opt/homebrew;
@@ -153,8 +155,8 @@ in
           space.space = "file_picker";
         };
       };
-      languages = [
-        {
+      languages = {
+        language = [{
           name = "nix";
           file-types = ["nix"];
           comment-token = "#";
@@ -162,8 +164,8 @@ in
           language-server = {
             command = "${pkgs.rnix-lsp}/bin/nil";
           };
-        }
-      ];
+        }];
+      };
     };
     starship = {
       enable = true;

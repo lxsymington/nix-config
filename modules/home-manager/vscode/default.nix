@@ -1,15 +1,23 @@
-{ self, inputs, config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 let
   marketplace_extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
     asvetliakov.vscode-neovim
+    dotenv.dotenv-vscode
+    github.copilot
+    github.copilot-chat
     github.vscode-pull-request-github
+    hashicorp.terraform
     hbenl.vscode-mocha-test-adapter
     hbenl.vscode-test-explorer
     hbenl.vscode-test-explorer-liveshare
+    jacobpfeifer.pfeifer-hurl
     kavod-io.vscode-jest-test-adapter
+    ms-azuretools.vscode-docker
+    ms-vscode.test-adapter-converter
     ms-vsliveshare.vsliveshare
     sisisin.type-explorer
+    wallabyjs.quokka-vscode
   ];
 in {
   programs = {
@@ -34,6 +42,9 @@ in {
         "explorer.fileNesting.expand" = false;
 
         "files.insertFinalNewline" = true;
+        "files.associations" = {
+          ".env*" = "dotenv";
+        };
 
         "git.mergeEditor" = true;
 

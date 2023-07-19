@@ -1,4 +1,4 @@
-{ self, inputs, config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   lxs_git_commit_template = builtins.toPath ./.git-commit-template;

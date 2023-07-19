@@ -1,4 +1,4 @@
-{ self, inputs, config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   isDarwin = pkgs.stdenvNoCC.isDarwin;

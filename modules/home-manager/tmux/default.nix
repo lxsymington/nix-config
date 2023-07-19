@@ -1,4 +1,4 @@
-{ self, inputs, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   lxs_tmux_darwin_config = builtins.toPath ./tmux.macos.conf;

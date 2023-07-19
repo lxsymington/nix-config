@@ -1,4 +1,4 @@
-{ self, inputs, config, lib, pkgs, ... }: {
+{ self, inputs, config, pkgs, ... }: {
   imports = [ ./primary.nix ./nixpkgs.nix ];
 
   programs.nix-index.enable = true;

@@ -2,8 +2,12 @@
 
 let
   marketplace_extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+    antfu.icons-carbon
+    antfu.theme-vitesse
     asvetliakov.vscode-neovim
     dotenv.dotenv-vscode
+    editorconfig.editorconfig
+    equinusocio.moxer-icons
     github.copilot
     github.copilot-chat
     github.vscode-pull-request-github
@@ -16,6 +20,9 @@ let
     ms-azuretools.vscode-docker
     ms-vscode.test-adapter-converter
     ms-vsliveshare.vsliveshare
+    postman.postman-for-vscode
+    rome.rome
+    sdras.night-owl
     sisisin.type-explorer
     wallabyjs.quokka-vscode
   ];
@@ -26,7 +33,7 @@ in {
         "debug.toolBarLocation" = "docked";
 
         "editor.cursorSurroundingLines" = 5;
-        "editor.fontFamily" = "JetBrainsMono Nerd Font";
+        "editor.fontFamily" = "Rec Mono Duotone, CommitMono, JetBrainsMono Nerd Font, monospace";
         "editor.fontLigatures" = true;
         "editor.fontSize" = 12;
         "editor.formatOnSave" = true;
@@ -222,17 +229,18 @@ in {
         "window.newWindowDimensions" = "maximized";
         "window.zoomLevel" = 1;
 
-        "workbench.colorTheme" = "Catppuccin Latte";
+        "workbench.colorTheme" = "Night Owl Light";
         "workbench.editor.highlightModifiedTabs" = true;
         "workbench.list.smoothScrolling" = true;
-        "workbench.preferredDarkColorTheme" = "Catppuccin Frappé";
-        "workbench.preferredLightColorTheme" = "Catppuccin Latte";
+        "workbench.iconTheme" = "moxer-icons";
+        "workbench.preferredDarkColorTheme" = "Night Owl";
+        "workbench.preferredLightColorTheme" = "Night Owl Light";
+        "workbench.productIconTheme" = "icons-carbon";
       };
       enable = true;
 
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
-        catppuccin.catppuccin-vsc
         dbaeumer.vscode-eslint
         eamodio.gitlens
         vscodevim.vim

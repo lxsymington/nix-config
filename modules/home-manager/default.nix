@@ -22,6 +22,7 @@ in
       cargo
       comma
       delta
+      dotnet-sdk_7
       du-dust
       emscripten
       fd

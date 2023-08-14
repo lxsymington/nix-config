@@ -1,4 +1,8 @@
-{ ... }: {
+{ ... }:
+
+{
   user.name = "lxs";
-  hm = { imports = [ ./home-manager/lxs-work.nix ]; };
+  hm = {
+    imports = [ ./home-manager/lxs-work.nix ];
+  };
 }

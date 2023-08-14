@@ -111,7 +111,9 @@
         };
         josie-personal-macbook = mkDarwinConfig {
           system = "x86_64-darwin";
-          extraModules = [ ];
+          extraModules = [
+            ./profiles/lxs-personal.nix
+          ];
         };
       };
 

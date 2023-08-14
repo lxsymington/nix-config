@@ -49,7 +49,7 @@ in
     stateVersion = "22.11";
 
     shellAliases = {
-      renix = "darwin-rebuild switch --flake ~/.config/nixpkgs";
+      renix = "darwin-rebuild switch --flake ~/.config/nix-darwin";
       jq = "gojq";
     };
 

@@ -3,6 +3,9 @@
   environment = {
     etc = {
       darwin.source = "${inputs.darwin}";
+      terminfo = {
+        source = "${pkgs.ncurses}/share/terminfo";
+      };
     };
 
     pathsToLink = [
@@ -43,7 +46,6 @@
     taps = [
       "homebrew/core"
       "homebrew/cask"
-      "homebrew/cask-drivers"
     ];
     brews = [
       "volta"

@@ -24,6 +24,7 @@ let
     rome.rome
     sdras.night-owl
     sisisin.type-explorer
+    tamasfe.even-better-toml
     wallabyjs.quokka-vscode
   ];
 in {

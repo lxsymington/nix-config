@@ -31,7 +31,6 @@ in
       mongodb-tools
       mongosh
       multimarkdown
-      neovim
       nghttp2
       nix-index
       nix-prefetch-git

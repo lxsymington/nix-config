@@ -101,9 +101,17 @@
     {
       darwinConfigurations = {
         lxs-seccl-macbook = mkDarwinConfig {
+          baseModules = [
+            home-manager.darwinModules.home-manager
+            ./modules/darwin/work.nix
+          ];
           extraModules = [
             ./profiles/lxs-work.nix
           ];
+        };
+        josie-personal-macbook = mkDarwinConfig {
+          system = "x86_64-darwin";
+          extraModules = [ ];
         };
       };
 

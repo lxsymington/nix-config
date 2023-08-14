@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  assume-role = builtins.fetchGit {
-    url = "git@github.com:ibisnetworks/assume-role.git";
-    ref = "master";
-    rev =  "b59b398b6c197eb2442a13cf8afe08936501b881";
-  };
   GOPATH = "go";
   GOBIN = "${GOPATH}/bin";
 in
@@ -16,13 +11,10 @@ in
     packages = with pkgs; [
       _1password
       # ansible # An ansible test is failing during the build
-      awscli2
-      aws-sam-cli
       cachix
       cargo
       comma
       delta
-      dotnet-sdk_7
       du-dust
       emscripten
       fd
@@ -54,11 +46,14 @@ in
       xh
       yarn
     ];
+
     stateVersion = "22.11";
+
     shellAliases = {
       renix = "darwin-rebuild switch --flake ~/.config/nixpkgs";
       jq = "gojq";
     };
+
     sessionPath = [
       "$HOMEBREW_REPOSITORY/bin"
       "$HOMEBREW_REPOSITORY/sbin"
@@ -66,19 +61,14 @@ in
       "${config.home.homeDirectory}/${GOBIN}"
       "${config.home.homeDirectory}/.seccl/bin"
     ];
+
     sessionVariables = {
-      AUTO_OPS = "${config.home.homeDirectory}/.seccl/auto-ops";
-      AWS_PROFILE = "seccl-master";
-      CORE_ENV = "genshared";
-      STAGE_ENV = "devlsymington";
       EDITOR = "nvim";
       HISTTIMEFORMAT = "%F %T ";
       HOMEBREW_CELLAR = /opt/homebrew/Cellar;
       HOMEBREW_PREFIX = /opt/homebrew;
       HOMEBREW_REPOSITORY = /opt/homebrew;
       MANPAGER = "nvim +Man!";
-      # Required for AUTO_OPS first time setup
-      NVM_DIR = "${config.home.homeDirectory}/.nvm";
       VOLTA_HOME = "${config.home.homeDirectory}/.local/share/volta";
     };
   };
@@ -103,6 +93,7 @@ in
       enable = true;
       path = "${config.home.homeDirectory}/.nixpkgs/modules/home-manager";
     };
+
     bat = {
       enable = true;
       config = {
@@ -112,11 +103,14 @@ in
         map-syntax = [ ".ignore:Git Ignore" ];
       };
     };
+
     bottom.enable = true;
+
     exa = {
       enable = true;
       enableAliases = true;
     };
+
     gh = {
       enable = true;
       settings = {
@@ -126,14 +120,13 @@ in
         pager = "${pkgs.delta}/bin/delta";
       };
     };
+
     go = {
       enable = true;
       goBin = GOBIN;
       goPath = GOPATH;
-      packages = {
-        "github.com/ibisnetworks/assume-role" = assume-role;
-      };
     };
+
     gpg = {
       enable = true;
       settings = {
@@ -141,6 +134,7 @@ in
         auto-key-locate = "local";
       };
     };
+
     helix = {
       enable = true;
       settings = {
@@ -168,11 +162,14 @@ in
         }];
       };
     };
+
     starship = {
       enable = true;
       enableFishIntegration = true;
     };
+
     tealdeer.enable = true;
+
     zoxide = {
       enable = true;
       enableFishIntegration = true;

@@ -15,8 +15,6 @@
       # GUI applications
       alacritty
       direnv
-      pritunl-ssh
-      teams
 
       # Global utils
       ncurses
@@ -48,15 +46,12 @@
       "homebrew/cask-drivers"
     ];
     brews = [
-      "ruby" # Required for AUTO_OPS
       "volta"
     ];
     casks = [
       "mongodb-compass"
       "postman"
       "docker"
-      # "pritunl"
-      "https://raw.githubusercontent.com/Homebrew/homebrew-cask/6bf26425d09c020c4accb5cb958112ead452e5fd/Casks/pritunl.rb" # Pritunl
     ];
   };
 

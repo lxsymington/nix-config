@@ -1,0 +1,40 @@
+{ config, pkgs, ... }:
+
+let
+  assume-role = builtins.fetchGit {
+    url = "git@github.com:ibisnetworks/assume-role.git";
+    ref = "master";
+    rev =  "b59b398b6c197eb2442a13cf8afe08936501b881";
+  };
+in
+{
+  imports = [
+    ./default.nix
+    ./fish/work.nix
+  ];
+
+  home = {
+    packages = with pkgs; [
+      awscli2
+      aws-sam-cli
+      dotnet-sdk_7
+    ];
+    
+    sessionVariables = {
+      AUTO_OPS = "${config.home.homeDirectory}/.seccl/auto-ops";
+      AWS_PROFILE = "seccl-master";
+      CORE_ENV = "genshared";
+      STAGE_ENV = "devlsymington";
+      # Required for AUTO_OPS first time setup
+      NVM_DIR = "${config.home.homeDirectory}/.nvm";
+    };
+  };
+
+  programs = {
+    go = {
+      packages = {
+        "github.com/ibisnetworks/assume-role" = assume-role;
+      };
+    }
+  };
+}

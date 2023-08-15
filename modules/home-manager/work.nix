@@ -9,7 +9,6 @@ let
 in
 {
   imports = [
-    ./default.nix
     ./fish/work.nix
   ];
 
@@ -35,6 +34,6 @@ in
       packages = {
         "github.com/ibisnetworks/assume-role" = assume-role;
       };
-    }
+    };
   };
 }

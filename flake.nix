@@ -101,11 +101,8 @@
     {
       darwinConfigurations = {
         lxs-seccl-macbook = mkDarwinConfig {
-          baseModules = [
-            home-manager.darwinModules.home-manager
-            ./modules/darwin/work.nix
-          ];
           extraModules = [
+            ./modules/darwin/work.nix
             ./profiles/lxs-work.nix
           ];
         };

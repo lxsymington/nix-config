@@ -1,11 +1,5 @@
 { inputs, config, pkgs, ... }:
 {
-  imports = [
-    ../common.nix
-    ./core.nix
-    ./preferences.nix
-  ];
-
   environment = {
     systemPackages = with pkgs; [
       # GUI applications
@@ -13,6 +7,9 @@
       teams
     ];
   };
+
+  # bootstrap home manager using system config
+  hm = import ../home-manager/work.nix;
   
   homebrew = {
     brews = [

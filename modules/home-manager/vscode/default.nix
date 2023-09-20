@@ -5,11 +5,12 @@ let
     antfu.icons-carbon
     antfu.theme-vitesse
     asvetliakov.vscode-neovim
-    dotenv.dotenv-vscode
     editorconfig.editorconfig
     equinusocio.moxer-icons
     github.copilot
     github.copilot-chat
+    github.copilot-labs
+    github.heygithub
     github.vscode-pull-request-github
     hashicorp.terraform
     hbenl.vscode-mocha-test-adapter
@@ -20,10 +21,10 @@ let
     ms-azuretools.vscode-docker
     ms-vscode.test-adapter-converter
     ms-vsliveshare.vsliveshare
+    mxsdev.typescript-explorer
     postman.postman-for-vscode
     rome.rome
     sdras.night-owl
-    sisisin.type-explorer
     tamasfe.even-better-toml
     wallabyjs.quokka-vscode
   ];
@@ -31,7 +32,14 @@ in {
   programs = {
     vscode = {
       userSettings = {
+        "accessibility.dimUnfocused.enabled" = true;
+
         "debug.toolBarLocation" = "docked";
+
+        "diffEditor.experimental.useVersion2" = true;
+        "diffEditor.experimental.collapseUnchangedRegions" = true;
+        "diffEditor.experimental.showMoves" = true;
+        "diffEditor.hideUnchangedRegions.enabled" = true;
 
         "editor.cursorSurroundingLines" = 5;
         "editor.fontFamily" = "Rec Mono Duotone, CommitMono, JetBrainsMono Nerd Font, monospace";
@@ -46,13 +54,12 @@ in {
         "editor.renderLineHighlightOnlyWhenFocus" = true;
         "editor.smoothScrolling" = true;
         "editor.stickyScroll.enabled" = true;
+        "editor.minimap.autohide" = true;
+
         "explorer.fileNesting.enabled" = true;
         "explorer.fileNesting.expand" = false;
 
         "files.insertFinalNewline" = true;
-        "files.associations" = {
-          ".env*" = "dotenv";
-        };
 
         "git.mergeEditor" = true;
 
@@ -90,6 +97,8 @@ in {
         "terminal.external.osxExec" = "Alacritty.app";
         "terminal.integrated.cursorBlinking" = true;
         "terminal.integrated.localEchoStyle" = "dim";
+        "terminal.integrated.persistentSessionScrollback" = 1000;
+        "terminal.integrated.scrollback" = 10000;
 
         "testExplorer.addToEditorContextMenu" = true;
         "testExplorer.mergeSuites" = true;
@@ -226,11 +235,13 @@ in {
         "vim.visualstar" = true;
 
         "window.autoDetectColorScheme" = true;
-        "window.nativeTabs" = true;
+        "window.commandCenter" = true;
+        "window.nativeTabs" = false;
         "window.newWindowDimensions" = "maximized";
         "window.zoomLevel" = 1;
 
         "workbench.colorTheme" = "Night Owl Light";
+        "workbench.fontAliasing" = "auto";
         "workbench.editor.highlightModifiedTabs" = true;
         "workbench.list.smoothScrolling" = true;
         "workbench.iconTheme" = "moxer-icons";

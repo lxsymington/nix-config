@@ -24,6 +24,7 @@ in
       gojq
       graphviz
       hurl
+      jd-diff-patch
       jq
       imagemagick
       inetutils

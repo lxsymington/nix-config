@@ -17,7 +17,6 @@ let
     hbenl.vscode-test-explorer
     hbenl.vscode-test-explorer-liveshare
     jacobpfeifer.pfeifer-hurl
-    kavod-io.vscode-jest-test-adapter
     ms-azuretools.vscode-docker
     ms-vscode.test-adapter-converter
     ms-vsliveshare.vsliveshare
@@ -27,12 +26,14 @@ let
     sdras.night-owl
     tamasfe.even-better-toml
     wallabyjs.quokka-vscode
+    orta.vscode-jest
   ];
 in {
   programs = {
     vscode = {
       userSettings = {
         "accessibility.dimUnfocused.enabled" = true;
+        "accessibility.dimUnfocused.opacity" = 0.5;
 
         "debug.toolBarLocation" = "docked";
 
@@ -55,9 +56,14 @@ in {
         "editor.smoothScrolling" = true;
         "editor.stickyScroll.enabled" = true;
         "editor.minimap.autohide" = true;
+        
 
         "explorer.fileNesting.enabled" = true;
         "explorer.fileNesting.expand" = false;
+
+        "extensions.experimental.affinity" = {
+          "asvetliakov.vscode-neovim" = 1;
+        };
 
         "files.insertFinalNewline" = true;
 
@@ -72,6 +78,8 @@ in {
         "javascript.inlayHints.parameterTypes.enabled" = true;
         "javascript.inlayHints.propertyDeclarationTypes.enabled" = true;
         "javascript.inlayHints.variableTypes.enabled" = true;
+        
+        "jest.autoRun" = "off";
 
         "liveshare.allowGuestDebugControl" = true;
         "liveshare.allowGuestTaskControl" = true;

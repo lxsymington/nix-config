@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   programs = {
@@ -7,8 +7,8 @@
       interactiveShellInit = ''
         fish_vi_key_bindings
 
-        if test -e ~/.seccl/env.sh -a -x ~/.seccl/env.sh
-          replay source ~/.seccl/env.sh
+        if test -e ${config.home.homeDirectory}/.seccl/env.sh -a -x ${config.home.homeDirectory}/.seccl/env.sh
+          replay source ${config.home.homeDirectory}/.seccl/env.sh
         end
       '';
       functions = {
@@ -18,8 +18,8 @@
           # onEvent = "fish_prompt";
           body = ''
             set -l filename "index-${pkgs.system}"
-            mkdir -p ~/.cache/nix-index
-            pushd ~/.cache/nix-index
+            mkdir -p ${config.home.homeDirectory}/.cache/nix-index
+            pushd ${config.home.homeDirectory}/.cache/nix-index
             # -N will only download a new version if there is an update.
             wget -q -N https://github.com/Mic92/nix-index-database/releases/latest/download/$filename
             ln -f $filename files

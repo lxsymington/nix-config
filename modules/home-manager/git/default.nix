@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   lxs_git_commit_template = builtins.toPath ./.git-commit-template;
@@ -126,7 +126,7 @@ in
           };
         };
         safe = {
-          directory = "~/Tools/neovim";
+          directory = "${config.home.homeDirectory}/Tools/neovim";
         };
       };
       ignores = [
@@ -137,7 +137,7 @@ in
       ];
       includes = [
         {
-          condition = "gitdir:~/Development/Seccl/";
+          condition = "gitdir:${config.home.homeDirectory}/Development/Seccl/";
           contents = {
             user = {
               email = "luke.xaviersymington@seccl.tech";

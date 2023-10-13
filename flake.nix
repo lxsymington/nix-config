@@ -100,7 +100,7 @@
     in
     {
       darwinConfigurations = {
-        lxs-seccl-macbook = mkDarwinConfig {
+        Lukes-MacBook-Pro = mkDarwinConfig {
           extraModules = [
             ./modules/darwin/work.nix
             ./profiles/lxs-work.nix

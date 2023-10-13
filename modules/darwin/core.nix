@@ -17,7 +17,6 @@
     systemPackages = with pkgs; [
       # GUI applications
       alacritty
-      direnv
 
       # Global utils
       ncurses

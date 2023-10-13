@@ -1,20 +1,31 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
+  home = {
+    sessionPath = [
+      "${config.home.homeDirectory}/.asdf/shims"
+    ];
+  };
+
   programs = {
     fish = {
+      interactiveShellInit = ''
+        if test -e ${config.home.homeDirectory}/.asdf/asdf.fish -a -x ${config.home.homeDirectory}/.asdf/asdf.fish
+          replay source ${config.home.homeDirectory}/.asdf/asdf.fish
+        end
+      '';
       functions = {
         # Required for first time AUTO_OPS setup
         nvm = {
           description = "nvm";
           body = ''
-            replay source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+            replay source ${config.home.homeDirectory}/.nvm/nvm.sh --no-use ';' nvm $argv
           '';
         };
         nvm_find_nvmrc = {
           description = "find nvmrc";
           body = ''
-            replay source ~/.nvm/nvm.sh --no-use ';' nvm_find_nvmrc
+            replay source ${config.home.homeDirectory}/.nvm/nvm.sh --no-use ';' nvm_find_nvmrc
           '';
         };
         load_nvm = {
@@ -37,6 +48,14 @@
             end
           '';
         };
+      };
+    };
+  };
+  
+  xdg = {
+    configFile = {
+      "fish/completions/asdf.fish" = {
+        source = "${pkgs.asdf-vm}/share/fish/vendor_completions.d/asdf.fish";
       };
     };
   };

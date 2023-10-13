@@ -11,6 +11,7 @@ in
     packages = with pkgs; [
       _1password
       # ansible # An ansible test is failing during the build
+      asdf-vm
       cachix
       cargo
       comma
@@ -24,10 +25,10 @@ in
       gojq
       graphviz
       hurl
-      jd-diff-patch
-      jq
       imagemagick
       inetutils
+      jd-diff-patch
+      jq
       llvm
       mongodb-tools
       mongosh
@@ -35,6 +36,7 @@ in
       nghttp2
       nix-index
       nix-prefetch-git
+      nixfmt
       pandoc
       pcre
       pinentry
@@ -50,7 +52,7 @@ in
     stateVersion = "22.11";
 
     shellAliases = {
-      renix = "darwin-rebuild switch --flake ~/.config/nix-darwin";
+      renix = "darwin-rebuild switch --flake ${config.home.homeDirectory}/.config/nix-darwin";
       jq = "gojq";
     };
 
@@ -93,6 +95,8 @@ in
       enable = true;
       path = "${config.home.homeDirectory}/.nixpkgs/modules/home-manager";
     };
+    
+    bash.enable = true;
 
     bat = {
       enable = true;
@@ -134,7 +138,7 @@ in
         auto-key-locate = "local";
       };
     };
-
+    
     helix = {
       enable = true;
       settings = {
@@ -162,10 +166,18 @@ in
         }];
       };
     };
+    
+    direnv = {
+      enable = true;
+      nix-direnv = {
+        enable = true;
+      };
+    };
 
     starship = {
       enable = true;
       enableFishIntegration = true;
+      enableTransience = true;
     };
 
     tealdeer.enable = true;

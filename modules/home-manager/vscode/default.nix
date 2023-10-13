@@ -2,6 +2,7 @@
 
 let
   marketplace_extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+    amazonwebservices.aws-toolkit-vscode
     antfu.icons-carbon
     antfu.theme-vitesse
     asvetliakov.vscode-neovim
@@ -17,16 +18,18 @@ let
     hbenl.vscode-test-explorer
     hbenl.vscode-test-explorer-liveshare
     jacobpfeifer.pfeifer-hurl
+    mkhl.direnv
+    mongodb.mongodb-vscode
     ms-azuretools.vscode-docker
     ms-vscode.test-adapter-converter
     ms-vsliveshare.vsliveshare
     mxsdev.typescript-explorer
+    orta.vscode-jest
     postman.postman-for-vscode
     rome.rome
     sdras.night-owl
     tamasfe.even-better-toml
     wallabyjs.quokka-vscode
-    orta.vscode-jest
   ];
 in {
   programs = {
@@ -35,13 +38,14 @@ in {
         "accessibility.dimUnfocused.enabled" = true;
         "accessibility.dimUnfocused.opacity" = 0.5;
 
-        "debug.toolBarLocation" = "docked";
+        "debug.toolBarLocation" = "commandCenter";
 
         "diffEditor.experimental.useVersion2" = true;
         "diffEditor.experimental.collapseUnchangedRegions" = true;
         "diffEditor.experimental.showMoves" = true;
         "diffEditor.hideUnchangedRegions.enabled" = true;
 
+        "editor.codeActionWidget.includeNearbyQuickfixes" = true;
         "editor.cursorSurroundingLines" = 5;
         "editor.fontFamily" = "Rec Mono Duotone, CommitMono, JetBrainsMono Nerd Font, monospace";
         "editor.fontLigatures" = true;
@@ -57,12 +61,13 @@ in {
         "editor.stickyScroll.enabled" = true;
         "editor.minimap.autohide" = true;
         
-
         "explorer.fileNesting.enabled" = true;
         "explorer.fileNesting.expand" = false;
 
         "extensions.experimental.affinity" = {
           "asvetliakov.vscode-neovim" = 1;
+          "mongodb.mongodb-vscode" = 1;
+          "orta.vscode-jest" = 1;
         };
 
         "files.insertFinalNewline" = true;
@@ -125,125 +130,9 @@ in {
         "typescript.inlayHints.variableTypes.enabled" = true;
         "typescript.tsserver.experimental.enableProjectDiagnostics" = true;
 
-        "vim.argumentObjectClosingDelimiters" = [")" "]" "}"];
-        "vim.argumentObjectOpeningDelimiters" = ["(" "[" "{"];
-        "vim.cursorStylePerMode.insert" = "line-thin";
-        "vim.cursorStylePerMode.normal" = "block";
-        "vim.cursorStylePerMode.replace" = "underline";
-        "vim.cursorStylePerMode.visual" = "block-outline";
-        "vim.cursorStylePerMode.visualblock" = "block-outline";
-        "vim.cursorStylePerMode.visualline" = "block-outline";
-        "vim.highlightedyank.enable" = true;
-        "vim.hlsearch" = true;
-        "vim.incsearch" = true;
-        "vim.insertModeKeyBindings" = [
-          {
-            before = ["j" "j"];
-            after = ["<Esc>"];
-          }
-        ];
-        "vim.normalModeKeyBindingsNonRecursive" = [
-          {
-            before = ["K"];
-            commands = [
-              "editor.action.showHover"
-            ]; 
-          }
-          {
-            before = ["g" "d"];
-            commands = [
-              "editor.action.goToSourceDefinition"
-            ]; 
-          }
-          {
-            before = ["g" "t"];
-            commands = [
-              "editor.action.goToTypeDeclaration"
-            ]; 
-          }
-          {
-            before = ["leader" "@" "d"];
-            commands = [
-              "editor.action.showDefinitionPreviewHover"
-            ]; 
-          }
-          {
-            before = ["leader" "t" "n"];
-            commands = [
-              "testing.runAtCursor"
-            ]; 
-          }
-          {
-            before = ["leader" "t" "f"];
-            commands = [
-              "testing.runCurrentFile"
-            ]; 
-          }
-          {
-            before = ["leader" "t" "d"];
-            commands = [
-              "testing.debugAtCursor"
-            ]; 
-          }
-          {
-            before = ["]" "d"];
-            commands = [
-              "editor.action.marker.next"
-            ];
-          }
-          {
-            before = ["[" "d"];
-            commands = [
-              "editor.action.marker.prev"
-            ];
-          }
-          {
-            before = ["]" "c"];
-            commands = [
-              "workbench.action.editor.nextChange"
-            ];
-          }
-          {
-            before = ["[" "c"];
-            commands = [
-              "workbench.action.editor.previousChange"
-            ];
-          }
-          {
-            before = ["]" "t"];
-            commands = [
-              "testing.goToNextMessage"
-            ];
-          }
-          {
-            before = ["[" "t"];
-            commands = [
-              "testing.goToPreviousMessage"
-            ];
-          }
-          {
-            before = ["z" "j"];
-            commands = [
-              "editor.gotoNextFold"
-            ];
-          }
-          {
-            before = ["z" "k"];
-            commands = [
-              "editor.goToPreviousFold"
-            ];
-          }
-        ];
-        "vim.leader" = "<space>";
-        "vim.matchpairs" = "(:),{:},[:],<:>";
-        "vim.showMarksInGutter" = true;
-        "vim.smartRelativeLine" = true;
-        "vim.useCtrlKeys" = true;
-        "vim.useSystemClipboard" = false;
-        "vim.visualstar" = true;
-
         "window.autoDetectColorScheme" = true;
         "window.commandCenter" = true;
+        "window.density.editorTabHeight" = "compact";
         "window.nativeTabs" = false;
         "window.newWindowDimensions" = "maximized";
         "window.zoomLevel" = 1;
@@ -263,7 +152,6 @@ in {
         bbenoist.nix
         dbaeumer.vscode-eslint
         eamodio.gitlens
-        vscodevim.vim
       ] ++ marketplace_extensions;
     };
   };

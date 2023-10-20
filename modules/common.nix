@@ -1,35 +1,40 @@
-{ self, inputs, config, pkgs, ... }: {
+{ self, inputs, config, pkgs, homeDirectory, username, ... }: {
   imports = [ ./primary.nix ./nixpkgs.nix ];
 
-  programs.nix-index.enable = true;
-  programs.bash.enable = true;
-  programs.zsh.enable = true;
-  programs.fish = {
-    enable = true;
-    vendor = {
-      config.enable = true;
-      completions.enable = true;
-      functions.enable = true;
+  programs = {
+    nix-index.enable = true;
+    bash.enable = true;
+    zsh.enable = true;
+
+    fish = {
+      enable = true;
+      vendor = {
+        config.enable = true;
+        completions.enable = true;
+        functions.enable = true;
+      };
     };
-  };
-  programs.man.enable = true;
-  programs.tmux = {
-    enable = true;
-    enableSensible = true;
-    enableMouse = true;
-    enableFzf = true;
-    enableVim = true;
-  };
-  programs.vim = {
-    enable = true;
-    enableSensible = true;
+
+    man.enable = true;
+
+    tmux = {
+      enable = true;
+      enableSensible = true;
+      enableMouse = true;
+      enableFzf = true;
+      enableVim = true;
+    };
+
+    vim = {
+      enable = true;
+      enableSensible = true;
+    };
   };
 
   user = {
+    name = username;
     description = "Luke Xavier Symington";
-    home = "${
-        if pkgs.stdenvNoCC.isDarwin then "/Users" else "/home"
-      }/${config.user.name}";
+    home = homeDirectory;
     shell = pkgs.fish;
   };
 
@@ -38,7 +43,7 @@
 
   # let nix manage home-manager profiles and use global nixpkgs
   home-manager = {
-    extraSpecialArgs = { inherit self inputs; };
+    extraSpecialArgs = { inherit self homeDirectory inputs username; };
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
@@ -59,11 +64,13 @@
       fzf
       ripgrep
     ];
+
     etc = {
       home-manager.source = "${inputs.home-manager}";
       nixpkgs.source = "${pkgs.path}";
       stable.source = "${inputs.stable}";
     };
+
     # list of acceptable shells in /etc/shells
     shells = with pkgs; [ bash zsh fish ];
   };

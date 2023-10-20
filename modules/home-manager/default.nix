@@ -11,7 +11,6 @@ in
     packages = with pkgs; [
       _1password
       # ansible # An ansible test is failing during the build
-      asdf-vm
       cachix
       cargo
       comma
@@ -177,7 +176,8 @@ in
     starship = {
       enable = true;
       enableFishIntegration = true;
-      enableTransience = true;
+      # Seems to cause issues with `pinentry` on macOS
+      # enableTransience = true;
     };
 
     tealdeer.enable = true;

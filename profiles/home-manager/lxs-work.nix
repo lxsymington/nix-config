@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ homeDirectory, ... }: {
   programs.ssh = {
     enable = true;
     matchBlocks = {
@@ -6,7 +6,7 @@
         hostname = "github.com";
         forwardAgent = true;
         identitiesOnly = true;
-        identityFile = "${config.home.homeDirectory}/.ssh/seccl_ed25519";
+        identityFile = "${homeDirectory}/.ssh/seccl_ed25519";
         extraOptions = {
           AddKeysToAgent = "yes";
           UseKeychain = "yes";
@@ -16,7 +16,7 @@
         hostname = "github.com";
         forwardAgent = true;
         identitiesOnly = true;
-        identityFile = "${config.home.homeDirectory}/.ssh/personal_ed25519";
+        identityFile = "${homeDirectory}/.ssh/personal_ed25519";
         extraOptions = {
           AddKeysToAgent = "yes";
           UseKeychain = "yes";

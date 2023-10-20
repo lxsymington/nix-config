@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   system = {
     defaults = {
       NSGlobalDomain = {
@@ -70,7 +70,7 @@
       };
       
       screencapture = {
-        location = "~/Pictures/Screenshots";
+        location = "${config.user.home}/Pictures/Screenshots";
       };
       
       spaces = {

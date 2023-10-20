@@ -9,6 +9,7 @@ in
       enable = true;
       userName = "Luke Xavier Symington";
       userEmail = "lukexaviersymington@gmail.com";
+
       aliases = {
         co = "checkout";
         # Show last commit
@@ -37,6 +38,7 @@ in
         # Fuzzy find all branches and checkout a branch
         fac = "!git fetch && git find-branch | xargs git checkout";
       };
+
       delta = {
         enable = true;
         options = {
@@ -56,6 +58,7 @@ in
           };
         };
       };
+
       extraConfig = {
         core = {
           autocrlf = "input";
@@ -64,25 +67,32 @@ in
           filemode = false;
           pager = "${pkgs.gitAndTools.delta}/bin/delta";
         };
+
         init = {
           defaultBranch = "main";
         };
+
         interactive = {
           diffFilter = "${pkgs.gitAndTools.delta}/bin/delta --color-only";
         };
+
         push = {
           default = "current";
           autoSetupRemote = true;
         };
+
         pull = {
           ff = "only";
         };
+
         fetch = {
           prune = true;
         };
+
         color = {
           ui = true;
         };
+
         diff = {
           tool = "nvim";
           conflictstyle = "diff2";
@@ -91,6 +101,7 @@ in
           compactionHeuristic = true;
           colorMoved = "default";
         };
+
         merge = {
           tool = "nvim";
           conflictstyle = "diff3";
@@ -98,6 +109,7 @@ in
           indentHeuristic = true;
           compactionHeuristic = true;
         };
+
         difftool = {
           prompt = false;
           trustexitcode = true;
@@ -105,6 +117,7 @@ in
             cmd = "nvim -d $LOCAL $REMOTE";
           };
         };
+
         mergetool = {
           prompt = false;
           trustexitcode = true;
@@ -114,10 +127,12 @@ in
             cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd b' -c 'wincmd J'";
           };
         };
+
         commit = {
           template = lxs_git_commit_template;
           verbose = true;
         };
+
         remote = {
           origin = {
             fetch = [
@@ -125,16 +140,19 @@ in
             ];
           };
         };
+
         safe = {
           directory = "${config.home.homeDirectory}/Tools/neovim";
         };
       };
+
       ignores = [
         "*.swp"
         ".prettier_d"
         ".eslintcache"
         ".DS_Store"
       ];
+
       includes = [
         {
           condition = "gitdir:${config.home.homeDirectory}/Development/Seccl/";
@@ -155,3 +173,45 @@ in
     };
   };
 }
+
+# Failed assertions:
+#   - lxs profile: The module services.gpg-agent does not support your platform. It only supports
+
+#     - aarch64-linux
+#     - armv5tel-linux
+#     - armv6l-linux
+#     - armv7a-linux
+#     - armv7l-linux
+#     - i686-linux
+#     - loongarch64-linux
+#     - m68k-linux
+#     - microblaze-linux
+#     - microblazeel-linux
+#     - mips-linux
+#     - mips64-linux
+#     - mips64el-linux
+#     - mipsel-linux
+#     - powerpc64-linux
+#     - powerpc64le-linux
+#     - riscv32-linux
+#     - riscv64-linux
+#     - s390-linux
+#     - s390x-linux
+#     - x86_64-linux
+
+# services = {
+#   gpg-agent = {
+#     defaultCacheTtl = 86400;
+#     defaultCacheTtlSsh = 86400;
+#     enable = true;
+#     enableFishIntegration = true;
+#     enableScDaemon = true;
+#     enableSshSupport = true;
+#     extraConfig = ''
+#       allow-loopback-pinentry
+#     '';
+#     maxCacheTtl = 86400;
+#     maxCacheTtlSsh = 86400;
+#     # pinentryFlavor = "curses";
+#   };
+# };

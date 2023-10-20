@@ -28,79 +28,75 @@
 
       isDarwin = system: (elem system nixpkgs.lib.platforms.darwin);
       homePrefix = system: if isDarwin system then "/Users" else "/home";
+      homeDirectory = { system, username }: "${homePrefix system}/${username}";
 
+      nixpkgsWithOverlays = system: (import nixpkgs {
+        inherit system;
+        config = {
+          allowUnsupportedSystem = true;
+          allowUnfree = true;
+          allowBroken = false;
+        };
+        overlays = [
+          (final: prev: {
+            rnix-lsp = lsp-nil.packages.${final.system}.default;
+          })
+        ];
+      });
+      
       # generate a base darwin configuration with the specified hostname,
       # overlays and any extraModules applied
-      mkDarwinConfig =
-        { system ? "aarch64-darwin"
-        , nixpkgs ? inputs.nixpkgs
-        , stable ? inputs.stable
-        , baseModules ? [
-            home-manager.darwinModules.home-manager
-            ./modules/darwin
-          ]
-        , extraModules ? []
-        }: darwinSystem {
-          inherit system;
-          pkgs = import nixpkgs {
-            inherit system;
-            config = {
-              allowUnsupportedSystem = true;
-              allowUnfree = true;
-              allowBroken = false;
-            };
-            overlays = [
-              (final: prev: {
-                rnix-lsp = lsp-nil.packages.${final.system}.default;
-              })
-            ];
+      mkDarwinConfig = {
+        system ? "aarch64-darwin",
+        username,
+        extraModules ? []
+      }: darwinSystem {
+        inherit system;
+        pkgs = nixpkgsWithOverlays system;
+        modules = [
+          home-manager.darwinModules.home-manager
+          ./modules/darwin
+        ] ++ extraModules;
+        specialArgs = {
+          inherit self inputs username;
+          homeDirectory = homeDirectory {
+            inherit system username;
           };
-          modules = baseModules ++ extraModules;
-          specialArgs = { inherit self inputs nixpkgs stable; };
         };
+      };
 
       # generate a home-manager configuration usable on any unix system
       # with overlays and any extraModules applied
       mkHomeConfig = {
-        username,
         system ? "x86_64-linux",
-        nixpkgs ? inputs.nixpkgs,
-        stable ? inputs.stable,
-        baseModules ? [
+        username,
+        extraModules ? [ ]
+      }: homeManagerConfiguration {
+        pkgs = nixpkgsWithOverlays { inherit system; };
+        modules = [
           ./modules/home-manager
           {
             home = {
-              inherit username;
-              homeDirectory = "${homePrefix system}/${username}";
+              inherit username homeDirectory;
               sessionVariables = {
                 NIX_PATH =
-                  "nixpkgs=${nixpkgs}:stable=${stable}\${NIX_PATH:+:}$NIX_PATH";
+                  "nixpkgs=${inputs.nixpkgs}:stable=${inputs.stable}\${NIX_PATH:+:}$NIX_PATH";
               };
             };
           }
-        ],
-        extraModules ? [ ]
-      }: homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {
-            allowUnsupportedSystem = true;
-            allowUnfree = true;
-            allowBroken = false;
+        ] ++ extraModules;
+        specialArgs = {
+          inherit self inputs username;
+          homeDirectory = homeDirectory {
+            inherit system username;
           };
-          overlays = [
-            (final: prev: {
-              rnix-lsp = lsp-nil.defaultPackagae.${final.system};
-            })
-          ];
         };
-        modules = baseModules ++ extraModules;
-        specialArgs = { inherit self inputs nixpkgs stable; };
       };
     in
     {
       darwinConfigurations = {
         Lukes-MacBook-Pro = mkDarwinConfig {
+          username = "lxs";
           extraModules = [
             ./modules/darwin/work.nix
             ./profiles/lxs-work.nix
@@ -108,6 +104,7 @@
         };
         josie-personal-macbook = mkDarwinConfig {
           system = "x86_64-darwin";
+          username = "lxs";
           extraModules = [
             ./profiles/lxs-personal.nix
           ];

@@ -1,8 +1,7 @@
-{ config, lib, options, ... }:
-# module used courtesy of @i077 - https://github.com/i077/system/
-let inherit (lib) mkAliasDefinitions mkOption types;
-in
-{
+{ config, lib, options, username, ... }:
+let
+  inherit (lib) mkAliasDefinitions mkOption types;
+in {
   # Define some aliases for ease of use
   options = {
     user = mkOption {
@@ -12,6 +11,7 @@ in
     };
 
     hm = mkOption {
+      description = "Home manager configuration";
       type = types.attrs;
       default = { };
     };
@@ -20,9 +20,9 @@ in
 
   config = {
     # hm -> home-manager.users.<primary user>
-    home-manager.users.${config.user.name} = mkAliasDefinitions options.hm;
+    home-manager.users.${username} = mkAliasDefinitions options.hm;
 
     # user -> users.users.<primary user>
-    users.users.${config.user.name} = mkAliasDefinitions options.user;
+    users.users.${username} = mkAliasDefinitions options.user;
   };
 }

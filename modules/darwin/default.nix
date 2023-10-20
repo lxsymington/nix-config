@@ -1,5 +1,4 @@
-{ ... }: 
-{
+{ self, inputs, ... }: {
   imports = [
     ../common.nix
     ./core.nix

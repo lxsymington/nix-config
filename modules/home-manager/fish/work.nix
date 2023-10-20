@@ -1,19 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home = {
-    sessionPath = [
-      "${config.home.homeDirectory}/.asdf/shims"
-    ];
-  };
-
   programs = {
     fish = {
-      interactiveShellInit = ''
-        if test -e ${config.home.homeDirectory}/.asdf/asdf.fish -a -x ${config.home.homeDirectory}/.asdf/asdf.fish
-          replay source ${config.home.homeDirectory}/.asdf/asdf.fish
-        end
-      '';
       functions = {
         # Required for first time AUTO_OPS setup
         nvm = {
@@ -48,14 +37,6 @@
             end
           '';
         };
-      };
-    };
-  };
-  
-  xdg = {
-    configFile = {
-      "fish/completions/asdf.fish" = {
-        source = "${pkgs.asdf-vm}/share/fish/vendor_completions.d/asdf.fish";
       };
     };
   };

@@ -1,6 +1,9 @@
 { inputs, config, pkgs, ... }:
 {
   environment = {
+    # TODO: use XDG config home
+    darwinConfig = "~/.config/nix-darwin/flake.nix";
+
     etc = {
       darwin.source = "${inputs.darwin}";
       terminfo = {
@@ -13,6 +16,10 @@
       "/share/doc"
       "/share/terminfo"
     ];
+    
+    shellAliases = {
+      pinentry = "pinentry-mac";
+    };
     
     systemPackages = with pkgs; [
       # GUI applications
@@ -45,8 +52,11 @@
     taps = [
       "homebrew/core"
       "homebrew/cask"
+      "jorgelbg/tap"
     ];
     brews = [
+      "pinentry-mac"
+      "pinentry-touchid"
       "volta"
     ];
     casks = [

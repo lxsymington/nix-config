@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, homeDirectory, inputs, ... }:
 
 let
+  inherit (inputs.nix-index-database.hmModules) nix-index;
   GOPATH = "go";
   GOBIN = "${GOPATH}/bin";
 in
@@ -11,17 +12,22 @@ in
     packages = with pkgs; [
       _1password
       # ansible # An ansible test is failing during the build
+      alejandra
       cachix
-      cargo
-      comma
+      curl
+      deadnix
       delta
       du-dust
       emscripten
       fd
       figlet
+      fx
       fzf
+      gh
       glib
+      go
       gojq
+      gopls
       graphviz
       hurl
       imagemagick
@@ -29,26 +35,39 @@ in
       jd-diff-patch
       jq
       llvm
+      lua
+      lua52Packages.luacheck
       mongodb-tools
       mongosh
       multimarkdown
       nghttp2
-      nix-index
       nix-prefetch-git
       nixfmt
+      nodePackages.prettier
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted
+      nodePackages.yaml-language-server
+      nodejs
       pandoc
       pcre
       pinentry
-      reattach-to-user-namespace
+      # reattach-to-user-namespace
       ripgrep
       rnix-lsp
+      rustup
       shellcheck
+      shellcheck
+      statix
+      sumneko-lua-language-server
       terminal-notifier
+      typescript
       xh
       yarn
     ];
 
-    stateVersion = "22.11";
+    inherit homeDirectory;
+
+    stateVersion = "23.11";
 
     shellAliases = {
       renix = "darwin-rebuild switch --flake ${config.home.homeDirectory}/.config/nix-darwin";
@@ -81,6 +100,7 @@ in
   xdg.enable = true;
 
   imports = [
+    nix-index
     ./alacritty
     ./fish
     ./git
@@ -109,9 +129,23 @@ in
 
     bottom.enable = true;
 
+    broot = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    command-not-found = {
+      enable = false;
+    };
+
     eza = {
       enable = true;
       enableAliases = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
     };
 
     gh = {
@@ -165,7 +199,16 @@ in
         }];
       };
     };
-    
+
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    nix-index-database = {
+      comma.enable = true;
+    };
+  
     direnv = {
       enable = true;
       nix-direnv = {

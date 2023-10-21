@@ -6,22 +6,50 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:lnl7/nix-darwin";
     };
+
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
+
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+
+    nur.url = "github:nix-community/NUR";
+
     lsp-nil = {
       url = "github:oxalica/nil";
     };
+
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
     };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, lsp-nil, ... }@inputs:
+  outputs = {
+    darwin,
+    home-manager,
+    lsp-nil,
+    nix-index-database,
+    nixos-wsl,
+    nixpkgs,
+    nixpkgs-stable,
+    nur,
+    self,
+    ...
+  }@inputs :
     let
+      inherit (nixpkgs.lib) nixosSystem;
       inherit (darwin.lib) darwinSystem;
       inherit (home-manager.lib) homeManagerConfiguration;
       inherit (builtins) elem;
@@ -30,7 +58,7 @@
       homePrefix = system: if isDarwin system then "/Users" else "/home";
       homeDirectory = { system, username }: "${homePrefix system}/${username}";
 
-      nixpkgsWithOverlays = system: (import nixpkgs {
+      nixpkgsWithOverlays = system: (import nixpkgs rec {
         inherit system;
         config = {
           allowUnsupportedSystem = true;
@@ -38,40 +66,74 @@
           allowBroken = false;
         };
         overlays = [
+          nur.overlay
+          (_final: prev: {
+            # this allows us to reference pkgs.stable
+            stable = import nixpkgs-stable {
+              inherit (prev) system;
+              inherit config;
+            };
+          })
           (final: prev: {
             rnix-lsp = lsp-nil.packages.${final.system}.default;
           })
         ];
       });
+
+      argDefaults = { hostname, system, username }: {
+        inherit self hostname inputs nix-index-database username;
+        homeDirectory = homeDirectory {
+          inherit system username;
+        };
+        channels = {
+          inherit nixpkgs nixpkgs-stable;
+        };
+      };
+
+      mkNixosConfiguration = {
+        system ? "x86_64-linux",
+        hostname,
+        username,
+        args ? {},
+        extraModules ? []
+      }: let
+        specialArgs = argDefaults { inherit hostname system username; } // args;
+      in nixosSystem {
+        inherit system specialArgs;
+        pkgs = nixpkgsWithOverlays system;
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./modules/nixos
+        ] ++ extraModules;
+      };
       
-      # generate a base darwin configuration with the specified hostname,
-      # overlays and any extraModules applied
       mkDarwinConfig = {
         system ? "aarch64-darwin",
+        hostname,
         username,
+        args ? {},
         extraModules ? []
-      }: darwinSystem {
-        inherit system;
+      }: let
+        specialArgs = argDefaults { inherit hostname system username; } // args;
+      in darwinSystem {
+        inherit system specialArgs;
         pkgs = nixpkgsWithOverlays system;
         modules = [
           home-manager.darwinModules.home-manager
           ./modules/darwin
         ] ++ extraModules;
-        specialArgs = {
-          inherit self inputs username;
-          homeDirectory = homeDirectory {
-            inherit system username;
-          };
-        };
       };
 
-      # generate a home-manager configuration usable on any unix system
-      # with overlays and any extraModules applied
       mkHomeConfig = {
         system ? "x86_64-linux",
+        hostname,
         username,
+        args ? {},
         extraModules ? [ ]
-      }: homeManagerConfiguration {
+      }: let
+        specialArgs = argDefaults { inherit hostname system username; } // args;
+      in homeManagerConfiguration {
+        inherit specialArgs;
         pkgs = nixpkgsWithOverlays { inherit system; };
         modules = [
           ./modules/home-manager
@@ -80,22 +142,29 @@
               inherit username homeDirectory;
               sessionVariables = {
                 NIX_PATH =
-                  "nixpkgs=${inputs.nixpkgs}:stable=${inputs.stable}\${NIX_PATH:+:}$NIX_PATH";
+                  "nixpkgs=${nixpkgs}:stable=${nixpkgs-stable}\${NIX_PATH:+:}$NIX_PATH";
               };
             };
           }
         ] ++ extraModules;
-        specialArgs = {
-          inherit self inputs username;
-          homeDirectory = homeDirectory {
-            inherit system username;
-          };
-        };
       };
     in
     {
+      nixosConfigurations = {
+        nixos = mkNixosConfiguration {
+          hostname = "nixos";
+          username = "lxs";
+          extraModules = [
+            nixos-wsl.nixosModules.wsl
+            ./modules/wsl
+            ./profiles/lxs-personal.nix
+          ];
+        };
+      };
+
       darwinConfigurations = {
         Lukes-MacBook-Pro = mkDarwinConfig {
+          hostname = "Lukes-MacBook-Pro";
           username = "lxs";
           extraModules = [
             ./modules/darwin/work.nix
@@ -104,6 +173,7 @@
         };
         josie-personal-macbook = mkDarwinConfig {
           system = "x86_64-darwin";
+          hostname = "josie-personal-macbook";
           username = "lxs";
           extraModules = [
             ./profiles/lxs-personal.nix
@@ -113,6 +183,7 @@
 
       homeConfigurations = {
         lxs = mkHomeConfig {
+          hostname = null;
           username = "lxs";
           extraModules = [ ];
         };

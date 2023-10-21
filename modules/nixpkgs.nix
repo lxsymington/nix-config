@@ -1,17 +1,9 @@
-{ inputs, config, username, ... }: {
+{ inputs, config, username, pkgs, ... }: {
   nix = {
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
     '';
-
-    settings = {
-      allowed-users = [ "${username}" "root" "@admin" "@wheel" ];
-      experimental-features = [ "nix-command" "flakes" ];
-      max-jobs = 8;
-      system-features = [ "benchmark" "big-parallel" "nixos-test" "kvm" ];
-      trusted-users = [ "${username}" "root" "@admin" "@wheel" ];
-    };
 
     gc = {
       automatic = true;
@@ -24,6 +16,8 @@
       "nixpkgs"
       "stable"
     ];
+
+    package = pkgs.nixFlakes;
 
     registry = {
       nixpkgs = {
@@ -39,8 +33,18 @@
           id = "stable";
           type = "indirect";
         };
-        flake = inputs.stable;
+        flake = inputs.nixpkgs-stable;
       };
+    };
+
+    settings = {
+      accept-flake-config = true;
+      allowed-users = [ "${username}" "root" "@admin" "@wheel" ];
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+      max-jobs = 8;
+      system-features = [ "benchmark" "big-parallel" "nixos-test" "kvm" ];
+      trusted-users = [ "${username}" "root" "@admin" "@wheel" ];
     };
   };
 }

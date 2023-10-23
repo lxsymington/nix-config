@@ -7,6 +7,14 @@
     enableAllTerminfo = true;
   };
 
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      recursive
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    ];
+  };
+
   system.stateVersion = "23.11";
 
   user = {

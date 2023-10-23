@@ -22,11 +22,9 @@
     };
     
     systemPackages = with pkgs; [
-      # GUI applications
       alacritty
-
-      # Global utils
       ncurses
+      reattach-to-user-namespace
     ];
 
     variables = {
@@ -38,6 +36,14 @@
     };
   };
   
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      recursive
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    ];
+  };
+
   homebrew = {
     enable = true;
     global = {

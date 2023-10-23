@@ -51,7 +51,6 @@ in
       pandoc
       pcre
       pinentry
-      # reattach-to-user-namespace
       ripgrep
       rnix-lsp
       rustup

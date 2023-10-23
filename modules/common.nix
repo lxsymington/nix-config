@@ -41,14 +41,6 @@
     ];
   };
 
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      recursive
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    ];
-  };
-
   # bootstrap home manager using system config
   hm = import ./home-manager;
 

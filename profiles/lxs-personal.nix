@@ -2,6 +2,6 @@
 
 {
   hm = {
-    imports = [ ./home-manager/lxs-personal.nix];
+    imports = [ ./home-manager/lxs-personal.nix ];
   };
 }

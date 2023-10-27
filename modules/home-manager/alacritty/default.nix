@@ -3,7 +3,8 @@
 let
   isDarwin = pkgs.stdenvNoCC.isDarwin;
   fontFamily = if isDarwin then "Rec Mono Duotone" else "JetBrainsMonoNL Nerd Font";
-in {
+in
+{
   programs = {
     alacritty = {
       enable = true;
@@ -69,7 +70,7 @@ in {
             action = "PasteSelection";
           }
         ];
-          
+
         font = {
           normal = {
             family = fontFamily;

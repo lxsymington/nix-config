@@ -10,7 +10,7 @@
         extraOptions = {
           AddKeysToAgent = "yes";
           # UseKeychain = "yes";
-        }; 
+        };
       };
     };
   };

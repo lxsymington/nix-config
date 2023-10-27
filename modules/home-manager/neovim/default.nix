@@ -12,7 +12,7 @@
       withPython3 = true;
     };
   };
-  
+
   xdg = {
     configFile = {
       nvim = {

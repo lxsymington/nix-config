@@ -10,7 +10,7 @@
 
   # bootstrap home manager using system config
   hm = import ../home-manager/work.nix;
-  
+
   homebrew = {
     brews = [
       "ruby" # Required for AUTO_OPS

@@ -4,7 +4,7 @@ let
   assume-role = builtins.fetchGit {
     url = "git@github.com:ibisnetworks/assume-role.git";
     ref = "master";
-    rev =  "b59b398b6c197eb2442a13cf8afe08936501b881";
+    rev = "b59b398b6c197eb2442a13cf8afe08936501b881";
   };
 in
 {
@@ -18,7 +18,7 @@ in
       aws-sam-cli
       dotnet-sdk_7
     ];
-    
+
     sessionVariables = {
       AUTO_OPS = "${config.home.homeDirectory}/.seccl/auto-ops";
       AWS_PROFILE = "engineer_standard";

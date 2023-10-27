@@ -10,7 +10,7 @@
         extraOptions = {
           AddKeysToAgent = "yes";
           UseKeychain = "yes";
-        }; 
+        };
       };
       Personal = {
         hostname = "github.com";
@@ -20,7 +20,7 @@
         extraOptions = {
           AddKeysToAgent = "yes";
           UseKeychain = "yes";
-        }; 
+        };
       };
     };
   };

@@ -1,6 +1,6 @@
 { pkgs, username, ... }: {
   environment.systemPackages = [
-    (import ./win32yank.nix {inherit pkgs;})
+    (import ./win32yank.nix { inherit pkgs; })
   ];
 
   # The next block to make vscode running in Windows "just work" with NixOS on WSL
@@ -8,7 +8,7 @@
   # more information: https://github.com/nix-community/NixOS-WSL/issues/238 and https://github.com/nix-community/NixOS-WSL/issues/294
   systemd.user = {
     paths.vscode-remote-workaround = {
-      wantedBy = ["default.target"];
+      wantedBy = [ "default.target" ];
       pathConfig.PathChanged = "%h/.vscode-server/bin";
     };
     services.vscode-remote-workaround.script = ''
@@ -26,8 +26,8 @@
   };
 
   wsl = {
-    enable = true; 
-  
+    enable = true;
+
     wslConf = {
       automount.root = "/mnt";
       interop.appendWindowsPath = false;

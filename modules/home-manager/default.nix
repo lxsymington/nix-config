@@ -47,7 +47,6 @@ in
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
-      nodejs
       pandoc
       pcre
       pinentry
@@ -91,7 +90,7 @@ in
       VOLTA_HOME = "${config.home.homeDirectory}/.local/share/volta";
     };
   };
-  
+
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -113,7 +112,7 @@ in
       enable = true;
       path = "${config.home.homeDirectory}/.nixpkgs/modules/home-manager";
     };
-    
+
     bash.enable = true;
 
     bat = {
@@ -170,17 +169,17 @@ in
         auto-key-locate = "local";
       };
     };
-    
+
     helix = {
       enable = true;
       settings = {
-      	editor = {
-        cursor-shape = {
-          normal = "block";
-          insert = "bar";
-          select = "underline";
-        };
-        lsp.display-messages = true;
+        editor = {
+          cursor-shape = {
+            normal = "block";
+            insert = "bar";
+            select = "underline";
+          };
+          lsp.display-messages = true;
         };
         keys.normal = {
           space.space = "file_picker";
@@ -189,7 +188,7 @@ in
       languages = {
         language = [{
           name = "nix";
-          file-types = ["nix"];
+          file-types = [ "nix" ];
           comment-token = "#";
           auto-format = true;
           language-server = {
@@ -207,7 +206,7 @@ in
     nix-index-database = {
       comma.enable = true;
     };
-  
+
     direnv = {
       enable = true;
       nix-direnv = {

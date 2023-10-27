@@ -16,11 +16,11 @@
       "/share/doc"
       "/share/terminfo"
     ];
-    
+
     shellAliases = {
       pinentry = "pinentry-mac";
     };
-    
+
     systemPackages = with pkgs; [
       alacritty
       ncurses
@@ -35,7 +35,7 @@
       ];
     };
   };
-  
+
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [

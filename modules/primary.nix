@@ -1,7 +1,8 @@
 { config, lib, options, username, ... }:
 let
   inherit (lib) mkAliasDefinitions mkOption types;
-in {
+in
+{
   # Define some aliases for ease of use
   options = {
     user = mkOption {

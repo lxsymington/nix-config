@@ -36,18 +36,18 @@
     };
   };
 
-  outputs = {
-    darwin,
-    home-manager,
-    lsp-nil,
-    nix-index-database,
-    nixos-wsl,
-    nixpkgs,
-    nixpkgs-stable,
-    nur,
-    self,
-    ...
-  }@inputs :
+  outputs =
+    { darwin
+    , home-manager
+    , lsp-nil
+    , nix-index-database
+    , nixos-wsl
+    , nixpkgs
+    , nixpkgs-stable
+    , nur
+    , self
+    , ...
+    }@inputs:
     let
       inherit (nixpkgs.lib) nixosSystem;
       inherit (darwin.lib) darwinSystem;
@@ -90,64 +90,70 @@
         };
       };
 
-      mkNixosConfiguration = {
-        system ? "x86_64-linux",
-        hostname,
-        username,
-        args ? {},
-        extraModules ? []
-      }: let
-        specialArgs = argDefaults { inherit hostname system username; } // args;
-      in nixosSystem {
-        inherit system specialArgs;
-        pkgs = nixpkgsWithOverlays system;
-        modules = [
-          home-manager.nixosModules.home-manager
-          ./modules/nixos
-        ] ++ extraModules;
-      };
-      
-      mkDarwinConfig = {
-        system ? "aarch64-darwin",
-        hostname,
-        username,
-        args ? {},
-        extraModules ? []
-      }: let
-        specialArgs = argDefaults { inherit hostname system username; } // args;
-      in darwinSystem {
-        inherit system specialArgs;
-        pkgs = nixpkgsWithOverlays system;
-        modules = [
-          home-manager.darwinModules.home-manager
-          ./modules/darwin
-        ] ++ extraModules;
-      };
+      mkNixosConfiguration =
+        { system ? "x86_64-linux"
+        , hostname
+        , username
+        , args ? { }
+        , extraModules ? [ ]
+        }:
+        let
+          specialArgs = argDefaults { inherit hostname system username; } // args;
+        in
+        nixosSystem {
+          inherit system specialArgs;
+          pkgs = nixpkgsWithOverlays system;
+          modules = [
+            home-manager.nixosModules.home-manager
+            ./modules/nixos
+          ] ++ extraModules;
+        };
 
-      mkHomeConfig = {
-        system ? "x86_64-linux",
-        hostname,
-        username,
-        args ? {},
-        extraModules ? [ ]
-      }: let
-        specialArgs = argDefaults { inherit hostname system username; } // args;
-      in homeManagerConfiguration {
-        inherit specialArgs;
-        pkgs = nixpkgsWithOverlays { inherit system; };
-        modules = [
-          ./modules/home-manager
-          {
-            home = {
-              inherit username homeDirectory;
-              sessionVariables = {
-                NIX_PATH =
-                  "nixpkgs=${nixpkgs}:stable=${nixpkgs-stable}\${NIX_PATH:+:}$NIX_PATH";
+      mkDarwinConfig =
+        { system ? "aarch64-darwin"
+        , hostname
+        , username
+        , args ? { }
+        , extraModules ? [ ]
+        }:
+        let
+          specialArgs = argDefaults { inherit hostname system username; } // args;
+        in
+        darwinSystem {
+          inherit system specialArgs;
+          pkgs = nixpkgsWithOverlays system;
+          modules = [
+            home-manager.darwinModules.home-manager
+            ./modules/darwin
+          ] ++ extraModules;
+        };
+
+      mkHomeConfig =
+        { system ? "x86_64-linux"
+        , hostname
+        , username
+        , args ? { }
+        , extraModules ? [ ]
+        }:
+        let
+          specialArgs = argDefaults { inherit hostname system username; } // args;
+        in
+        homeManagerConfiguration {
+          inherit specialArgs;
+          pkgs = nixpkgsWithOverlays { inherit system; };
+          modules = [
+            ./modules/home-manager
+            {
+              home = {
+                inherit username homeDirectory;
+                sessionVariables = {
+                  NIX_PATH =
+                    "nixpkgs=${nixpkgs}:stable=${nixpkgs-stable}\${NIX_PATH:+:}$NIX_PATH";
+                };
               };
-            };
-          }
-        ] ++ extraModules;
-      };
+            }
+          ] ++ extraModules;
+        };
     in
     {
       nixosConfigurations = {

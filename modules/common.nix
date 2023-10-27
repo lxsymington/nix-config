@@ -1,11 +1,10 @@
-{
-  homeDirectory,
-  hostname,
-  inputs,
-  pkgs,
-  self,
-  username,
-  ...
+{ homeDirectory
+, hostname
+, inputs
+, pkgs
+, self
+, username
+, ...
 }: {
   imports = [ ./primary.nix ./nixpkgs.nix ];
 
@@ -21,7 +20,7 @@
       stable.source = "${inputs.nixpkgs-stable}";
     };
 
-    pathsToLink = ["/share/fish"];
+    pathsToLink = [ "/share/fish" ];
 
     # list of acceptable shells in /etc/shells
     shells = with pkgs; [ bash zsh fish ];
@@ -32,11 +31,14 @@
       curl
       wget
       git
-      gojq
+
+      # nix utils
+      nixpkgs-fmt
 
       # helpful shell stuff
       bat
       fzf
+      gojq
       ripgrep
     ];
   };

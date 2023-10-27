@@ -4,7 +4,7 @@
       NSGlobalDomain = {
         "com.apple.sound.beep.feedback" = 0;
         "com.apple.sound.beep.volume" = 0.000;
-        "com.apple.mouse.tapBehavior"= 1;
+        "com.apple.mouse.tapBehavior" = 1;
         AppleInterfaceStyleSwitchesAutomatically = true; # Whether to automatically switch between light and dark mode. The default is false.
         ApplePressAndHoldEnabled = false; # allow key repeat
         AppleScrollerPagingBehavior = true; # Jump to the spot that’s clicked on the scroll bar. The default is false.
@@ -13,7 +13,7 @@
         InitialKeyRepeat = 10; # delay before repeating keystrokes
         KeyRepeat = 1; # delay between repeated keystrokes upon holding a key
       };
-      
+
       SoftwareUpdate = {
         AutomaticallyInstallMacOSUpdates = true;
       };
@@ -68,11 +68,11 @@
         ShowDayOfWeek = true;
         ShowSeconds = true;
       };
-      
+
       screencapture = {
         location = "${config.user.home}/Pictures/Screenshots";
       };
-      
+
       spaces = {
         spans-displays = false;
       };

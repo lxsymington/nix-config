@@ -31,7 +31,8 @@ let
     tamasfe.even-better-toml
     wallabyjs.quokka-vscode
   ];
-in {
+in
+{
   programs = {
     vscode = {
       userSettings = {
@@ -60,7 +61,7 @@ in {
         "editor.smoothScrolling" = true;
         "editor.stickyScroll.enabled" = true;
         "editor.minimap.autohide" = true;
-        
+
         "explorer.fileNesting.enabled" = true;
         "explorer.fileNesting.expand" = false;
 
@@ -83,7 +84,7 @@ in {
         "javascript.inlayHints.parameterTypes.enabled" = true;
         "javascript.inlayHints.propertyDeclarationTypes.enabled" = true;
         "javascript.inlayHints.variableTypes.enabled" = true;
-        
+
         "jest.autoRun" = "off";
 
         "liveshare.allowGuestDebugControl" = true;

@@ -6,6 +6,7 @@ let
     antfu.icons-carbon
     antfu.theme-vitesse
     asvetliakov.vscode-neovim
+    biomejs.biome
     editorconfig.editorconfig
     equinusocio.moxer-icons
     github.copilot
@@ -26,7 +27,7 @@ let
     mxsdev.typescript-explorer
     orta.vscode-jest
     postman.postman-for-vscode
-    rome.rome
+    sainnhe.everforest
     sdras.night-owl
     tamasfe.even-better-toml
     wallabyjs.quokka-vscode
@@ -56,11 +57,15 @@ in
         "editor.inlayHints.padding" = true;
         "editor.inlineSuggest.enabled" = true;
         "editor.lineHighlightBackground" = "#ffffff0A";
+        "editor.minimap.autohide" = true;
+        "editor.multiDocumentOccurencesHighlight" = true;
         "editor.renderLineHighlight" = "none";
         "editor.renderLineHighlightOnlyWhenFocus" = true;
         "editor.smoothScrolling" = true;
         "editor.stickyScroll.enabled" = true;
-        "editor.minimap.autohide" = true;
+
+        "everforest.diagnosticTextBackgroundOpacity" = "12.5%";
+        "everforest.italicKeywords" = true;
 
         "explorer.fileNesting.enabled" = true;
         "explorer.fileNesting.expand" = false;
@@ -136,15 +141,17 @@ in
         "window.density.editorTabHeight" = "compact";
         "window.nativeTabs" = false;
         "window.newWindowDimensions" = "maximized";
+        "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 1;
 
-        "workbench.colorTheme" = "Night Owl Light";
+        "workbench.activityBar.location" = "top";
+        "workbench.colorTheme" = "Everforest Dark";
         "workbench.fontAliasing" = "auto";
         "workbench.editor.highlightModifiedTabs" = true;
         "workbench.list.smoothScrolling" = true;
         "workbench.iconTheme" = "moxer-icons";
-        "workbench.preferredDarkColorTheme" = "Night Owl";
-        "workbench.preferredLightColorTheme" = "Night Owl Light";
+        "workbench.preferredDarkColorTheme" = "Everforest Dark";
+        "workbench.preferredLightColorTheme" = "Everforest Light";
         "workbench.productIconTheme" = "icons-carbon";
       };
       enable = true;

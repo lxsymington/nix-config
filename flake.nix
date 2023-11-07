@@ -34,6 +34,10 @@
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
     };
+
+    vscode-server = {
+      url = "github:nix-community/nixos-vscode-server";
+    };
   };
 
   outputs =
@@ -46,6 +50,7 @@
     , nixpkgs-stable
     , nur
     , self
+    , vscode-server
     , ...
     }@inputs:
     let
@@ -105,6 +110,7 @@
           pkgs = nixpkgsWithOverlays system;
           modules = [
             home-manager.nixosModules.home-manager
+            vscode-server.nixosModules.default
             ./modules/nixos
           ] ++ extraModules;
         };

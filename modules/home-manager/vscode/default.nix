@@ -40,6 +40,8 @@ in
         "accessibility.dimUnfocused.enabled" = true;
         "accessibility.dimUnfocused.opacity" = 0.5;
 
+        "aws.samcli.lambdaTimeout" = 90000;
+
         "debug.toolBarLocation" = "commandCenter";
 
         "diffEditor.experimental.useVersion2" = true;
@@ -90,7 +92,7 @@ in
         "javascript.inlayHints.propertyDeclarationTypes.enabled" = true;
         "javascript.inlayHints.variableTypes.enabled" = true;
 
-        "jest.autoRun" = "off";
+        "jest.runMode" = "deferred";
 
         "liveshare.allowGuestDebugControl" = true;
         "liveshare.allowGuestTaskControl" = true;

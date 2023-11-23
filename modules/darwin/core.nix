@@ -1,7 +1,6 @@
 { inputs, config, pkgs, ... }:
 {
   environment = {
-    # TODO: use XDG config home
     darwinConfig = "~/.config/nix-darwin/flake.nix";
 
     etc = {
@@ -19,6 +18,7 @@
 
     shellAliases = {
       pinentry = "pinentry-mac";
+      renix = "darwin-rebuild switch --flake ${config.environment.darwinConfig}";
     };
 
     systemPackages = with pkgs; [

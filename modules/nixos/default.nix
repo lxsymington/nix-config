@@ -1,10 +1,14 @@
-{ pkgs, ... }@args: {
+{ config, pkgs, ... }@args: {
   imports = builtins.traceVerbose (builtins.attrNames args) [
     ../common.nix
   ];
 
   environment = {
     enableAllTerminfo = true;
+
+    shellAliases = {
+      renix = "nixos-rebuild switch --flake ~/.config/lxs";
+    };
   };
 
   fonts = {

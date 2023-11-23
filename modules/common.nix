@@ -40,6 +40,9 @@
       fzf
       gojq
       ripgrep
+
+      # Node
+      nodejs_20
     ];
   };
 

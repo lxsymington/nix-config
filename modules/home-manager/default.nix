@@ -68,7 +68,6 @@ in
     stateVersion = "23.11";
 
     shellAliases = {
-      renix = "darwin-rebuild switch --flake ${config.home.homeDirectory}/.config/nix-darwin";
       jq = "gojq";
     };
 
@@ -191,7 +190,7 @@ in
           file-types = [ "nix" ];
           comment-token = "#";
           auto-format = true;
-          language-server = {
+          language-servers = {
             command = "${pkgs.rnix-lsp}/bin/nil";
           };
         }];

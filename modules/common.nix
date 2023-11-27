@@ -35,6 +35,9 @@
       # nix utils
       nixpkgs-fmt
 
+      # editor
+      lxs-nvim
+
       # helpful shell stuff
       bat
       fzf

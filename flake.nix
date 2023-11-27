@@ -38,6 +38,10 @@
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
     };
+
+    lxs-nvim = {
+      url = "github:lxsymington/nix-neovim";
+    };
   };
 
   outputs =
@@ -51,6 +55,7 @@
     , nur
     , self
     , vscode-server
+    , lxs-nvim
     , ...
     }@inputs:
     let
@@ -82,6 +87,7 @@
           (final: prev: {
             rnix-lsp = lsp-nil.packages.${final.system}.default;
           })
+          lxs-nvim.overlays.default
         ];
       });
 

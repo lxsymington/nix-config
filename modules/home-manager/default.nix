@@ -101,7 +101,6 @@ in
     ./alacritty
     ./fish
     ./git
-    ./neovim
     ./tmux
     ./vscode
   ];

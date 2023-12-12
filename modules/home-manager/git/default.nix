@@ -159,7 +159,7 @@ in
           contents = {
             user = {
               email = "luke.xaviersymington@seccl.tech";
-              signingkey = "7A816B2451AAB9A2";
+              signingkey = "95E5AFCB46DF9A6F";
             };
             gpg = {
               program = "${pkgs.gnupg}/bin/gpg";

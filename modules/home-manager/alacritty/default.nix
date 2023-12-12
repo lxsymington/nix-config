@@ -2,7 +2,7 @@
 
 let
   isDarwin = pkgs.stdenvNoCC.isDarwin;
-  fontFamily = "Rec Mono Duotone";
+  fontFamily = "CommitMono Nerd Font Propo";
   theme = import ../../colours.nix;
 in
 {

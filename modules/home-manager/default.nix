@@ -23,7 +23,6 @@ in
       figlet
       fx
       fzf
-      gh
       glib
       go
       gojq
@@ -50,6 +49,7 @@ in
       pandoc
       pcre
       pinentry
+      python3
       ripgrep
       rnix-lsp
       rustup
@@ -146,11 +146,15 @@ in
 
     gh = {
       enable = true;
+      gitCredentialHelper = {
+        enable = true;
+      };
       settings = {
         git_protocol = "ssh";
         prompt = "enabled";
         editor = "${pkgs.vim}/bin/vim";
         pager = "${pkgs.delta}/bin/delta";
+        version = 1;
       };
     };
 

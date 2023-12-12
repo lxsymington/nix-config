@@ -138,6 +138,8 @@ in
         "typescript.inlayHints.variableTypes.enabled" = true;
         "typescript.tsserver.experimental.enableProjectDiagnostics" = true;
 
+        "vscode-neovim.neovimClean" = true;
+
         "window.autoDetectColorScheme" = true;
         "window.commandCenter" = true;
         "window.density.editorTabHeight" = "compact";

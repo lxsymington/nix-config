@@ -9,6 +9,11 @@
     shellAliases = {
       renix = "nixos-rebuild switch --flake ~/.config/lxs";
     };
+
+    systemPackages = with pkgs; [
+      # Node - Volta is used on Darwin
+      nodejs_20
+    ];
   };
 
   fonts = {

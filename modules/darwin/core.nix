@@ -40,7 +40,7 @@
     fontDir.enable = true;
     fonts = with pkgs; [
       recursive
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (nerdfonts.override { fonts = [ "JetBrainsMono" "CommitMono" ]; })
     ];
   };
 
@@ -61,6 +61,7 @@
       "jorgelbg/tap"
     ];
     brews = [
+      "pinentry"
       "pinentry-mac"
       "pinentry-touchid"
       "volta"

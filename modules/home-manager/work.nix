@@ -14,9 +14,11 @@ in
 
   home = {
     packages = with pkgs; [
+      auth0-cli
       awscli2
       aws-sam-cli
       dotnet-sdk_7
+      terraform
     ];
 
     sessionVariables = {

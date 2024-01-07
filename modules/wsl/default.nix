@@ -4,6 +4,7 @@
   environment.systemPackages = [
     (import ./win32yank.nix { inherit pkgs; })
     pkgs.wget
+    pkgs.wslu
   ];
 
   programs = {

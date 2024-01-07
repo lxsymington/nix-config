@@ -11,7 +11,6 @@ let
     equinusocio.moxer-icons
     github.copilot
     github.copilot-chat
-    github.copilot-labs
     github.heygithub
     github.vscode-pull-request-github
     hashicorp.terraform

@@ -56,8 +56,6 @@
       upgrade = true;
     };
     taps = [
-      "homebrew/core"
-      "homebrew/cask"
       "jorgelbg/tap"
     ];
     brews = [

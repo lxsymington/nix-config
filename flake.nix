@@ -87,7 +87,7 @@
           (final: prev: {
             rnix-lsp = lsp-nil.packages.${final.system}.default;
           })
-          lxs-nvim.overlays.default
+          lxs-nvim.overlays.${system}.default
         ];
       });
 
@@ -201,6 +201,7 @@
 
       homeConfigurations = {
         lxs = mkHomeConfig {
+          system = builtins.currentSystem;
           hostname = null;
           username = "lxs";
           extraModules = [ ];

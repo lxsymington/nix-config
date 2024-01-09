@@ -54,7 +54,7 @@ in
           vi_mode_style = "Underline";
           blink_interval = 600;
           blink_timeout = 15;
-          unfocussed_hollow = true;
+          unfocused_hollow = true;
           thickness = 0.15;
         };
 
@@ -63,14 +63,13 @@ in
 
         mouse = {
           hide_when_typing = true;
+          bindings = [
+            {
+              mouse = "Middle";
+              action = "PasteSelection";
+            }
+          ];
         };
-
-        mouse_bindings = [
-          {
-            mouse = "Middle";
-            action = "PasteSelection";
-          }
-        ];
 
         font = {
           normal = {
@@ -106,9 +105,9 @@ in
           };
         };
 
-        draw_bold_text_with_bright_colors = false;
-
         colors = {
+          draw_bold_text_with_bright_colors = false;
+
           primary = {
             background = theme { colour = "black"; };
             bright_foreground = theme { colour = "white"; variant = "light"; };

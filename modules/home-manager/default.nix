@@ -101,6 +101,7 @@ in
     ./alacritty
     ./fish
     ./git
+    ./starship
     ./tmux
     ./vscode
   ];
@@ -214,13 +215,6 @@ in
       nix-direnv = {
         enable = true;
       };
-    };
-
-    starship = {
-      enable = true;
-      enableFishIntegration = true;
-      # Seems to cause issues with `pinentry` on macOS
-      # enableTransience = true;
     };
 
     tealdeer.enable = true;

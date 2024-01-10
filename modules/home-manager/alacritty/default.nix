@@ -24,9 +24,13 @@ in
             y = 20;
           };
           dynamic_padding = true;
-          decorations = if isDarwin then "transparent" else "full";
+          decorations = "full";
           startup_mode = "Maximized";
           dynamic_title = true;
+        } // pkgs.lib.optionalAttrs (isDarwin) {
+          blur = true;
+          decorations = "transparent";
+          opacity = 0.85;
           option_as_alt = "Both";
         };
 

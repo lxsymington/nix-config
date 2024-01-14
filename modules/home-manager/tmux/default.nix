@@ -1,10 +1,4 @@
-{ config, pkgs, ... }:
-
-let
-  lxs_tmux_darwin_config = builtins.toPath ./tmux.macos.conf;
-  lxs_tmux_linux_config = builtins.toPath ./tmux.linux.conf;
-in
-{
+{ config, pkgs, ... }: {
   programs = {
     tmux = {
       enable = true;
@@ -73,8 +67,55 @@ in
         # Open a fixed size split
         bind-key Tab split-window -h -l 80 -c '#{pane_current_path}'
 
-        # Import platform specific config
-        if-shell "uname | grep -q Darwin" "source-file ${lxs_tmux_darwin_config}" "source-file ${lxs_tmux_linux_config}"
+        # Configure the battery plugin
+        set-option -g @batt_icon_charge_tier8 '󰁹'
+        set-option -g @batt_icon_charge_tier7 '󰂁'
+        set-option -g @batt_icon_charge_tier6 '󰁿'
+        set-option -g @batt_icon_charge_tier5 '󰁾'
+        set-option -g @batt_icon_charge_tier4 '󰁼'
+        set-option -g @batt_icon_charge_tier3 '󰁻'
+        set-option -g @batt_icon_charge_tier2 '󰁺'
+        set-option -g @batt_icon_charge_tier1 '󱟩'
+        set-option -g @batt_icon_status_charged ''
+        set-option -g @batt_icon_status_charging '⚡'
+        set-option -g @batt_icon_status_discharging '󱟞'
+
+        # Display string (by default the session name) to the left of the status line
+        set-option -g status-left '#[fg=brightwhite bold]󱈤 #{session_name}#[default] '
+        set-option -ag status-left '#{?session_alerts,#[fg=orange]󰂚 #{session_alerts},#[fg=green]✓}#[default] '
+        set-option -ag status-left '#{cpu_fg_color} #{cpu_percentage}#[default] '
+        set-option -ag status-left '#{ram_fg_color} #{ram_percentage}#[default] '
+        run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
+
+        # Display string (by default the session name) to the right of the status line
+        set-option -g status-right '#[fg=white dim]⬇️ #{download_speed} ⬆️ #{upload_speed}#[default] '
+        set-option -ag status-right '#[fg=brightyellow italics]%A %d %B %G#[default] '
+        set-option -ag status-right '#[fg=brightwhite bold]%R %Z#[default] '
+        set-option -ag status-right '#{battery_icon} #{battery_percentage} #{battery_remain} '
+        run-shell ${pkgs.tmuxPlugins.net-speed}/share/tmux-plugins/net-speed/net_speed.tmux
+        run-shell ${pkgs.tmuxPlugins.battery}/share/tmux-plugins/battery/battery.tmux
+
+        # Window status format and style
+        set-option -g window-status-activity-style 'fg=brightwhite bold underscore blink'
+        set-option -g window-status-format '#[fg=yellow italics dim] #I #W #[default]'
+        set-option -g window-status-current-format '#[fg=magenta] #I #W #[default]'
+        set-option -g window-status-separator '⁞'
+
+        # Enable tmux continuum
+        set -g @continuum-restore 'on'
+        # Set tmux continuum interval in minutes
+        set -g @continuum-save-interval '5'
+        run-shell ${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux
+
+        # Restore contents for panes
+        set -g @resurrect-capture-pane-contents 'on'
+        # Restore contents for vim
+        set -g @resurrect-strategy-vim 'session'
+        # Restore contents for neovim
+        set -g @resurrect-strategy-nvim 'session'
+        # Restore using Startify
+        set -g @resurrect-processes '"nvim->nvim +SLoad"'
+        run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
       '';
       aggressiveResize = true;
       baseIndex = 1;
@@ -83,44 +124,15 @@ in
       prefix = "C-a";
       terminal = "tmux-256color";
       plugins = with pkgs.tmuxPlugins; [
+        battery
         cpu
         net-speed
         open
         pain-control
         sensible
         yank
-        {
-          plugin = continuum;
-          extraConfig = ''
-            # Enable tmux continuum
-            set -g @continuum-restore 'on'
-            # Set tmux continuum interval in minutes
-            set -g @continuum-save-interval '5'
-          '';
-        }
-        {
-          plugin = resurrect;
-          extraConfig = ''
-            # Restore contents for panes
-            set -g @resurrect-capture-pane-contents 'on'
-            # Restore contents for vim
-            set -g @resurrect-strategy-vim 'session'
-            # Restore contents for neovim
-            set -g @resurrect-strategy-nvim 'session'
-            # Restore using Startify
-            set -g @resurrect-processes '"nvim->nvim +SLoad"'
-          '';
-        }
-        (mkTmuxPlugin {
-          pluginName = "simple-git-status";
-          version = "master";
-          src = pkgs.fetchFromGitHub {
-            owner = "kristijanhusak";
-            repo = "tmux-simple-git-status";
-            rev = "287da42f47d7204618b62f2c4f8bd60b36d5c7ed";
-            sha256 = "04vs4afxcr118p78mw25nnzvlms7pmgmi2a80h92vw5pzw9a0msq";
-          };
-        })
+        continuum
+        resurrect
       ];
     };
   };

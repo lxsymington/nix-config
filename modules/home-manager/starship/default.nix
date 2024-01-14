@@ -41,7 +41,7 @@
         '';
         git_metrics = {
           disabled = false;
-          format = "[ ⟪ [󰐖 $added]($added_style) ❘ [󰍵 $deleted]($deleted_style) ⟫](bold white)";
+          format = "[⟪ [󰐖 $added]($added_style) ❘ [󰍵 $deleted]($deleted_style) ⟫](bold white)";
         };
         os = {
           disabled = false;

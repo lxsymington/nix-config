@@ -2,6 +2,7 @@
 
 let
   lxs_git_commit_template = builtins.toPath ./.git-commit-template;
+  lxs_gitattributes_file = builtins.toPath ./.gitattributes;
 in
 {
   programs = {
@@ -61,6 +62,7 @@ in
 
       extraConfig = {
         core = {
+          attributesFile = lxs_gitattributes_file;
           autocrlf = "input";
           trustctime = false;
           editor = "nvim";
@@ -94,7 +96,7 @@ in
         };
 
         diff = {
-          tool = "nvim";
+          tool = "nvimdiff";
           conflictstyle = "diff2";
           algorithm = "patience";
           indentHeuristic = true;
@@ -103,7 +105,7 @@ in
         };
 
         merge = {
-          tool = "nvim";
+          tool = "nvimdiff";
           conflictstyle = "diff3";
           algorithm = "patience";
           indentHeuristic = true;
@@ -113,8 +115,8 @@ in
         difftool = {
           prompt = false;
           trustexitcode = true;
-          nvim = {
-            cmd = "nvim -d $LOCAL $REMOTE";
+          nvimdiff = {
+            layout = "LOCAL,REMOTE";
           };
         };
 
@@ -123,8 +125,8 @@ in
           trustexitcode = true;
           keepBackup = false;
           keepTemporaries = false;
-          nvim = {
-            cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd b' -c 'wincmd J'";
+          nvimdiff = {
+            layout = "LOCAL,BASE,REMOTE / MERGED";
           };
         };
 
@@ -136,7 +138,7 @@ in
         remote = {
           origin = {
             fetch = [
-              "+refs/heads/*:refs/heads/origin/*"
+              "+refs/heads/*:refs/remotes/origin/*"
             ];
           };
         };

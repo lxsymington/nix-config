@@ -27,10 +27,9 @@
 
     systemPackages = with pkgs; [
       # standard toolset
-      coreutils-full
+      uutils-coreutils-noprefix
       curl
       wget
-      git
 
       # nix utils
       nixpkgs-fmt
@@ -39,10 +38,7 @@
       lxs-nvim
 
       # helpful shell stuff
-      bat
-      fzf
       gojq
-      ripgrep
     ];
   };
 

@@ -217,6 +217,8 @@ in
       };
     };
 
+    ripgrep.enable = true;
+
     tealdeer.enable = true;
 
     zoxide = {

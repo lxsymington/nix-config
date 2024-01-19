@@ -2,7 +2,6 @@
 
 let
   lxs_git_commit_template = builtins.toPath ./.git-commit-template;
-  lxs_gitattributes_file = builtins.toPath ./.gitattributes;
 in
 {
   programs = {
@@ -40,6 +39,12 @@ in
         fac = "!git fetch && git find-branch | xargs git checkout";
       };
 
+      attributes = [
+        "flake.nix nix"
+        ".envrc nix"
+        ".direnv nix"
+      ];
+
       delta = {
         enable = true;
         options = {
@@ -62,7 +67,6 @@ in
 
       extraConfig = {
         core = {
-          attributesFile = lxs_gitattributes_file;
           autocrlf = "input";
           trustctime = false;
           editor = "nvim";

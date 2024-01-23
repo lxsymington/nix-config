@@ -28,9 +28,7 @@ in
           startup_mode = "Maximized";
           dynamic_title = true;
         } // pkgs.lib.optionalAttrs (isDarwin) {
-          blur = true;
           decorations = "transparent";
-          opacity = 0.85;
           option_as_alt = "Both";
         };
 

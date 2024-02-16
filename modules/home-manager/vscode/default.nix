@@ -151,8 +151,8 @@ in
         "workbench.editor.highlightModifiedTabs" = true;
         "workbench.list.smoothScrolling" = true;
         "workbench.iconTheme" = "moxer-icons";
-        "workbench.preferredDarkColorTheme" = "Everforest Dark";
-        "workbench.preferredLightColorTheme" = "Everforest Light";
+        "workbench.preferredDarkColorTheme" = "Rosé Pine";
+        "workbench.preferredLightColorTheme" = "Rosé Pine Dawn";
         "workbench.productIconTheme" = "icons-carbon";
       };
       enable = true;

@@ -139,14 +139,6 @@ in
           verbose = true;
         };
 
-        remote = {
-          origin = {
-            fetch = [
-              "+refs/heads/*:refs/remotes/origin/*"
-            ];
-          };
-        };
-
         safe = {
           directory = "${config.home.homeDirectory}/Tools/neovim";
         };
@@ -172,6 +164,13 @@ in
             };
             commit = {
               gpgSign = true;
+            };
+            remote = {
+              origin = {
+                fetch = [
+                  "+refs/heads/*:refs/remotes/origin/*"
+                ];
+              };
             };
           };
         }

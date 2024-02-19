@@ -137,6 +137,8 @@ in
         "typescript.inlayHints.variableTypes.enabled" = true;
         "typescript.tsserver.experimental.enableProjectDiagnostics" = true;
 
+        "vscode-neovim.neovimClean" = true;
+
         "window.autoDetectColorScheme" = true;
         "window.commandCenter" = true;
         "window.density.editorTabHeight" = "compact";
@@ -146,7 +148,7 @@ in
         "window.zoomLevel" = 1;
 
         "workbench.activityBar.location" = "top";
-        "workbench.colorTheme" = "Everforest Dark";
+        "workbench.colorTheme" = "Rosé Pine";
         "workbench.fontAliasing" = "auto";
         "workbench.editor.highlightModifiedTabs" = true;
         "workbench.list.smoothScrolling" = true;

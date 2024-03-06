@@ -28,8 +28,8 @@ in
           startup_mode = "Maximized";
           dynamic_title = true;
         } // pkgs.lib.optionalAttrs (isDarwin) {
-          decorations = "transparent";
-          option_as_alt = "Both";
+          decorations = "Transparent";
+          option_as_alt = "OnlyLeft";
         };
 
         scrolling = {

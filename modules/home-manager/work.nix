@@ -23,7 +23,7 @@ in
 
     sessionVariables = {
       AUTO_OPS = "${config.home.homeDirectory}/.seccl/auto-ops";
-      AWS_PROFILE = "engineer_standard";
+      AWS_PROFILE = "engineer-standard";
       CORE_ENV = "genshared";
       STAGE_ENV = "devlsymington";
       # Required for AUTO_OPS first time setup

@@ -17,7 +17,7 @@
     ];
 
     shellAliases = {
-      pinentry = "pinentry-mac";
+      pinentry = "pinentry-touchid";
       renix = "darwin-rebuild switch --flake ${config.environment.darwinConfig}";
     };
 

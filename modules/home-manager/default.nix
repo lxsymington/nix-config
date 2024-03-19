@@ -48,7 +48,7 @@ in
       nodePackages.yaml-language-server
       pandoc
       pcre
-      pinentry
+      # pinentry
       python3
       ripgrep
       rnix-lsp

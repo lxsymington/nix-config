@@ -8,10 +8,12 @@ let
     asvetliakov.vscode-neovim
     biomejs.biome
     editorconfig.editorconfig
+    eg2.tslint
     equinusocio.moxer-icons
+    esbenp.prettier-vscode
     github.copilot
     github.copilot-chat
-    github.heygithub
+    github.vscode-github-actions
     github.vscode-pull-request-github
     hashicorp.terraform
     hbenl.vscode-mocha-test-adapter
@@ -21,13 +23,22 @@ let
     mkhl.direnv
     mongodb.mongodb-vscode
     ms-azuretools.vscode-docker
+    ms-vscode-remote.remote-containers
+    ms-vscode-remote.remote-ssh
+    ms-vscode-remote.remote-ssh-edit
+    ms-vscode-remote.remote-wsl
+    ms-vscode-remote.vscode-remote-extensionpack
+    ms-vscode.remote-explorer
+    ms-vscode.remote-server
     ms-vscode.test-adapter-converter
     ms-vsliveshare.vsliveshare
+    mvllow.rose-pine
     mxsdev.typescript-explorer
     orta.vscode-jest
-    postman.postman-for-vscode
+    # postman.postman-for-vscode
     sainnhe.everforest
     sdras.night-owl
+    # sonarsource.sonarlint-vscode
     tamasfe.even-better-toml
     wallabyjs.quokka-vscode
   ];

@@ -39,6 +39,7 @@
 
       # helpful shell stuff
       gojq
+      ast-grep
     ];
   };
 

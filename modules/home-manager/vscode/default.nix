@@ -48,11 +48,11 @@ in
     vscode = {
       userSettings = {
         "accessibility.dimUnfocused.enabled" = true;
-        "accessibility.dimUnfocused.opacity" = 0.5;
+        "accessibility.dimUnfocused.opacity" = 0.25;
 
         "aws.samcli.lambdaTimeout" = 90000;
 
-        "debug.toolBarLocation" = "commandCenter";
+        "debug.toolBarLocation" = "floating";
 
         "diffEditor.experimental.useVersion2" = true;
         "diffEditor.experimental.collapseUnchangedRegions" = true;
@@ -106,11 +106,13 @@ in
 
         "liveshare.allowGuestDebugControl" = true;
         "liveshare.allowGuestTaskControl" = true;
+        "liveshare.focusBehavior" = "prompt";
         "liveshare.guestApprovalRequired" = true;
         "liveshare.joinDebugSessionOption" = "Prompt";
         "liveshare.languages.allowGuestCommandControl" = true;
         "liveshare.launcherClient" = "visualStudioCode";
         "liveshare.presence" = true;
+        "liveshare.publishWorkspaceInfo" = true;
 
         "merge-conflict.autoNavigateNextConflict.enabled" = true;
 
@@ -149,6 +151,7 @@ in
         "typescript.tsserver.experimental.enableProjectDiagnostics" = true;
 
         "vscode-neovim.neovimClean" = true;
+        "vscode-neovim.revealCursorScrollLine" = false;
 
         "window.autoDetectColorScheme" = true;
         "window.commandCenter" = true;

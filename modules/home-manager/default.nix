@@ -2,6 +2,8 @@
 
 let
   inherit (inputs.nix-index-database.hmModules) nix-index;
+  # inherit (pkgs.stdenv) isDarwin;
+  # inherit (lib) optionals;
   GOPATH = "go";
   GOBIN = "${GOPATH}/bin";
 in
@@ -36,6 +38,7 @@ in
       llvm
       lua
       lua52Packages.luacheck
+      manix
       mongodb-tools
       mongosh
       multimarkdown
@@ -72,19 +75,13 @@ in
     };
 
     sessionPath = [
-      "$HOMEBREW_REPOSITORY/bin"
-      "$HOMEBREW_REPOSITORY/sbin"
       "$VOLTA_HOME/bin"
       "${config.home.homeDirectory}/${GOBIN}"
-      "${config.home.homeDirectory}/.seccl/bin"
     ];
 
     sessionVariables = {
       EDITOR = "nvim";
       HISTTIMEFORMAT = "%F %T ";
-      HOMEBREW_CELLAR = /opt/homebrew/Cellar;
-      HOMEBREW_PREFIX = /opt/homebrew;
-      HOMEBREW_REPOSITORY = /opt/homebrew;
       MANPAGER = "nvim +Man!";
       VOLTA_HOME = "${config.home.homeDirectory}/.local/share/volta";
     };
@@ -103,6 +100,7 @@ in
     ./git
     ./starship
     ./tmux
+    # ] ++ optionals (isDarwin) [
     ./vscode
   ];
 

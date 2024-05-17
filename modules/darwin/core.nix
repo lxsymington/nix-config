@@ -27,7 +27,15 @@
       reattach-to-user-namespace
     ];
 
+    systemPath = [
+      "$HOMEBREW_REPOSITORY/bin"
+      "$HOMEBREW_REPOSITORY/sbin"
+    ];
+
     variables = {
+      HOMEBREW_CELLAR = /opt/homebrew/Cellar;
+      HOMEBREW_PREFIX = /opt/homebrew;
+      HOMEBREW_REPOSITORY = /opt/homebrew;
       SHELL = "${pkgs.fish}/bin/fish";
       TERMINFO_DIRS = [
         "$HOME/.local/share/terminfo"

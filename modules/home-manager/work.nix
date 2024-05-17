@@ -21,6 +21,10 @@ in
       terraform
     ];
 
+    sessionPath = [
+      "${config.home.homeDirectory}/.seccl/bin"
+    ];
+
     sessionVariables = {
       AUTO_OPS = "${config.home.homeDirectory}/.seccl/auto-ops";
       AWS_PROFILE = "engineer-standard";

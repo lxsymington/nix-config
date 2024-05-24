@@ -2,8 +2,6 @@
 
 let
   inherit (inputs.nix-index-database.hmModules) nix-index;
-  # inherit (pkgs.stdenv) isDarwin;
-  # inherit (lib) optionals;
   GOPATH = "go";
   GOBIN = "${GOPATH}/bin";
 in
@@ -100,7 +98,6 @@ in
     ./git
     ./starship
     ./tmux
-    # ] ++ optionals (isDarwin) [
     ./vscode
   ];
 

@@ -91,19 +91,6 @@
         enableSSHSupport = true;
       };
     };
-
-    tmux = {
-      enable = true;
-      enableSensible = true;
-      enableMouse = true;
-      enableFzf = true;
-      enableVim = true;
-    };
-
-    vim = {
-      enable = true;
-      enableSensible = true;
-    };
   };
 
   services = {

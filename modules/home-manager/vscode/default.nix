@@ -2,9 +2,12 @@
 
 let
   marketplace_extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+    # postman.postman-for-vscode
+    # sonarsource.sonarlint-vscode
     amazonwebservices.aws-toolkit-vscode
     antfu.icons-carbon
     antfu.theme-vitesse
+    ast-grep.ast-grep-vscode
     asvetliakov.vscode-neovim
     biomejs.biome
     editorconfig.editorconfig
@@ -35,10 +38,9 @@ let
     mvllow.rose-pine
     mxsdev.typescript-explorer
     orta.vscode-jest
-    # postman.postman-for-vscode
+    remcohaszing.schemastore
     sainnhe.everforest
     sdras.night-owl
-    # sonarsource.sonarlint-vscode
     tamasfe.even-better-toml
     wallabyjs.quokka-vscode
   ];

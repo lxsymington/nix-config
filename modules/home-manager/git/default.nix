@@ -1,8 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  lxs_git_commit_template = builtins.toPath ./.git-commit-template;
-in
 {
   programs = {
     git = {
@@ -135,7 +132,6 @@ in
         };
 
         commit = {
-          template = lxs_git_commit_template;
           verbose = true;
         };
 
@@ -157,7 +153,7 @@ in
           contents = {
             user = {
               email = "luke.xaviersymington@seccl.tech";
-              signingkey = "9D08BB6CC8047FA8";
+              signingkey = "D580A64AA71C62C3";
             };
             gpg = {
               program = "${pkgs.gnupg}/bin/gpg";

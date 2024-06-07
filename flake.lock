@@ -401,11 +401,11 @@
         "tslint": "tslint"
       },
       "locked": {
-        "lastModified": 1717588649,
-        "narHash": "sha256-gXy6eTmkrfTiY7KbLfOKhZ55e/4YR7cKM1w59/blmzQ=",
+        "lastModified": 1717589516,
+        "narHash": "sha256-GgJBtd81OcmftzjfPXfheFyQ77S7RLUbzkfHkfCIzl4=",
         "owner": "lxsymington",
         "repo": "nix-neovim",
-        "rev": "544760ab30d61d7a694517a341ae18be34a41606",
+        "rev": "e6641f233a7657059b2c26fd74819cb0b8b8cbe0",
         "type": "github"
       },
       "original": {

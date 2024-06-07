@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  isDarwin = pkgs.stdenvNoCC.isDarwin;
+  inherit (pkgs.stdenvNoCC) isDarwin;
   fontFamily = "CommitMono Nerd Font Propo";
   theme = import ../../colours.nix;
 in
@@ -27,7 +27,7 @@ in
           decorations = "full";
           startup_mode = "Maximized";
           dynamic_title = true;
-        } // pkgs.lib.optionalAttrs (isDarwin) {
+        } // pkgs.lib.optionalAttrs isDarwin {
           decorations = "Transparent";
           option_as_alt = "OnlyLeft";
         };

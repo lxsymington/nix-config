@@ -36,6 +36,7 @@
 
       # editor
       lxs-nvim
+      neovide
 
       # helpful shell stuff
       gojq

@@ -39,6 +39,7 @@
       neovide
 
       # helpful shell stuff
+      just
       gojq
       ast-grep
     ];

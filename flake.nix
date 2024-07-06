@@ -22,25 +22,31 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+    };
 
     lsp-nil = {
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:oxalica/nil";
     };
 
     nix-vscode-extensions = {
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-vscode-extensions";
     };
 
     vscode-server = {
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixos-vscode-server";
     };
 
     lxs-nvim = {
       url = "github:lxsymington/nix-neovim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -69,7 +75,7 @@
       homeDirectory = { system, username }: "${homePrefix system}/${username}";
 
       nixpkgsWithOverlays = system: (import nixpkgs rec {
-        inherit system;
+        inherit nixpkgs nixpkgs-stable system;
         config = {
           allowUnsupportedSystem = true;
           allowUnfree = true;

@@ -23,6 +23,7 @@ let
     hbenl.vscode-test-explorer
     hbenl.vscode-test-explorer-liveshare
     jacobpfeifer.pfeifer-hurl
+    maty.vscode-mocha-sidebar
     mkhl.direnv
     mongodb.mongodb-vscode
     ms-azuretools.vscode-docker
@@ -37,12 +38,14 @@ let
     ms-vsliveshare.vsliveshare
     mvllow.rose-pine
     mxsdev.typescript-explorer
+    mylesmurphy.prettify-ts
     orta.vscode-jest
     remcohaszing.schemastore
     sainnhe.everforest
     sdras.night-owl
     tamasfe.even-better-toml
     wallabyjs.quokka-vscode
+    yoavbls.pretty-ts-errors
   ];
 in
 {

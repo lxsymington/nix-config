@@ -44,7 +44,8 @@ let
     sainnhe.everforest
     sdras.night-owl
     tamasfe.even-better-toml
-    wallabyjs.quokka-vscode
+    # TODO: reinstate this extension once it's fixed
+    # wallabyjs.quokka-vscode
     yoavbls.pretty-ts-errors
   ];
 in

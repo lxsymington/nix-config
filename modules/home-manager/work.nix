@@ -16,8 +16,8 @@ in
     packages = with pkgs; [
       auth0-cli
       awscli2
-      aws-sam-cli
-      dotnet-sdk_7
+      # TODO: reinstate this once it's fixed
+      # aws-sam-cli
       terraform
     ];
 

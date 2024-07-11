@@ -1,7 +1,7 @@
 { inputs, config, pkgs, ... }:
 {
   environment = {
-    darwinConfig = "~/.config/nix-darwin/flake.nix";
+    darwinConfig = "~/.config/nix-darwin";
 
     etc = {
       darwin.source = "${inputs.darwin}";

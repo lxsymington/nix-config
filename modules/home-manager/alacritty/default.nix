@@ -29,7 +29,7 @@ in
           dynamic_title = true;
         } // pkgs.lib.optionalAttrs isDarwin {
           decorations = "Transparent";
-          option_as_alt = "OnlyLeft";
+          option_as_alt = "Both";
         };
 
         scrolling = {

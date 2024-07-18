@@ -17,7 +17,6 @@
     ];
 
     shellAliases = {
-      pinentry = "pinentry-touchid";
       renix = "darwin-rebuild switch --flake ${config.environment.darwinConfig}";
     };
 
@@ -66,9 +65,6 @@
       "jorgelbg/tap"
     ];
     brews = [
-      "pinentry"
-      "pinentry-mac"
-      "pinentry-touchid"
       "volta"
     ];
     casks = [

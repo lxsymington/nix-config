@@ -49,7 +49,7 @@ in
       nodePackages.yaml-language-server
       pandoc
       pcre
-      # pinentry
+      pinentry-tty
       python3
       ripgrep
       rnix-lsp
@@ -169,8 +169,9 @@ in
     gpg = {
       enable = true;
       settings = {
-        utf8-strings = true;
         auto-key-locate = "local";
+        pinentry-mode = "loopback";
+        utf8-strings = true;
       };
     };
 
@@ -227,4 +228,22 @@ in
       enableFishIntegration = true;
     };
   };
+
+  /* services = {
+    gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 86400;
+      defaultCacheTtlSsh = 86400;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableSshSupport = true;
+      enableExtraSocket = true;
+      extraConfig = ''
+        allow-emacs-pinentry
+        allow-loopback-pinentry
+      '';
+      grabKeyboardAndMouse = true;
+      pinentryPackage = pkgs.pinentry-tty;
+    };
+  }; */
 }

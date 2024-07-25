@@ -2,16 +2,20 @@
   system = {
     defaults = {
       NSGlobalDomain = {
-        "com.apple.sound.beep.feedback" = 0;
-        "com.apple.sound.beep.volume" = 0.000;
+        "com.apple.sound.beep.feedback" = 1;
+        "com.apple.sound.beep.volume" = 1.000;
         "com.apple.mouse.tapBehavior" = 1;
         AppleInterfaceStyleSwitchesAutomatically = true; # Whether to automatically switch between light and dark mode. The default is false.
         ApplePressAndHoldEnabled = false; # allow key repeat
+        AppleKeyboardUIMode = 3; # full keyboard 3
+        AppleMeasurementUnits = "Centimeters";
+        AppleMetricUnits = 1;
         AppleScrollerPagingBehavior = true; # Jump to the spot that’s clicked on the scroll bar. The default is false.
         AppleShowAllExtensions = true;
         AppleShowScrollBars = "Automatic";
         InitialKeyRepeat = 10; # delay before repeating keystrokes
         KeyRepeat = 1; # delay between repeated keystrokes upon holding a key
+        NSWindowShouldDragOnGesture = true; # Whether to allow dragging windows with three fingers. The default is false.
       };
 
       SoftwareUpdate = {

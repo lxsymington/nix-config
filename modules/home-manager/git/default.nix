@@ -34,6 +34,10 @@
         fc = "!git find-branch | xargs git checkout";
         # Fuzzy find all branches and checkout a branch
         fac = "!git fetch && git find-branch | xargs git checkout";
+        # Stash untracked files as well
+        sa = "stash --all";
+        # Push rewritten history, but more carefully protecting remote refs
+        pfwl = "push --force-with-lease";
       };
 
       attributes = [
@@ -133,6 +137,10 @@
 
         commit = {
           verbose = true;
+        };
+
+        rerere = {
+          enabled = true;
         };
 
         safe = {

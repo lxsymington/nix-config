@@ -98,12 +98,12 @@ in
 
           offset = {
             x = 0;
-            y = if isDarwin then 8 else 4;
+            y = if isDarwin then 16 else 4;
           };
 
           glyph_offset = {
             x = 0;
-            y = if isDarwin then 4 else 2;
+            y = if isDarwin then 8 else 2;
           };
         };
 

@@ -99,6 +99,7 @@ in
     ./starship
     ./tmux
     ./vscode
+    ./zellij
   ];
 
   programs = {

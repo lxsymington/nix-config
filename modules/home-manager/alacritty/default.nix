@@ -40,7 +40,7 @@ in
         bell = {
           animation = "EaseOutExpo";
           duration = 300;
-          color = "#a3293d";
+          color = theme { colour = "orange"; subVariant = "bright"; };
         };
 
         selection = {
@@ -112,8 +112,8 @@ in
 
           primary = {
             background = theme { colour = "black"; };
-            bright_foreground = theme { colour = "white"; variant = "light"; };
-            dim_foreground = theme { colour = "grey"; variant = "light"; };
+            bright_foreground = theme { colour = "white"; subVariant = "bright"; };
+            dim_foreground = theme { colour = "grey"; subVariant = "bright"; };
             foreground = theme { colour = "white"; };
           };
 
@@ -135,7 +135,7 @@ in
           search = {
             matches = {
               foreground = theme { colour = "black"; };
-              background = theme { colour = "green"; variant = "light"; };
+              background = theme { colour = "green"; subVariant = "bright"; };
             };
 
             focused_match = {
@@ -147,44 +147,44 @@ in
           hints = {
             end = {
               background = theme { colour = "orange"; };
-              foreground = theme { colour = "white"; variant = "light"; };
+              foreground = theme { colour = "white"; subVariant = "bright"; };
             };
             start = {
-              background = theme { colour = "white"; variant = "light"; };
+              background = theme { colour = "white"; subVariant = "bright"; };
               foreground = theme { colour = "orange"; };
             };
           };
 
           line_indicator = {
             foreground = "None";
-            background = theme { colour = "grey"; variant = "light"; };
+            background = theme { colour = "grey"; subVariant = "bright"; };
           };
 
           footer_bar = {
-            background = theme { colour = "black"; variant = "light"; };
+            background = theme { colour = "black"; subVariant = "bright"; };
             foreground = theme { colour = "white"; };
           };
 
           normal = {
             black = theme { colour = "black"; };
-            red = theme { colour = "red"; variant = "light"; };
-            green = theme { colour = "green"; variant = "light"; };
-            yellow = theme { colour = "yellow"; variant = "light"; };
-            blue = theme { colour = "blue"; variant = "light"; };
-            magenta = theme { colour = "purple"; variant = "light"; };
-            cyan = theme { colour = "cyan"; variant = "light"; };
-            white = theme { colour = "white"; variant = "light"; };
+            red = theme { colour = "red"; subVariant = "bright"; };
+            green = theme { colour = "green"; subVariant = "bright"; };
+            yellow = theme { colour = "yellow"; subVariant = "bright"; };
+            blue = theme { colour = "blue"; subVariant = "bright"; };
+            magenta = theme { colour = "purple"; subVariant = "bright"; };
+            cyan = theme { colour = "cyan"; subVariant = "bright"; };
+            white = theme { colour = "white"; subVariant = "bright"; };
           };
 
           dim = {
-            black = theme { colour = "black"; variant = "dim"; };
-            red = theme { colour = "red"; variant = "dim"; };
-            green = theme { colour = "green"; variant = "dim"; };
-            yellow = theme { colour = "yellow"; variant = "dim"; };
-            blue = theme { colour = "blue"; variant = "dim"; };
-            magenta = theme { colour = "purple"; variant = "dim"; };
-            cyan = theme { colour = "cyan"; variant = "dim"; };
-            white = theme { colour = "white"; variant = "dim"; };
+            black = theme { colour = "black"; subVariant = "dim"; };
+            red = theme { colour = "red"; subVariant = "dim"; };
+            green = theme { colour = "green"; subVariant = "dim"; };
+            yellow = theme { colour = "yellow"; subVariant = "dim"; };
+            blue = theme { colour = "blue"; subVariant = "dim"; };
+            magenta = theme { colour = "purple"; subVariant = "dim"; };
+            cyan = theme { colour = "cyan"; subVariant = "dim"; };
+            white = theme { colour = "white"; subVariant = "dim"; };
           };
         };
       };

@@ -81,7 +81,7 @@ in
 
           bold = {
             family = fontFamily;
-            style = "Extra Bold";
+            style = "Bold";
           };
 
           italic = {
@@ -91,7 +91,7 @@ in
 
           bold_italic = {
             family = fontFamily;
-            style = "Extra Bold Italic";
+            style = "Bold Italic";
           };
 
           size = if isDarwin then 12.0 else 10.0;

@@ -21,6 +21,7 @@ in
       emscripten
       fd
       figlet
+      fontconfig
       fx
       fzf
       glib
@@ -97,6 +98,7 @@ in
     ./fish
     ./git
     ./starship
+    # ./rio # Rio is not working with the current version of Nix
     ./tmux
     ./vscode
     ./zellij

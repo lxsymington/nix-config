@@ -8,10 +8,6 @@ let
   };
 in
 {
-  imports = [
-    ./fish/work.nix
-  ];
-
   home = {
     packages = with pkgs; [
       auth0-cli
@@ -26,14 +22,11 @@ in
     ];
 
     sessionVariables = {
-      AUTO_OPS = "${config.home.homeDirectory}/.seccl/auto-ops";
       AWS_PROFILE = "sandbox";
       AWS_REGION = "eu-west-1";
       AWS_SDK_LOAD_CONFIG = "1";
       CORE_ENV = "sandbox";
       STAGE_ENV = "devlsymington";
-      # Required for AUTO_OPS first time setup
-      NVM_DIR = "${config.home.homeDirectory}/.nvm";
     };
   };
 

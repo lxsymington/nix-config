@@ -48,6 +48,31 @@
       url = "github:lxsymington/nix-neovim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    done = {
+      url = "github:franciscolourenco/done";
+      flake = false;
+    };
+
+    fish-nix-env = {
+      url = "github:lilyball/nix-env.fish";
+      flake = false;
+    };
+
+    ssh-agent-fish = {
+      url = "github:danhper/fish-ssh-agent";
+      flake = false;
+    };
+
+    pisces = {
+      url = "github:laughedelic/pisces";
+      flake = false;
+    };
+
+    replay = {
+      url = "github:jorgebucaran/replay.fish";
+      flake = false;
+    };
   };
 
   outputs =

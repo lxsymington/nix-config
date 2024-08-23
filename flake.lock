@@ -70,6 +70,38 @@
         "type": "github"
       }
     },
+    "done": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1712867771,
+        "narHash": "sha256-DMIRKRAVOn7YEnuAtz4hIxrU93ULxNoQhW6juxCoh4o=",
+        "owner": "franciscolourenco",
+        "repo": "done",
+        "rev": "eb32ade85c0f2c68cbfcff3036756bbf27a4f366",
+        "type": "github"
+      },
+      "original": {
+        "owner": "franciscolourenco",
+        "repo": "done",
+        "type": "github"
+      }
+    },
+    "fish-nix-env": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1638213644,
+        "narHash": "sha256-RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=",
+        "owner": "lilyball",
+        "repo": "nix-env.fish",
+        "rev": "7b65bd228429e852c8fdfa07601159130a818cfa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lilyball",
+        "repo": "nix-env.fish",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -1210,6 +1242,22 @@
         "type": "github"
       }
     },
+    "pisces": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1606703175,
+        "narHash": "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=",
+        "owner": "laughedelic",
+        "repo": "pisces",
+        "rev": "e45e0869855d089ba1e628b6248434b2dfa709c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "laughedelic",
+        "repo": "pisces",
+        "type": "github"
+      }
+    },
     "reactive": {
       "flake": false,
       "locked": {
@@ -1223,6 +1271,22 @@
       "original": {
         "owner": "rasulomaroff",
         "repo": "reactive.nvim",
+        "type": "github"
+      }
+    },
+    "replay": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719805987,
+        "narHash": "sha256-TzQ97h9tBRUg+A7DSKeTBWLQuThicbu19DHMwkmUXdg=",
+        "owner": "jorgebucaran",
+        "repo": "replay.fish",
+        "rev": "d2ecacd3fe7126e822ce8918389f3ad93b14c86c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jorgebucaran",
+        "repo": "replay.fish",
         "type": "github"
       }
     },
@@ -1245,6 +1309,8 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "done": "done",
+        "fish-nix-env": "fish-nix-env",
         "home-manager": "home-manager",
         "lsp-nil": "lsp-nil",
         "lxs-nvim": "lxs-nvim",
@@ -1254,6 +1320,9 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nur": "nur",
+        "pisces": "pisces",
+        "replay": "replay",
+        "ssh-agent-fish": "ssh-agent-fish",
         "vscode-server": "vscode-server"
       }
     },
@@ -1291,6 +1360,22 @@
       "original": {
         "owner": "NStefan002",
         "repo": "screenkey.nvim",
+        "type": "github"
+      }
+    },
+    "ssh-agent-fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1605087262,
+        "narHash": "sha256-e94Sd1GSUAxwLVVo5yR6msq0jZLOn2m+JZJ6mvwQdLs=",
+        "owner": "danhper",
+        "repo": "fish-ssh-agent",
+        "rev": "fd70a2afdd03caf9bf609746bf6b993b9e83be57",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danhper",
+        "repo": "fish-ssh-agent",
         "type": "github"
       }
     },

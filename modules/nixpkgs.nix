@@ -17,8 +17,6 @@
       "stable"
     ];
 
-    package = pkgs.nixFlakes;
-
     registry = {
       nixpkgs = {
         from = {

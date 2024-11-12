@@ -10,6 +10,8 @@ in
       enableBashIntegration = true;
       enableFishIntegration = true;
       settings = {
+        default_layout = "default";
+        default_mode = "locked";
         pane_frames = false;
         simplified_ui = true;
         styled_underlines = true;

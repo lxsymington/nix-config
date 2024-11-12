@@ -36,7 +36,7 @@
 
       # editor
       lxs-nvim
-      neovide
+      # neovide
 
       # helpful shell stuff
       just
@@ -58,6 +58,10 @@
 
   networking = {
     hostName = hostname;
+  };
+
+  nix = {
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   };
 
   programs = {

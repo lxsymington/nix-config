@@ -29,11 +29,6 @@
       url = "github:nix-community/NUR";
     };
 
-    lsp-nil = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:oxalica/nil";
-    };
-
     nix-vscode-extensions = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-vscode-extensions";
@@ -78,7 +73,6 @@
   outputs =
     { darwin
     , home-manager
-    , lsp-nil
     , nix-index-database
     , nixos-wsl
     , nixpkgs
@@ -114,9 +108,6 @@
               inherit (prev) system;
               inherit config;
             };
-          })
-          (final: prev: {
-            rnix-lsp = lsp-nil.packages.${final.system}.default;
           })
           lxs-nvim.overlays.${system}.default
         ];

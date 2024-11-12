@@ -10,10 +10,13 @@ in
 
   home = {
     packages = with pkgs; [
-      _1password
       # ansible # An ansible test is failing during the build
+      _1password
       alejandra
+      biome
       cachix
+      clang
+      corepack
       curl
       deadnix
       delta
@@ -24,6 +27,7 @@ in
       fontconfig
       fx
       fzf
+      git
       glib
       go
       gojq
@@ -34,6 +38,7 @@ in
       inetutils
       jd-diff-patch
       jq
+      libcxx
       llvm
       lua
       lua52Packages.luacheck
@@ -43,7 +48,9 @@ in
       multimarkdown
       nghttp2
       nix-prefetch-git
+      nixd
       nixfmt
+      node-gyp
       nodePackages.prettier
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
@@ -51,11 +58,14 @@ in
       pandoc
       pcre
       pinentry-tty
-      python3
+      pkg-config
+      pnpm
+      (python3.withPackages (python-pkgs: with python-pkgs; [
+        pip
+        setuptools
+      ]))
       ripgrep
-      rnix-lsp
       rustup
-      shellcheck
       shellcheck
       statix
       sumneko-lua-language-server
@@ -200,7 +210,7 @@ in
           comment-token = "#";
           auto-format = true;
           language-servers = {
-            command = "${pkgs.rnix-lsp}/bin/nil";
+            command = "${pkgs.nixd}/bin/nixd";
           };
         }];
       };

@@ -17,6 +17,10 @@
       "stable"
     ];
 
+    optimise = {
+      automatic = true;
+    };
+
     registry = {
       nixpkgs = {
         from = {
@@ -38,7 +42,6 @@
     settings = {
       accept-flake-config = true;
       allowed-users = [ "${username}" "root" "@admin" "@wheel" ];
-      auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
       max-jobs = 8;
       system-features = [ "benchmark" "big-parallel" "nixos-test" "kvm" ];

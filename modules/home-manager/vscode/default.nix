@@ -35,6 +35,7 @@ let
     ms-vscode.remote-explorer
     ms-vscode.remote-server
     ms-vscode.test-adapter-converter
+    ms-vscode.vscode-js-profile-flame
     ms-vsliveshare.vsliveshare
     mvllow.rose-pine
     mxsdev.typescript-explorer
@@ -174,7 +175,7 @@ in
         "workbench.list.smoothScrolling" = true;
         "workbench.iconTheme" = "moxer-icons";
         "workbench.preferredDarkColorTheme" = "Rosé Pine";
-        "workbench.preferredLightColorTheme" = "Rosé Pine Dawn";
+        "workbench.preferredLightColorTheme" = "Rosé Pine Moon";
         "workbench.productIconTheme" = "icons-carbon";
       };
       enable = true;

@@ -50,7 +50,6 @@ in
       nix-prefetch-git
       nixd
       nixfmt
-      node-gyp
       nodePackages.prettier
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
@@ -108,7 +107,7 @@ in
     ./fish
     ./git
     ./starship
-    # ./rio # Rio is not working with the current version of Nix
+    ./rio
     ./tmux
     ./vscode
     ./zellij

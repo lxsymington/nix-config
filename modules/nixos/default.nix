@@ -19,8 +19,9 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      recursive
-      (nerdfonts.override { fonts = [ "CommitMono" "JetBrainsMono" ]; })
+      nerd-fonts.commit-mono
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.recursive-mono
     ];
   };
 

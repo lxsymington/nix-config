@@ -36,7 +36,7 @@
         autohide-delay = 0.0; # delay before dock hides
         autohide-time-modifier = 0.0; # delay before dock shows
         expose-animation-duration = 0.12; # duration of animation when activating expose
-        expose-group-by-app = true; # group windows by app
+        expose-group-apps = true; # group windows by app
         launchanim = true; # disable launch animation
         largesize = 96; # size of icons when dock is magnified
         magnification = true; # enable magnification

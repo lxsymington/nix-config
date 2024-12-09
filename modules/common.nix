@@ -36,12 +36,13 @@
 
       # editor
       lxs-nvim
-      # neovide
 
       # helpful shell stuff
-      just
-      gojq
+      act
       ast-grep
+      atac
+      gojq
+      just
     ];
   };
 

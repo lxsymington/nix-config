@@ -45,8 +45,9 @@
 
   fonts = {
     packages = with pkgs; [
-      recursive
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "CommitMono" ]; })
+      nerd-fonts.commit-mono
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.recursive-mono
     ];
   };
 
@@ -61,16 +62,13 @@
       cleanup = "zap";
       upgrade = true;
     };
-    taps = [
-      "jorgelbg/tap"
-    ];
     brews = [
       "volta"
     ];
     casks = [
+      "docker"
       "mongodb-compass"
       "postman"
-      "docker"
     ];
   };
 
@@ -89,7 +87,6 @@
   };
 
   services = {
-    activate-system.enable = true;
     nix-daemon.enable = true;
   };
 

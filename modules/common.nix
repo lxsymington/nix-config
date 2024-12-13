@@ -43,6 +43,7 @@
       atac
       gojq
       just
+      inputs.mergiraf
     ];
   };
 

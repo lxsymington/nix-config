@@ -68,6 +68,11 @@
       url = "github:jorgebucaran/replay.fish";
       flake = false;
     };
+
+    mergiraf = {
+      url = "git+https://codeberg.org/mergiraf/mergiraf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

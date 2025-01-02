@@ -29,21 +29,6 @@
       url = "github:nix-community/NUR";
     };
 
-    nix-vscode-extensions = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nix-vscode-extensions";
-    };
-
-    vscode-server = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nixos-vscode-server";
-    };
-
-    lxs-nvim = {
-      url = "github:lxsymington/nix-neovim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     done = {
       url = "github:franciscolourenco/done";
       flake = false;
@@ -54,9 +39,19 @@
       flake = false;
     };
 
-    ssh-agent-fish = {
-      url = "github:danhper/fish-ssh-agent";
-      flake = false;
+    lxs-nvim = {
+      url = "github:lxsymington/nix-neovim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mergiraf = {
+      url = "git+https://codeberg.org/mergiraf/mergiraf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-vscode-extensions = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-vscode-extensions";
     };
 
     pisces = {
@@ -69,9 +64,14 @@
       flake = false;
     };
 
-    mergiraf = {
-      url = "git+https://codeberg.org/mergiraf/mergiraf";
+    ssh-agent-fish = {
+      url = "github:danhper/fish-ssh-agent";
+      flake = false;
+    };
+
+    vscode-server = {
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixos-vscode-server";
     };
   };
 

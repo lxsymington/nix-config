@@ -64,6 +64,11 @@
       flake = false;
     };
 
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ssh-agent-fish = {
       url = "github:danhper/fish-ssh-agent";
       flake = false;
@@ -84,10 +89,11 @@
     , nixpkgs-stable
     , nur
     , self
+    , stylix
     , vscode-server
     , lxs-nvim
     , ...
-    }@inputs:
+    } @ inputs:
     let
       inherit (nixpkgs.lib) nixosSystem;
       inherit (darwin.lib) darwinSystem;
@@ -95,8 +101,15 @@
       inherit (builtins) elem;
 
       isDarwin = system: (elem system nixpkgs.lib.platforms.darwin);
-      homePrefix = system: if isDarwin system then "/Users" else "/home";
-      homeDirectory = { system, username }: "${homePrefix system}/${username}";
+      homePrefix = system:
+        if isDarwin system
+        then "/Users"
+        else "/home";
+      homeDirectory =
+        { system
+        , username
+        ,
+        }: "${homePrefix system}/${username}";
 
       nixpkgsWithOverlays = system: (import nixpkgs rec {
         inherit nixpkgs nixpkgs-stable system;
@@ -106,7 +119,7 @@
           allowBroken = false;
         };
         overlays = [
-          nur.overlay
+          nur.overlays.default
           (_final: prev: {
             # this allows us to reference pkgs.stable
             stable = import nixpkgs-stable {
@@ -118,15 +131,20 @@
         ];
       });
 
-      argDefaults = { hostname, system, username }: {
-        inherit self hostname inputs nix-index-database username;
-        homeDirectory = homeDirectory {
-          inherit system username;
+      argDefaults =
+        { hostname
+        , system
+        , username
+        ,
+        }: {
+          inherit self hostname inputs nix-index-database username;
+          homeDirectory = homeDirectory {
+            inherit system username;
+          };
+          channels = {
+            inherit nixpkgs nixpkgs-stable;
+          };
         };
-        channels = {
-          inherit nixpkgs nixpkgs-stable;
-        };
-      };
 
       mkNixosConfiguration =
         { system ? "x86_64-linux"
@@ -134,6 +152,7 @@
         , username
         , args ? { }
         , extraModules ? [ ]
+        ,
         }:
         let
           specialArgs = argDefaults { inherit hostname system username; } // args;
@@ -141,11 +160,14 @@
         nixosSystem {
           inherit system specialArgs;
           pkgs = nixpkgsWithOverlays system;
-          modules = [
-            home-manager.nixosModules.home-manager
-            vscode-server.nixosModules.default
-            ./modules/nixos
-          ] ++ extraModules;
+          modules =
+            [
+              home-manager.nixosModules.home-manager
+              stylix.nixosModules.stylix
+              vscode-server.nixosModules.default
+              ./modules/nixos
+            ]
+            ++ extraModules;
         };
 
       mkDarwinConfig =
@@ -154,6 +176,7 @@
         , username
         , args ? { }
         , extraModules ? [ ]
+        ,
         }:
         let
           specialArgs = argDefaults { inherit hostname system username; } // args;
@@ -161,10 +184,13 @@
         darwinSystem {
           inherit system specialArgs;
           pkgs = nixpkgsWithOverlays system;
-          modules = [
-            home-manager.darwinModules.home-manager
-            ./modules/darwin
-          ] ++ extraModules;
+          modules =
+            [
+              home-manager.darwinModules.home-manager
+              stylix.darwinModules.stylix
+              ./modules/darwin
+            ]
+            ++ extraModules;
         };
 
       mkHomeConfig =
@@ -173,6 +199,7 @@
         , username
         , args ? { }
         , extraModules ? [ ]
+        ,
         }:
         let
           specialArgs = argDefaults { inherit hostname system username; } // args;
@@ -180,21 +207,29 @@
         homeManagerConfiguration {
           inherit specialArgs;
           pkgs = nixpkgsWithOverlays { inherit system; };
-          modules = [
-            ./modules/home-manager
-            {
-              home = {
-                inherit username homeDirectory;
-                sessionVariables = {
-                  NIX_PATH =
-                    "nixpkgs=${nixpkgs}:stable=${nixpkgs-stable}\${NIX_PATH:+:}$NIX_PATH";
+          modules =
+            [
+              stylix.homeManagerModules.stylix
+              ./modules/home-manager
+              {
+                home = {
+                  inherit username homeDirectory;
+                  sessionVariables = {
+                    NIX_PATH = "nixpkgs=${nixpkgs}:stable=${nixpkgs-stable}\${NIX_PATH:+:}$NIX_PATH";
+                  };
                 };
-              };
-            }
-          ] ++ extraModules;
+              }
+            ]
+            ++ extraModules;
         };
     in
     {
+      formatter = {
+        x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+        aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
+        x86_64-darwin = nixpkgs.legacyPackages.x86_64-darwin.alejandra;
+      };
+
       nixosConfigurations = {
         nixos = mkNixosConfiguration {
           hostname = "nixos";

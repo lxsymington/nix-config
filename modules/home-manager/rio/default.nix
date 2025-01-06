@@ -1,10 +1,7 @@
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   fontFamily = "CommitMono Nerd Font Propo";
   theme = import ../../colours.nix;
-in
-{
+in {
   programs = {
     rio = {
       enable = true;
@@ -36,16 +33,19 @@ in
           };
         };
         colors = {
-          background = theme { colour = "black"; };
-          foreground = theme { colour = "white"; };
-          comment = theme { colour = "grey"; };
-          cyan = theme { colour = "cyan"; };
-          green = theme { colour = "green"; };
-          orange = theme { colour = "orange"; };
-          pink = theme { colour = "purple"; variant = "light"; };
-          purple = theme { colour = "purple"; };
-          red = theme { colour = "red"; };
-          yellow = theme { colour = "yellow"; };
+          background = theme {colour = "black";};
+          foreground = theme {colour = "white";};
+          comment = theme {colour = "grey";};
+          cyan = theme {colour = "cyan";};
+          green = theme {colour = "green";};
+          orange = theme {colour = "orange";};
+          pink = theme {
+            colour = "purple";
+            variant = "light";
+          };
+          purple = theme {colour = "purple";};
+          red = theme {colour = "red";};
+          yellow = theme {colour = "yellow";};
         };
       };
     };

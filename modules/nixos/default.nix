@@ -1,4 +1,9 @@
-{ config, pkgs, system, ... }@args: {
+{
+  config,
+  pkgs,
+  system,
+  ...
+} @ args: {
   imports = builtins.traceVerbose (builtins.attrNames args) [
     ../common.nix
   ];

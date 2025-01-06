@@ -1,6 +1,8 @@
-{ inputs, pkgs, ... }:
-
-let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   marketplace_extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
     # postman.postman-for-vscode
     # sonarsource.sonarlint-vscode
@@ -49,8 +51,7 @@ let
     # wallabyjs.quokka-vscode
     yoavbls.pretty-ts-errors
   ];
-in
-{
+in {
   programs = {
     vscode = {
       userSettings = {
@@ -68,9 +69,7 @@ in
 
         "editor.codeActionWidget.includeNearbyQuickfixes" = true;
         "editor.cursorSurroundingLines" = 5;
-        "editor.fontFamily" = "Rec Mono Duotone, CommitMono, JetBrainsMono Nerd Font, monospace";
         "editor.fontLigatures" = true;
-        "editor.fontSize" = 12;
         "editor.formatOnSave" = true;
         "editor.inlayHints.fontSize" = 8;
         "editor.inlayHints.padding" = true;
@@ -169,22 +168,21 @@ in
         "window.zoomLevel" = 1;
 
         "workbench.activityBar.location" = "top";
-        "workbench.colorTheme" = "Rosé Pine";
         "workbench.fontAliasing" = "auto";
         "workbench.editor.highlightModifiedTabs" = true;
         "workbench.list.smoothScrolling" = true;
         "workbench.iconTheme" = "moxer-icons";
-        "workbench.preferredDarkColorTheme" = "Rosé Pine";
-        "workbench.preferredLightColorTheme" = "Rosé Pine Moon";
         "workbench.productIconTheme" = "icons-carbon";
       };
       enable = true;
 
-      extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        dbaeumer.vscode-eslint
-        eamodio.gitlens
-      ] ++ marketplace_extensions;
+      extensions = with pkgs.vscode-extensions;
+        [
+          bbenoist.nix
+          dbaeumer.vscode-eslint
+          eamodio.gitlens
+        ]
+        ++ marketplace_extensions;
     };
   };
 }

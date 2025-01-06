@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs = {
     tmux = {
       enable = true;
@@ -26,23 +30,23 @@
 
         # Set the position of the window list component of the status line: left, centre or right justified.
         set -g status-justify 'centre'
-        
+
         # Let the status length be up to 80 characters in length
         set -g status-left-length 120
-        
+
         # Let the status length be up to 80 characters in length
         set -g status-right-length 120
-        
+
         # Pane decorations
         set -g pane-active-border-style 'fg=brightmagenta,bold'
         set -g pane-border-style 'fg=white,dim,italics'
-        set -g pane-border-status 'top' 
-        
+        set -g pane-border-status 'top'
+
         # window rename
         set -g status-interval 5
         set -g automatic-rename on
         set -g automatic-rename-format '#{b:pane_current_path}'
-        
+
         # Enable the Mouse
         set -g mouse on
 
@@ -51,19 +55,19 @@
 
         # make dbus available in tmux
         set -g update-environment 'DBUS_SESSION_BUS_ADDRESS'
-        
+
         # Make new Tmux windows open at the current working directory
         bind c new-window -c '#{pane_current_path}'
 
         # Set a binding for opening a fuzzy search for switchable Tmux sessions
         bind-key C-j split-window -v "tmux list-sessions | sed -E 's/:.*$//' | fzf --reverse | xargs tmux switch-client -t"
-        
+
         # Prompted join pane
         bind-key J command-prompt -p "Join pane from: " "join-pane -h -s '%%'"
-        
+
         # Easily swap a pane (targeted by pane number) with the current pane
         bind-key S select-pane -m\; choose-tree -Zw "swap-pane -t '%%'"
-        
+
         # Open a fixed size split
         bind-key Tab split-window -h -l 80 -c '#{pane_current_path}'
 

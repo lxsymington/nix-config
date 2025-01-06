@@ -1,7 +1,5 @@
-{ ... }:
-
-{
+{...}: {
   hm = {
-    imports = [ ./home-manager/lxs-work.nix ];
+    imports = [./home-manager/lxs-work.nix];
   };
 }

@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs = {
     git = {
       enable = true;
@@ -74,7 +76,6 @@
         enable = true;
         options = {
           features = "side-by-side line-numbers decorations";
-          syntax-theme = "TwoDark";
           decorations = {
             commit-decoration-style = "bold purple box ul";
             file-style = "bold purple ul";

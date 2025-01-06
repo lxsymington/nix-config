@@ -1,5 +1,8 @@
-{ inputs, config, pkgs, ... }:
-{
+{ inputs
+, config
+, pkgs
+, ...
+}: {
   environment = {
     darwinConfig = "~/.config/nix-darwin";
 
@@ -69,6 +72,7 @@
       "docker"
       "ghostty"
       "mongodb-compass"
+      "neovide"
       "postman"
     ];
   };

@@ -1,6 +1,9 @@
-{ pkgs, homeDirectory, inputs, ... }:
-
 {
+  pkgs,
+  homeDirectory,
+  inputs,
+  ...
+}: {
   programs = {
     fish = {
       enable = true;
@@ -28,14 +31,26 @@
         };
       };
       plugins = [
-        { name = "nix-env.fish"; src = inputs.fish-nix-env.outPath; }
-        { name = "done"; src = inputs.done.outPath; }
+        {
+          name = "nix-env.fish";
+          src = inputs.fish-nix-env.outPath;
+        }
+        {
+          name = "done";
+          src = inputs.done.outPath;
+        }
         {
           name = "fish-ssh-agent";
           src = inputs.ssh-agent-fish.outPath;
         }
-        { name = "pisces"; src = inputs.pisces.outPath; }
-        { name = "replay"; src = inputs.replay.outPath; }
+        {
+          name = "pisces";
+          src = inputs.pisces.outPath;
+        }
+        {
+          name = "replay";
+          src = inputs.replay.outPath;
+        }
       ];
     };
   };

@@ -1,5 +1,9 @@
-{ config, pkgs, homeDirectory, inputs, ... }:
-
+{ config
+, pkgs
+, homeDirectory
+, inputs
+, ...
+}:
 let
   inherit (inputs.nix-index-database.hmModules) nix-index;
   GOPATH = "go";
@@ -11,7 +15,7 @@ in
   home = {
     packages = with pkgs; [
       # ansible # An ansible test is failing during the build
-      _1password
+      _1password-cli
       alejandra
       biome
       cachix
@@ -49,7 +53,6 @@ in
       nghttp2
       nix-prefetch-git
       nixd
-      nixfmt
       nodePackages.prettier
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
@@ -59,10 +62,11 @@ in
       pinentry-tty
       pkg-config
       pnpm
-      (python3.withPackages (python-pkgs: with python-pkgs; [
-        pip
-        setuptools
-      ]))
+      (python3.withPackages (python-pkgs:
+        with python-pkgs; [
+          pip
+          setuptools
+        ]))
       ripgrep
       rustup
       shellcheck
@@ -95,16 +99,13 @@ in
     };
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-
   xdg.enable = true;
 
   imports = [
     nix-index
     ./alacritty
     ./fish
+    ./ghostty
     ./git
     ./starship
     ./rio
@@ -124,7 +125,6 @@ in
     bat = {
       enable = true;
       config = {
-        theme = "TwoDark";
         italic-text = "always";
         pager = "less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse";
         map-syntax = [ ".ignore:Git Ignore" ];
@@ -203,15 +203,17 @@ in
         };
       };
       languages = {
-        language = [{
-          name = "nix";
-          file-types = [ "nix" ];
-          comment-token = "#";
-          auto-format = true;
-          language-servers = {
-            command = "${pkgs.nixd}/bin/nixd";
-          };
-        }];
+        language = [
+          {
+            name = "nix";
+            file-types = [ "nix" ];
+            comment-token = "#";
+            auto-format = true;
+            language-servers = {
+              command = "${pkgs.nixd}/bin/nixd";
+            };
+          }
+        ];
       };
     };
 
@@ -241,7 +243,19 @@ in
     };
   };
 
-  /* services = {
+  stylix = {
+    targets = {
+      alacritty = {
+        enable = false;
+      };
+      neovim = {
+        enable = false;
+      };
+    };
+  };
+
+  /*
+     services = {
     gpg-agent = {
       enable = true;
       defaultCacheTtl = 86400;
@@ -257,5 +271,6 @@ in
       grabKeyboardAndMouse = true;
       pinentryPackage = pkgs.pinentry-tty;
     };
-  }; */
+    };
+  */
 }

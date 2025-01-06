@@ -1,9 +1,6 @@
-{ ... }:
-
-let
+{...}: let
   theme = import ../../colours.nix;
-in
-{
+in {
   programs = {
     zellij = {
       enable = true;
@@ -17,25 +14,55 @@ in
         styled_underlines = true;
         themes = {
           default = {
-            fg = theme { colour = "white"; subVariant = "dim"; };
-            bg = theme { colour = "grey"; subVariant = "dim"; };
-            black = theme { colour = "black"; };
-            red = theme { colour = "red"; subVariant = "dim"; };
-            green = theme { colour = "green"; subVariant = "dim"; };
-            yellow = theme { colour = "yellow"; subVariant = "dim"; };
-            blue = theme { colour = "blue"; subVariant = "dim"; };
-            magenta = theme { colour = "purple"; subVariant = "dim"; };
-            cyan = theme { colour = "cyan"; subVariant = "dim"; };
-            white = theme { colour = "white"; subVariant = "bright"; };
-            orange = theme { colour = "orange"; subVariant = "dim"; };
+            fg = theme {
+              colour = "white";
+              subVariant = "dim";
+            };
+            bg = theme {
+              colour = "grey";
+              subVariant = "dim";
+            };
+            black = theme {colour = "black";};
+            red = theme {
+              colour = "red";
+              subVariant = "dim";
+            };
+            green = theme {
+              colour = "green";
+              subVariant = "dim";
+            };
+            yellow = theme {
+              colour = "yellow";
+              subVariant = "dim";
+            };
+            blue = theme {
+              colour = "blue";
+              subVariant = "dim";
+            };
+            magenta = theme {
+              colour = "purple";
+              subVariant = "dim";
+            };
+            cyan = theme {
+              colour = "cyan";
+              subVariant = "dim";
+            };
+            white = theme {
+              colour = "white";
+              subVariant = "bright";
+            };
+            orange = theme {
+              colour = "orange";
+              subVariant = "dim";
+            };
           };
         };
       };
     };
   };
 }
-
-/* keybinds = {
+/*
+   keybinds = {
   _args = [ "clear-defaults=true" ];
   normal = { };
   locked = {
@@ -238,4 +265,6 @@ in
   "shared_except \"tmux\" \"locked\"" = {
   "bind \"b\"" = { SwitchToMode = "Tmux"; };
   };
-}; */
+};
+*/
+

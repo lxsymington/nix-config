@@ -1,4 +1,4 @@
-{ homeDirectory, ... }: {
+{homeDirectory, ...}: {
   programs.ssh = {
     enable = true;
     matchBlocks = {

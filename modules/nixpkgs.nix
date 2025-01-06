@@ -1,4 +1,10 @@
-{ inputs, config, username, pkgs, ... }: {
+{
+  inputs,
+  config,
+  username,
+  pkgs,
+  ...
+}: {
   nix = {
     extraOptions = ''
       keep-outputs = true
@@ -10,12 +16,13 @@
       options = "--delete-older-than 7d";
     };
 
-    nixPath = builtins.map
+    nixPath =
+      builtins.map
       (source: "${source}=/etc/${config.environment.etc.${source}.target}") [
-      "home-manager"
-      "nixpkgs"
-      "stable"
-    ];
+        "home-manager"
+        "nixpkgs"
+        "stable"
+      ];
 
     optimise = {
       automatic = true;
@@ -41,11 +48,11 @@
 
     settings = {
       accept-flake-config = true;
-      allowed-users = [ "${username}" "root" "@admin" "@wheel" ];
-      experimental-features = [ "nix-command" "flakes" ];
+      allowed-users = ["${username}" "root" "@admin" "@wheel"];
+      experimental-features = ["nix-command" "flakes"];
       max-jobs = 8;
-      system-features = [ "benchmark" "big-parallel" "nixos-test" "kvm" ];
-      trusted-users = [ "${username}" "root" "@admin" "@wheel" ];
+      system-features = ["benchmark" "big-parallel" "nixos-test" "kvm"];
+      trusted-users = ["${username}" "root" "@admin" "@wheel"];
     };
   };
 }

@@ -1,8 +1,12 @@
-{ pkgs, username, ... }: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   # For vscode-server see this issue: https://github.com/nix-community/NixOS-WSL/issues/294#issuecomment-1793362619
 
   environment.systemPackages = [
-    (import ./win32yank.nix { inherit pkgs; })
+    (import ./win32yank.nix {inherit pkgs;})
     pkgs.wget
     pkgs.wslu
   ];
@@ -31,9 +35,9 @@
     enable = true;
 
     extraBin = with pkgs; [
-      { src = "${coreutils}/bin/uname"; }
-      { src = "${coreutils}/bin/dirname"; }
-      { src = "${coreutils}/bin/readlink"; }
+      {src = "${coreutils}/bin/uname";}
+      {src = "${coreutils}/bin/dirname";}
+      {src = "${coreutils}/bin/readlink";}
     ];
 
     startMenuLaunchers = true;

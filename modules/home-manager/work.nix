@@ -1,13 +1,14 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   assume-role = builtins.fetchGit {
     url = "git@github.com:ibisnetworks/assume-role.git";
     ref = "master";
     rev = "b59b398b6c197eb2442a13cf8afe08936501b881";
   };
-in
-{
+in {
   home = {
     packages = with pkgs; [
       auth0-cli

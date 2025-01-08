@@ -25,10 +25,10 @@ in
       stable.source = "${inputs.nixpkgs-stable}";
     };
 
-    pathsToLink = [ "/share/fish" ];
+    pathsToLink = [ "/share/bash" "/share/fish" "/share/zsh" "/share/nushell" ];
 
     # list of acceptable shells in /etc/shells
-    shells = with pkgs; [ bash zsh fish ];
+    shells = with pkgs; [ bash zsh fish nushell ];
 
     systemPackages = with pkgs; [
       # standard toolset
@@ -46,6 +46,7 @@ in
       act
       ast-grep
       atac
+      dum
       gojq
       just
       inputs.mergiraf

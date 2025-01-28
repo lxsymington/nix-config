@@ -1,8 +1,7 @@
-{
-  pkgs,
-  homeDirectory,
-  inputs,
-  ...
+{ pkgs
+, homeDirectory
+, inputs
+, ...
 }: {
   programs = {
     fish = {
@@ -14,6 +13,7 @@
           replay source ${homeDirectory}/.seccl/env.sh
         end
       '';
+      generateCompletions = true;
       functions = {
         update_nix_index = {
           description = "Update the nix-index for `comma`";

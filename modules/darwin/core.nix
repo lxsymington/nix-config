@@ -79,9 +79,6 @@
 
   nix.nixPath = [ "darwin=/etc/${config.environment.etc.darwin.target}" ];
 
-  # auto manage nixbld users with nix darwin
-  nix.configureBuildUsers = true;
-
   programs = {
     gnupg = {
       agent = {
@@ -89,10 +86,6 @@
         enableSSHSupport = true;
       };
     };
-  };
-
-  services = {
-    nix-daemon.enable = true;
   };
 
   # Used for backwards compatibility, please read the changelog before changing.

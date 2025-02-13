@@ -1,8 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs = {
     starship = {
       enable = true;
       enableFishIntegration = true;
+      enableNushellIntegration = true;
       # Seems to cause issues with `pinentry` on macOS
       # enableTransience = true;
       settings = {

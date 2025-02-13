@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   programs = {
     tmux = {
@@ -55,6 +54,9 @@
 
         # make dbus available in tmux
         set -g update-environment 'DBUS_SESSION_BUS_ADDRESS'
+
+        # Enables certain keys to be passed through to the terminal
+        set -g xterm-keys on
 
         # Make new Tmux windows open at the current working directory
         bind c new-window -c '#{pane_current_path}'

@@ -107,8 +107,9 @@ in
     ./fish
     ./ghostty
     ./git
-    ./starship
+    ./nushell
     ./rio
+    ./starship
     ./tmux
     ./vscode
     ./zellij

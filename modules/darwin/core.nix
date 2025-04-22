@@ -1,7 +1,8 @@
-{ inputs
-, config
-, pkgs
-, ...
+{
+  inputs,
+  config,
+  pkgs,
+  ...
 }: {
   environment = {
     darwinConfig = "~/.config/nix-darwin";
@@ -27,6 +28,7 @@
       alacritty
       ncurses
       reattach-to-user-namespace
+      volta
     ];
 
     systemPath = [
@@ -65,9 +67,6 @@
       cleanup = "zap";
       upgrade = true;
     };
-    brews = [
-      "volta"
-    ];
     casks = [
       "docker"
       "ghostty"
@@ -77,7 +76,7 @@
     ];
   };
 
-  nix.nixPath = [ "darwin=/etc/${config.environment.etc.darwin.target}" ];
+  nix.nixPath = ["darwin=/etc/${config.environment.etc.darwin.target}"];
 
   programs = {
     gnupg = {

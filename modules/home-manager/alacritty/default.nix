@@ -1,10 +1,8 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   inherit (pkgs.stdenvNoCC) isDarwin;
   fontFamily = "CommitMono Nerd Font Propo";
   theme = import ../../colours.nix;
-in
-{
+in {
   programs = {
     alacritty = {
       enable = true;
@@ -124,16 +122,16 @@ in
           draw_bold_text_with_bright_colors = false;
 
           primary = {
-            background = theme { colour = "black"; };
+            background = theme {colour = "background";};
             bright_foreground = theme {
-              colour = "white";
+              colour = "foreground";
               subVariant = "bright";
             };
             dim_foreground = theme {
               colour = "grey";
               subVariant = "bright";
             };
-            foreground = theme { colour = "white"; };
+            foreground = theme {colour = "foreground";};
           };
 
           cursor = {
@@ -153,7 +151,7 @@ in
 
           search = {
             matches = {
-              foreground = theme { colour = "black"; };
+              foreground = theme {colour = "background";};
               background = theme {
                 colour = "green";
                 subVariant = "bright";
@@ -168,7 +166,7 @@ in
 
           hints = {
             end = {
-              background = theme { colour = "orange"; };
+              background = theme {colour = "orange";};
               foreground = theme {
                 colour = "white";
                 subVariant = "bright";
@@ -179,7 +177,7 @@ in
                 colour = "white";
                 subVariant = "bright";
               };
-              foreground = theme { colour = "orange"; };
+              foreground = theme {colour = "orange";};
             };
           };
 
@@ -193,14 +191,14 @@ in
 
           footer_bar = {
             background = theme {
-              colour = "black";
+              colour = "background";
               subVariant = "bright";
             };
-            foreground = theme { colour = "white"; };
+            foreground = theme {colour = "foreground";};
           };
 
           normal = {
-            black = theme { colour = "black"; };
+            black = theme {colour = "black";};
             red = theme {
               colour = "red";
               subVariant = "bright";
@@ -267,9 +265,15 @@ in
           };
         };
 
-        key_bindings = [
-          { key = "Key3"; mods = "Alt"; chars = "#"; }
-        ];
+        keyboard = {
+          bindings = [
+            {
+              key = "Key3";
+              mods = "Alt";
+              chars = "#";
+            }
+          ];
+        };
       };
     };
   };

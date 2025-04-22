@@ -1,17 +1,16 @@
-{ homeDirectory
-, hostname
-, inputs
-, config
-, pkgs
-, self
-, username
-, ...
-}:
-let
-  theme = import ./colours.nix;
-in
 {
-  imports = [ ./primary.nix ./nixpkgs.nix ];
+  homeDirectory,
+  hostname,
+  inputs,
+  config,
+  pkgs,
+  self,
+  username,
+  ...
+}: let
+  theme = import ./colours.nix;
+in {
+  imports = [./primary.nix ./nixpkgs.nix];
 
   documentation = {
     man.enable = true;
@@ -25,10 +24,10 @@ in
       stable.source = "${inputs.nixpkgs-stable}";
     };
 
-    pathsToLink = [ "/share/bash" "/share/fish" "/share/zsh" "/share/nushell" ];
+    pathsToLink = ["/share/bash" "/share/fish" "/share/zsh" "/share/nushell"];
 
     # list of acceptable shells in /etc/shells
-    shells = with pkgs; [ bash zsh fish nushell ];
+    shells = with pkgs; [bash zsh fish nushell];
 
     systemPackages = with pkgs; [
       # standard toolset
@@ -58,7 +57,7 @@ in
 
   # let nix manage home-manager profiles and use global nixpkgs
   home-manager = {
-    extraSpecialArgs = { inherit self homeDirectory hostname inputs username; };
+    extraSpecialArgs = {inherit self homeDirectory hostname inputs username;};
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
@@ -69,7 +68,7 @@ in
   };
 
   nix = {
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 
   programs = {
@@ -118,45 +117,76 @@ in
         terminal = 12;
       };
     };
+
     image = config.lib.stylix.pixel "base0A";
 
     base16Scheme = {
-      slug = "crepuscular-dusk";
-      scheme = "Crepuscular Dusk";
+      slug = "crepuscular-dawn";
+      scheme = "Crepuscular Dawn";
       author = "lxsymington";
-      variant = "dark";
+      variant = "light";
       # Default Background
-      base00 = theme { colour = "black"; };
+      base00 = theme {colour = "background";};
       # Lighter Background (Used for status bars, line number and folding marks)
-      base01 = theme { colour = "blue"; subVariant = "dim"; };
+      base01 = theme {
+        colour = "blue";
+        subVariant = "dim";
+      };
       # Selection Background
-      base02 = theme { colour = "purple"; subVariant = "bright"; };
+      base02 = theme {
+        colour = "purple";
+        subVariant = "bright";
+      };
       # Comments, Invisibles, Line Highlighting
-      base03 = theme { colour = "grey"; };
+      base03 = theme {colour = "grey";};
       # Dark Foreground (Used for status bars)
-      base04 = theme { colour = "cyan"; subVariant = "dim"; };
+      base04 = theme {
+        colour = "cyan";
+        subVariant = "dim";
+      };
       # Default Foreground, Caret, Delimiters, Operators
-      base05 = theme { colour = "white"; };
+      base05 = theme {colour = "foreground";};
       # Light Foreground (Not often used)
-      base06 = theme { colour = "yellow"; subVariant = "dim"; };
+      base06 = theme {
+        colour = "yellow";
+        subVariant = "dim";
+      };
       # Light Background (Not often used)
-      base07 = theme { colour = "purple"; subVariant = "dim"; };
+      base07 = theme {
+        colour = "purple";
+        subVariant = "dim";
+      };
       # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-      base08 = theme { colour = "red"; subVariant = "bright"; };
+      base08 = theme {
+        colour = "red";
+        subVariant = "bright";
+      };
       # Integers, Boolean, Constants, XML Attributes, Markup Link Url
-      base09 = theme { colour = "orange"; subVariant = "bright"; };
+      base09 = theme {
+        colour = "orange";
+        subVariant = "bright";
+      };
       # Classes, Markup Bold, Search Text Background
-      base0A = theme { colour = "yellow"; };
+      base0A = theme {colour = "yellow";};
       # Strings, Inherited Class, Markup Code, Diff Inserted
-      base0B = theme { colour = "green"; subVariant = "bright"; };
+      base0B = theme {
+        colour = "green";
+        subVariant = "bright";
+      };
       # Support, Regular Expressions, Escape Characters, Markup Quotes
-      base0C = theme { colour = "cyan"; };
+      base0C = theme {colour = "cyan";};
       # Functions, Methods, Attribute IDs, Headings
-      base0D = theme { colour = "blue"; subVariant = "bright"; };
+      base0D = theme {
+        colour = "blue";
+        subVariant = "bright";
+      };
       # Keywords, Storage, Selector, Markup Italic, Diff Changed
-      base0E = theme { colour = "purple"; };
+      base0E = theme {colour = "purple";};
       # Deprecated, Opening/Closing Embedded Language Tags, e.g.
-      base0F = theme { colour = "orange"; subVariant = "dim"; };
+      base0F = theme {
+        colour = "orange";
+        subVariant = "dim";
+      };
     };
   };
 

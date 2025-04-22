@@ -15,11 +15,11 @@ in {
         themes = {
           default = {
             fg = theme {
-              colour = "white";
+              colour = "foreground";
               subVariant = "dim";
             };
             bg = theme {
-              colour = "grey";
+              colour = "background";
               subVariant = "dim";
             };
             black = theme {colour = "black";};
@@ -55,6 +55,33 @@ in {
               colour = "orange";
               subVariant = "dim";
             };
+            /*
+               text_selected = {
+              base = theme {
+                colour = "yellow";
+                subVariant = "bright";
+              };
+              background = theme {
+                colour = "grey";
+                subVariant = "dim";
+              };
+              emphasis_0 = theme {
+                colour = "cyan";
+              };
+              emphasis_1 = theme {
+                colour = "orange";
+                subVariant = "bright";
+              };
+              emphasis_2 = theme {
+                colour = "purple";
+                subVariant = "bright";
+              };
+              emphasis_3 = theme {
+                colour = "green";
+                subVariant = "bright";
+              };
+            };
+            */
           };
         };
       };

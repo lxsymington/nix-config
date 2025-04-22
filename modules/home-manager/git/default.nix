@@ -92,12 +92,24 @@
       };
 
       extraConfig = {
+        branch = {
+          sort = "-committerdate";
+        };
+
         core = {
           autocrlf = "input";
           trustctime = false;
           editor = "nvim";
           filemode = false;
           pager = "${pkgs.gitAndTools.delta}/bin/delta";
+        };
+
+        column = {
+          ui = "auto";
+        };
+
+        help = {
+          autocorrect = "prompt";
         };
 
         init = {
@@ -109,8 +121,9 @@
         };
 
         push = {
-          default = "current";
+          default = "simple";
           autoSetupRemote = true;
+          followTags = true;
         };
 
         pull = {
@@ -119,6 +132,8 @@
 
         fetch = {
           prune = true;
+          pruneTags = true;
+          all = true;
         };
 
         color = {
@@ -126,17 +141,23 @@
         };
 
         diff = {
-          tool = "nvimdiff";
-          conflictstyle = "diff2";
-          algorithm = "patience";
-          indentHeuristic = true;
+          algorithm = "histogram";
+          colorMoved = "plain";
           compactionHeuristic = true;
-          colorMoved = "default";
+          conflictstyle = "diff2";
+          indentHeuristic = true;
+          mnemonicPrefix = true;
+          renames = true;
+          tool = "nvimdiff";
+        };
+
+        feature = {
+          experimental = true;
         };
 
         merge = {
           tool = "nvimdiff";
-          conflictstyle = "diff3";
+          conflictstyle = "zdiff3";
           algorithm = "patience";
           indentHeuristic = true;
           compactionHeuristic = true;
@@ -168,12 +189,23 @@
           verbose = true;
         };
 
+        rebase = {
+          autoSquash = true;
+          autoStash = true;
+          updateRefs = true;
+        };
+
         rerere = {
           enabled = true;
+          autoupdate = true;
         };
 
         safe = {
           directory = "${config.home.homeDirectory}/Tools/neovim";
+        };
+
+        tag = {
+          sort = "version:refname";
         };
       };
 

@@ -1,7 +1,8 @@
-{ pkgs
-, homeDirectory
-, inputs
-, ...
+{
+  pkgs,
+  homeDirectory,
+  inputs,
+  ...
 }: {
   programs = {
     fish = {
@@ -12,6 +13,8 @@
         if test -e ${homeDirectory}/.seccl/env.sh -a -x ${homeDirectory}/.seccl/env.sh
           replay source ${homeDirectory}/.seccl/env.sh
         end
+
+        carapace _carapace | source
       '';
       generateCompletions = true;
       functions = {

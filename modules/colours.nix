@@ -1,6 +1,6 @@
 {
   colour,
-  variant ? "dark",
+  variant ? "light",
   subVariant ? "standard",
 }: let
   colours = {
@@ -15,6 +15,8 @@
 
     dark = {
       dim = {
+        background = "#150E1C";
+        foreground = "#FAEFE5";
         black = "#150E1C";
         blue = "#ABB7CC";
         cyan = "#96BEB9";
@@ -28,6 +30,8 @@
       };
 
       bright = {
+        background = "#131016";
+        foreground = "#F5F1E3";
         black = "#131016";
         blue = "#9CB6F0";
         cyan = "#A4BBB8";
@@ -41,6 +45,8 @@
       };
 
       standard = {
+        background = "#170C21";
+        foreground = "#FAEFE5";
         black = "#170C21";
         blue = "#A9B4E7";
         cyan = "#6AC5BD";
@@ -56,6 +62,8 @@
 
     light = {
       dim = {
+        background = "#FAEFE5";
+        foreground = "#150E1C";
         black = "#150E1C";
         blue = "#526F96";
         cyan = "#417671";
@@ -69,6 +77,8 @@
       };
 
       bright = {
+        background = "#FAEFE5";
+        foreground = "#131016";
         black = "#131016";
         blue = "#406DB1";
         cyan = "#63706E";
@@ -82,6 +92,8 @@
       };
 
       standard = {
+        background = "#FAEFE5";
+        foreground = "#170C21";
         black = "#170C21";
         blue = "#326ACB";
         cyan = "#437671";

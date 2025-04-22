@@ -1,15 +1,14 @@
-{ config
-, pkgs
-, homeDirectory
-, inputs
-, ...
-}:
-let
+{
+  config,
+  pkgs,
+  homeDirectory,
+  inputs,
+  ...
+}: let
   inherit (inputs.nix-index-database.hmModules) nix-index;
   GOPATH = "go";
   GOBIN = "${GOPATH}/bin";
-in
-{
+in {
   manual.manpages.enable = true;
 
   home = {
@@ -74,6 +73,7 @@ in
       sumneko-lua-language-server
       terminal-notifier
       typescript
+      volta
       xh
       yarn
     ];
@@ -95,6 +95,7 @@ in
       EDITOR = "nvim";
       HISTTIMEFORMAT = "%F %T ";
       MANPAGER = "nvim +Man!";
+      VOLTA_FEATURE_PNPM = 1;
       VOLTA_HOME = "${config.home.homeDirectory}/.local/share/volta";
     };
   };
@@ -128,13 +129,18 @@ in
       config = {
         italic-text = "always";
         pager = "less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse";
-        map-syntax = [ ".ignore:Git Ignore" ];
+        map-syntax = [".ignore:Git Ignore"];
       };
     };
 
     bottom.enable = true;
 
     broot = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    carapace = {
       enable = true;
       enableFishIntegration = true;
     };
@@ -207,7 +213,7 @@ in
         language = [
           {
             name = "nix";
-            file-types = [ "nix" ];
+            file-types = ["nix"];
             comment-token = "#";
             auto-format = true;
             language-servers = {
@@ -256,22 +262,22 @@ in
   };
 
   /*
-     services = {
-    gpg-agent = {
-      enable = true;
-      defaultCacheTtl = 86400;
-      defaultCacheTtlSsh = 86400;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableSshSupport = true;
-      enableExtraSocket = true;
-      extraConfig = ''
-        allow-emacs-pinentry
-        allow-loopback-pinentry
-      '';
-      grabKeyboardAndMouse = true;
-      pinentryPackage = pkgs.pinentry-tty;
-    };
-    };
+   services = {
+  gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 86400;
+    defaultCacheTtlSsh = 86400;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    enableSshSupport = true;
+    enableExtraSocket = true;
+    extraConfig = ''
+      allow-emacs-pinentry
+      allow-loopback-pinentry
+    '';
+    grabKeyboardAndMouse = true;
+    pinentryPackage = pkgs.pinentry-tty;
+  };
+  };
   */
 }

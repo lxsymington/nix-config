@@ -18,6 +18,7 @@ in {
       alejandra
       biome
       cachix
+      carapace-bridge
       clang
       corepack
       curl
@@ -142,7 +143,10 @@ in {
 
     carapace = {
       enable = true;
+      enableBashIntegration = true;
       enableFishIntegration = true;
+      enableNushellIntegration = true;
+      enableZshIntegration = true;
     };
 
     command-not-found = {

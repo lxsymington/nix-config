@@ -7,14 +7,15 @@
   programs = {
     fish = {
       enable = true;
+      shellInit = ''
+        carapace _carapace | source
+      '';
       interactiveShellInit = ''
         fish_vi_key_bindings
 
         if test -e ${homeDirectory}/.seccl/env.sh -a -x ${homeDirectory}/.seccl/env.sh
           replay source ${homeDirectory}/.seccl/env.sh
         end
-
-        carapace _carapace | source
       '';
       generateCompletions = true;
       functions = {

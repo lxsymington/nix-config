@@ -109,8 +109,8 @@ in {
     ./fish
     ./ghostty
     ./git
-    ./nushell
-    ./rio
+    # ./nushell
+    # ./rio
     ./starship
     ./tmux
     ./vscode

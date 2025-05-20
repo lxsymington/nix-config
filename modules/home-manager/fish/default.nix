@@ -16,24 +16,12 @@
         if test -e ${homeDirectory}/.seccl/env.sh -a -x ${homeDirectory}/.seccl/env.sh
           replay source ${homeDirectory}/.seccl/env.sh
         end
+
+        if not set -q TMUX
+          exec tmux
+        end
       '';
       generateCompletions = true;
-      functions = {
-        update_nix_index = {
-          description = "Update the nix-index for `comma`";
-          # Currently there is no index available for `aarch64-darwin`
-          # onEvent = "fish_prompt";
-          body = ''
-            set -l filename "index-${pkgs.system}"
-            mkdir -p ${homeDirectory}/.cache/nix-index
-            pushd ${homeDirectory}/.cache/nix-index
-            # -N will only download a new version if there is an update.
-            wget -q -N https://github.com/Mic92/nix-index-database/releases/latest/download/$filename
-            ln -f $filename files
-            popd
-          '';
-        };
-      };
       plugins = [
         {
           name = "nix-env.fish";

@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
   programs = {
     tmux = {
@@ -106,28 +107,15 @@
         set-option -g window-status-format '#[fg=yellow italics dim] #I #W #[default]'
         set-option -g window-status-current-format '#[fg=magenta] #I #W #[default]'
         set-option -g window-status-separator '⁞'
-
-        # Enable tmux continuum
-        set -g @continuum-restore 'on'
-        # Set tmux continuum interval in minutes
-        set -g @continuum-save-interval '5'
-        run-shell ${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux
-
-        # Restore contents for panes
-        set -g @resurrect-capture-pane-contents 'on'
-        # Restore contents for vim
-        set -g @resurrect-strategy-vim 'session'
-        # Restore contents for neovim
-        set -g @resurrect-strategy-nvim 'session'
-        # Restore using Startify
-        set -g @resurrect-processes '"nvim->nvim +SLoad"'
-        run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
       '';
       aggressiveResize = true;
       baseIndex = 1;
+      focusEvents = true;
       keyMode = "vi";
       historyLimit = 50000;
-      prefix = "C-a";
+      prefix = "C-g";
+      shell = "${pkgs.fish}/bin/fish";
+      sensibleOnTop = true;
       terminal = "tmux-256color";
       plugins = with pkgs.tmuxPlugins; [
         battery
@@ -137,8 +125,71 @@
         pain-control
         sensible
         yank
-        continuum
-        resurrect
+        {
+          plugin = tmux-sessionx;
+          extraConfig = ''
+            # I recommend using `o` if not already in use, for least key strokes when launching
+            set -g @sessionx-bind 'o'
+          '';
+        }
+        {
+          plugin = tmux-floax;
+          extraConfig = ''
+            # Setting the main key to toggle the floating pane on and off
+            set -g @floax-bind '-n M-f'
+
+            # When the pane is toggled, using this bind pops a menu with additional options
+            # such as resize, fullscreen, resetting to defaults and more.
+            set -g @floax-bind-menu 'P'
+
+            # The default width and height of the floating pane
+            set -g @floax-width '67%'
+            set -g @floax-height '67%'
+
+            # The border color can be changed, these are the colors supported by Tmux:
+            # black, red, green, yellow, blue, magenta, cyan, white for the standard
+            # terminal colors; brightred, brightyellow and so on for the bright variants;
+            # colour0/color0 to colour255/color255 for the colors from the 256-color
+            # palette; default for the default color; or a hexadecimal RGB color such as #882244.
+            set -g @floax-border-color 'magenta'
+
+            # The text color can also be changed, by default it's blue
+            # to distinguish from the main window
+            # Optional colors are as shown above in @floax-border-color
+            set -g @floax-text-color 'blue'
+
+            # By default when floax sees a change in session path
+            # it'll change the floating pane's path
+            # You can disable this by setting it to false
+            # You could also "cd -" when the pane is toggled to go back
+            set -g @floax-change-path 'true'
+
+            # The default session name of the floating pane is 'scratch'
+            # You can modify the session name with this option:
+            set -g @floax-session-name 'some-other-session-name'
+
+            # Change the title of the floating window
+            set -g @floax-title 'floax'
+          '';
+        }
+        {
+          plugin = resurrect;
+          extraConfig = ''
+            set -g @resurrect-capture-pane-contents 'on'
+            set -g @resurrect-strategy-vim 'session'
+            set -g @resurrect-strategy-nvim 'session'
+            set -g @resurrect-processes '"nvim->nvim +SLoad"'
+          '';
+        }
+        {
+          plugin = continuum;
+          extraConfig = ''
+            set -g @continuum-restore 'on'
+            set -g @continuum-boot 'on'
+            set -g @continuum-boot-options 'alacritty'
+            set -g @continuum-save-interval '5'
+          '';
+        }
       ];
     };
   };

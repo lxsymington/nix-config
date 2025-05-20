@@ -40,6 +40,7 @@ in {
 
       # editor
       lxs-nvim
+      zed-editor
 
       # helpful shell stuff
       act
@@ -49,6 +50,9 @@ in {
       gojq
       just
       inputs.mergiraf
+
+      # AI agent
+      goose-cli
     ];
   };
 
@@ -124,7 +128,7 @@ in {
       slug = "crepuscular-dawn";
       scheme = "Crepuscular Dawn";
       author = "lxsymington";
-      variant = "light";
+      variant = "dark";
       # Default Background
       base00 = theme {colour = "background";};
       # Lighter Background (Used for status bars, line number and folding marks)

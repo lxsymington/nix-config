@@ -1,6 +1,6 @@
 {
   colour,
-  variant ? "light",
+  variant ? "dark",
   subVariant ? "standard",
 }: let
   colours = {

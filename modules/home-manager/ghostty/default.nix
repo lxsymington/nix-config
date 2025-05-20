@@ -87,102 +87,102 @@ in {
         text = ''
           palette = 0=${theme {
             colour = "black";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 1=${theme {
             colour = "blue";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 2=${theme {
             colour = "purple";
             subVariant = "bright";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 3=${theme {
             colour = "grey";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 4=${theme {
             colour = "cyan";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 5=${theme {
             colour = "white";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 6=${theme {
             colour = "yellow";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 7=${theme {
             colour = "purple";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 8=${theme {
             colour = "red";
             subVariant = "bright";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 9=${theme {
             colour = "orange";
             subVariant = "bright";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 10=${theme {
             colour = "yellow";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 11=${theme {
             colour = "green";
             subVariant = "bright";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 12=${theme {
             colour = "cyan";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 13=${theme {
             colour = "blue";
             subVariant = "bright";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 14=${theme {
             colour = "purple";
-            variant = "light";
+            variant = "dark";
           }}
           palette = 15=${theme {
             colour = "orange";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           background = ${theme {
             colour = "black";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           foreground = ${theme {
             colour = "white";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           cursor-color = ${theme {
             colour = "yellow";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           selection-background = ${theme {
             colour = "green";
             subVariant = "dim";
-            variant = "light";
+            variant = "dark";
           }}
           selection-foreground = ${theme {
             colour = "black";
             subVariant = "bright";
-            variant = "light";
+            variant = "dark";
           }}
         '';
         target = "${config.xdg.configHome}/ghostty/themes/crepuscular-dawn";

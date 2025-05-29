@@ -6,6 +6,7 @@
   programs = {
     tmux = {
       enable = true;
+      sensibleOnTop = true;
       extraConfig = ''
         # Create a history file for Tmux
         set -g history-file ${config.xdg.configHome}/tmux/history
@@ -18,7 +19,8 @@
         set -as terminal-features ",*:strikethrough"
         set -as terminal-features ",*:usstyle"
 
-        # Set the foreground and background colours for the Tmux status line
+        # Set style attributes for the Tmux status line
+        set -g status-position top
         set -g status-style 'bg=default'
         set -g status-style 'fg=default'
 
@@ -44,6 +46,7 @@
 
         # window rename
         set -g status-interval 5
+        set -g aggressive-rename on
         set -g automatic-rename on
         set -g automatic-rename-format '#{b:pane_current_path}'
 
@@ -58,6 +61,33 @@
 
         # Enables certain keys to be passed through to the terminal
         set -g xterm-keys on
+
+        # Monitors
+        set-option -g monitor-activity on
+        set-option -g monitor-bell on
+        set-option -g monitor-silence 30
+
+        # Menu
+        set-option -g menu-style 'bg=default fg=yellow dim'
+        set-option -g menu-selected-style 'bg=yellow fg=default bold'
+        set-option -g menu-border-lines 'single'
+        set-option -g menu-border-style 'fg=grey dim'
+
+        # Copy Mode
+        set-option -g copy-mode-match-style 'bg=green fg=default dim'
+        set-option -g copy-mode-current-match-style 'bg=green fg=default bold'
+        set-option -g copy-mode-mark-style 'bg=grey dim'
+
+        # Mode
+        set-option -g mode-style 'bg=green fg=default dim'
+
+        # Cursor
+        set-option -g cursor-style 'blinking-block'
+
+        # Message
+        set-option -g message-command-style 'bg=default fg=magenta italics align=centre fill=default'
+        set-option -g message-line 1
+        set-option -g message-style 'bg=default fg=magenta dim'
 
         # Make new Tmux windows open at the current working directory
         bind c new-window -c '#{pane_current_path}'
@@ -74,39 +104,27 @@
         # Open a fixed size split
         bind-key Tab split-window -h -l 80 -c '#{pane_current_path}'
 
-        # Configure the battery plugin
-        set-option -g @batt_icon_charge_tier8 '󰁹'
-        set-option -g @batt_icon_charge_tier7 '󰂁'
-        set-option -g @batt_icon_charge_tier6 '󰁿'
-        set-option -g @batt_icon_charge_tier5 '󰁾'
-        set-option -g @batt_icon_charge_tier4 '󰁼'
-        set-option -g @batt_icon_charge_tier3 '󰁻'
-        set-option -g @batt_icon_charge_tier2 '󰁺'
-        set-option -g @batt_icon_charge_tier1 '󱟩'
-        set-option -g @batt_icon_status_charged ''
-        set-option -g @batt_icon_status_charging '⚡'
-        set-option -g @batt_icon_status_discharging '󱟞'
-
         # Display string (by default the session name) to the left of the status line
         set-option -g status-left '#[fg=brightwhite bold]󱈤 #{session_name}#[default] '
         set-option -ag status-left '#{?session_alerts,#[fg=orange]󰂚 #{session_alerts},#[fg=green]✓}#[default] '
-        set-option -ag status-left '#{cpu_fg_color} #{cpu_percentage}#[default] '
-        set-option -ag status-left '#{ram_fg_color} #{ram_percentage}#[default] '
+        set-option -g status-right '#{cpu_fg_color} #{cpu_percentage}#[default] '
+        set-option -ag status-right '#{ram_fg_color} #{ram_percentage}#[default] '
+        set-option -ag status-right '#[fg=magenta bold]↻ #{continuum_status}'
         run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
 
-        # Display string (by default the session name) to the right of the status line
-        set-option -g status-right '#[fg=white dim]⬇️ #{download_speed} ⬆️ #{upload_speed}#[default] '
-        set-option -ag status-right '#[fg=brightyellow italics]%A %d %B %G#[default] '
-        set-option -ag status-right '#[fg=brightwhite bold]%R %Z#[default] '
-        set-option -ag status-right '#{battery_icon} #{battery_percentage} #{battery_remain} '
-        run-shell ${pkgs.tmuxPlugins.net-speed}/share/tmux-plugins/net-speed/net_speed.tmux
-        run-shell ${pkgs.tmuxPlugins.battery}/share/tmux-plugins/battery/battery.tmux
-
         # Window status format and style
-        set-option -g window-status-activity-style 'fg=brightwhite bold underscore blink'
-        set-option -g window-status-format '#[fg=yellow italics dim] #I #W #[default]'
-        set-option -g window-status-current-format '#[fg=magenta] #I #W #[default]'
-        set-option -g window-status-separator '⁞'
+        set-option -g renumber-windows on
+        set-option -g window-status-style 'bg=default fg=grey italics dim'
+        set-option -g window-status-last-style 'fg=yellow italics dim'
+        set-option -g window-status-current-style 'fg=blue us=orange bold double-underscore'
+        set-option -g window-status-activity-style 'us=green dashed-underscore blink'
+        set-option -g window-status-bell-style 'us=red curly-underscore blink'
+        set-option -g window-status-format '#I #W'
+        set-option -g window-status-current-format '#I #W'
+        set-option -g window-status-separator ' ◦ '
+
+        set -gu default-command
+        set -g default-command "$SHELL"
       '';
       aggressiveResize = true;
       baseIndex = 1;
@@ -115,15 +133,11 @@
       historyLimit = 50000;
       prefix = "C-g";
       shell = "${pkgs.fish}/bin/fish";
-      sensibleOnTop = true;
       terminal = "tmux-256color";
       plugins = with pkgs.tmuxPlugins; [
-        battery
         cpu
-        net-speed
         open
         pain-control
-        sensible
         yank
         {
           plugin = tmux-sessionx;
@@ -179,15 +193,6 @@
             set -g @resurrect-strategy-vim 'session'
             set -g @resurrect-strategy-nvim 'session'
             set -g @resurrect-processes '"nvim->nvim +SLoad"'
-          '';
-        }
-        {
-          plugin = continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-boot 'on'
-            set -g @continuum-boot-options 'alacritty'
-            set -g @continuum-save-interval '5'
           '';
         }
       ];

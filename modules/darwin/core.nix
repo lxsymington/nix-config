@@ -9,9 +9,6 @@
 
     etc = {
       darwin.source = "${inputs.darwin}";
-      terminfo = {
-        source = "${pkgs.ncurses}/share/terminfo";
-      };
     };
 
     pathsToLink = [

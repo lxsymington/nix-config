@@ -40,6 +40,7 @@ in {
       hurl
       imagemagick
       inetutils
+      jaq
       jd-diff-patch
       jq
       libcxx
@@ -84,7 +85,7 @@ in {
     stateVersion = "23.11";
 
     shellAliases = {
-      jq = "gojq";
+      jq = "jaq";
     };
 
     sessionPath = [

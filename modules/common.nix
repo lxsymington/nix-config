@@ -47,7 +47,7 @@ in {
       ast-grep
       atac
       dum
-      gojq
+      jaq
       just
       inputs.mergiraf
 

@@ -8,6 +8,7 @@
     ast-grep.ast-grep-vscode
     asvetliakov.vscode-neovim
     biomejs.biome
+    davidnussio.vscode-jq-playground
     editorconfig.editorconfig
     eg2.tslint
     equinusocio.moxer-icons
@@ -21,7 +22,6 @@
     hbenl.vscode-test-explorer
     hbenl.vscode-test-explorer-liveshare
     jacobpfeifer.pfeifer-hurl
-    maty.vscode-mocha-sidebar
     mkhl.direnv
     mongodb.mongodb-vscode
     ms-azuretools.vscode-docker

@@ -1,5 +1,4 @@
 {
-  pkgs,
   homeDirectory,
   inputs,
   ...
@@ -15,10 +14,6 @@
 
         if test -e ${homeDirectory}/.seccl/env.sh -a -x ${homeDirectory}/.seccl/env.sh
           replay source ${homeDirectory}/.seccl/env.sh
-        end
-
-        if not set -q TMUX
-          exec tmux
         end
       '';
       generateCompletions = true;

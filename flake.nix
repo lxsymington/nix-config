@@ -2,9 +2,12 @@
   description = "System configurations";
 
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+
     darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:lnl7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin";
     };
 
     home-manager = {
@@ -21,9 +24,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/NixOS-WSL";
     };
-
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     nur = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,6 +79,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixos-vscode-server";
     };
+
+    zed = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:zed-industries/zed";
+    };
   };
 
   outputs = {
@@ -94,6 +99,7 @@
     stylix,
     vscode-server,
     lxs-nvim,
+    zed,
     ...
   } @ inputs: let
     inherit (nixpkgs.lib) nixosSystem;
@@ -129,6 +135,7 @@
         })
         nix-vscode-extensions.overlays.default
         lxs-nvim.overlays.${system}.default
+        zed.overlays.default
       ];
     });
 

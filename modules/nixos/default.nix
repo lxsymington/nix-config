@@ -12,7 +12,7 @@
     enableAllTerminfo = true;
 
     shellAliases = {
-      renix = "nixos-rebuild switch --flake ~/.config/lxs";
+      renix = "sudo nixos-rebuild switch --flake ~/.config/lxs";
     };
 
     systemPackages = with pkgs; [

@@ -5,12 +5,6 @@
   pkgs,
   ...
 }: {
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
-
   nix = {
     extraOptions = ''
       keep-outputs = true

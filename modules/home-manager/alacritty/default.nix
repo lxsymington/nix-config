@@ -65,6 +65,11 @@ in {
         live_config_reload = true;
         working_directory = "None";
 
+        shell = {
+          program = "${pkgs.tmux}/bin/tmux";
+          args = ["new-session" "-A" "-s" "default"];
+        };
+
         mouse = {
           hide_when_typing = true;
           bindings = [

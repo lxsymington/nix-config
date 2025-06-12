@@ -18,7 +18,7 @@
     ];
 
     shellAliases = {
-      renix = "darwin-rebuild switch --flake ${config.environment.darwinConfig}";
+      renix = "sudo darwin-rebuild switch --flake ${config.environment.darwinConfig}";
     };
 
     systemPackages = with pkgs; [

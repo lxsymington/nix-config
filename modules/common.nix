@@ -24,7 +24,7 @@ in {
       stable.source = "${inputs.nixpkgs-stable}";
     };
 
-    pathsToLink = ["/share/bash" "/share/fish" "/share/zsh" "/share/nushell"];
+    pathsToLink = ["/share/bash" "/share/fish" "/share/zsh" "/share/nu"];
 
     # list of acceptable shells in /etc/shells
     shells = with pkgs; [bash zsh fish nushell];

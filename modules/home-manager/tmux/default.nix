@@ -46,7 +46,6 @@
 
         # window rename
         set -g status-interval 5
-        set -g aggressive-rename on
         set -g automatic-rename on
         set -g automatic-rename-format '#{b:pane_current_path}'
 

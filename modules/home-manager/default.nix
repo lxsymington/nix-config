@@ -110,7 +110,7 @@ in {
     ./fish
     ./ghostty
     ./git
-    # ./nushell
+    ./nushell
     # ./rio
     ./starship
     ./tmux
@@ -140,6 +140,7 @@ in {
     broot = {
       enable = true;
       enableFishIntegration = true;
+      enableNushellIntegration = true;
     };
 
     carapace = {
@@ -157,6 +158,7 @@ in {
     eza = {
       enable = true;
       enableFishIntegration = true;
+      enableNushellIntegration = true;
       extraOptions = [
         "--group-directories-first"
         "--header"
@@ -252,6 +254,7 @@ in {
     zoxide = {
       enable = true;
       enableFishIntegration = true;
+      enableNushellIntegration = true;
     };
   };
 

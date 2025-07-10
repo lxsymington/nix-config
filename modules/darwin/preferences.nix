@@ -22,13 +22,6 @@
         AutomaticallyInstallMacOSUpdates = true;
       };
 
-      # firewall settings
-      alf = {
-        globalstate = 1; # 0 = disabled 1 = enabled 2 = blocks all connections except for essential services
-        loggingenabled = 0;
-        stealthenabled = 1;
-      };
-
       # dock settings
       dock = {
         appswitcher-all-displays = true; # show app switcher on all displays
@@ -95,6 +88,13 @@
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToControl = true;
+    };
+  };
+
+  networking = {
+    applicationFirewall = {
+      enable = true;
+      enableStealthMode = true;
     };
   };
 }

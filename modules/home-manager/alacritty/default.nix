@@ -62,12 +62,17 @@ in {
           thickness = 0.15;
         };
 
-        live_config_reload = true;
+        general = {
+          live_config_reload = true;
+        };
+
         working_directory = "None";
 
-        shell = {
-          program = "${pkgs.tmux}/bin/tmux";
-          args = ["new-session" "-A" "-s" "default"];
+        terminal = {
+          shell = {
+            program = "${pkgs.tmux}/bin/tmux";
+            args = ["new-session" "-A" "-s" "default"];
+          };
         };
 
         mouse = {

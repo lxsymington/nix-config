@@ -1080,11 +1080,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752202894,
-        "narHash": "sha256-knafgng4gCjZIUMyAEWjxxdols6n/swkYnbWr+oF+1w=",
+        "lastModified": 1752265577,
+        "narHash": "sha256-YhnBM3oknReSFTAuc2SMwekwjl9nDd5PUhcar4DsefM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "fab659b346c0d4252208434c3c4b3983a4b38fec",
+        "rev": "3976e0507edc9a5f332cb2be93fa20e646d22374",
         "type": "github"
       },
       "original": {
@@ -1409,11 +1409,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1752164965,
-        "narHash": "sha256-09C5A9ToH3zzUlUcLDd/5wOOkWs4jmjaqI9HpzGebUU=",
+        "lastModified": 1752259619,
+        "narHash": "sha256-UV7mq+ZXxA0nfAwZrcD5Z+TglVuk8D9Yn5ZwhRG4zQ8=",
         "ref": "refs/heads/main",
-        "rev": "79b5378df59c9094570b359295584d69964f2b3d",
-        "revCount": 379,
+        "rev": "910f2282042e1d8fadc5474bf54f0fdc00083b0d",
+        "revCount": 380,
         "type": "git",
         "url": "https://codeberg.org/mergiraf/mergiraf"
       },
@@ -1999,11 +1999,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752238241,
-        "narHash": "sha256-FAL3YvZOt8lXQY/N7ssugm775BkjWnH1FpgAAaBQrfU=",
+        "lastModified": 1752271509,
+        "narHash": "sha256-DgufzDU620kp2WSt1y8CVHlS7j3VpcfztgpmmUUuKd0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "9e311ede9a39b9ec3a7e37be8411056a4c4e9711",
+        "rev": "71e5fcae6f4782187276720bbb33bc0ecd6c21c1",
         "type": "github"
       },
       "original": {
@@ -2381,11 +2381,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1752231632,
-        "narHash": "sha256-ZuFQ62qagCV5GHSbwnpLk92HxKlNjG7w4wbkT1OrhUA=",
+        "lastModified": 1752250117,
+        "narHash": "sha256-zCPV1a8w9hRn5ukOQwaAggA3X5cMmVsZVBYo8wLfLuU=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "0150050d6eed373b04fd85e08bd2ae7b5cc8d3b2",
+        "rev": "0da583a359fd911d5cbfd2c789424b888b777a4b",
         "type": "github"
       },
       "original": {
@@ -2761,11 +2761,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1752243909,
-        "narHash": "sha256-S+h4JtjVuN3wmw+yGYP+1RkZR0/ixQWaWC69V/f5gT4=",
+        "lastModified": 1752272584,
+        "narHash": "sha256-c/bdBYLxnCUW3O1Y603536+VXrVn9RS70GMpHoDMPp0=",
         "owner": "zed-industries",
         "repo": "zed",
-        "rev": "10028aaae83d59bb7d2186df4bc12cbb43f94e7d",
+        "rev": "12bc8907d926ca719ae182ac3aba0ba7e226f9d7",
         "type": "github"
       },
       "original": {

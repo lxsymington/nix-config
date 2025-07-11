@@ -6,9 +6,6 @@
   programs = {
     fish = {
       enable = true;
-      shellInit = ''
-        carapace _carapace | source
-      '';
       interactiveShellInit = ''
         fish_vi_key_bindings
 

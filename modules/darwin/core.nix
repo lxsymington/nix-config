@@ -1,6 +1,8 @@
 {
+  self,
   inputs,
   config,
+  username,
   pkgs,
   ...
 }: {
@@ -84,10 +86,13 @@
     };
   };
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
   system = {
-    primaryUser = "lxs";
-    stateVersion = 4;
+    primaryUser = username;
+    # Set Git commit hash for darwin-version.
+    configurationRevision = self.rev or self.dirtyRev or null;
+
+    # Used for backwards compatibility, please read the changelog before changing.
+    # $ darwin-rebuild changelog
+    stateVersion = 6;
   };
 }

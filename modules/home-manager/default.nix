@@ -62,7 +62,6 @@ in {
       pcre
       pinentry-tty
       pkg-config
-      pnpm
       (python3.withPackages (python-pkgs:
         with python-pkgs; [
           pip
@@ -77,7 +76,6 @@ in {
       typescript
       volta
       xh
-      yarn
     ];
 
     inherit homeDirectory;

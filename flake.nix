@@ -7,7 +7,7 @@
 
     darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-darwin/nix-darwin";
+      url = "github:nix-darwin/nix-darwin/master";
     };
 
     home-manager = {
@@ -255,6 +255,14 @@
         system = "x86_64-darwin";
         hostname = "josie-personal-macbook";
         username = "lxs";
+        extraModules = [
+          ./profiles/lxs-personal.nix
+        ];
+      };
+      josie-personal-imac = mkDarwinConfig {
+        system = "x86_64-darwin";
+        hostname = "josie-personal-imac";
+        username = "lukesymington";
         extraModules = [
           ./profiles/lxs-personal.nix
         ];

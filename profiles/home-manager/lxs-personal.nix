@@ -9,7 +9,7 @@
         identityFile = "${homeDirectory}/.ssh/personal_ed25519";
         extraOptions = {
           AddKeysToAgent = "yes";
-          # UseKeychain = "yes";
+          UseKeychain = "yes";
         };
       };
     };

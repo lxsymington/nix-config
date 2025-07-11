@@ -15,6 +15,11 @@
       url = "github:nix-community/home-manager";
     };
 
+    nh = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nh";
+    };
+
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Mic92/nix-index-database";
@@ -28,6 +33,11 @@
     nur = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/NUR";
+    };
+
+    mac-app-util = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:hraban/mac-app-util";
     };
 
     done = {
@@ -89,6 +99,8 @@
   outputs = {
     darwin,
     home-manager,
+    mac-app-util,
+    nh,
     nix-index-database,
     nix-vscode-extensions,
     nixos-wsl,
@@ -133,6 +145,7 @@
             inherit config;
           };
         })
+        nh.overlays.default
         nix-vscode-extensions.overlays.default
         lxs-nvim.overlays.${system}.default
         zed.overlays.default
@@ -189,7 +202,15 @@
         pkgs = nixpkgsWithOverlays system;
         modules =
           [
+            mac-app-util.darwinModules.default
             home-manager.darwinModules.home-manager
+            ({...}: {
+              # Or to enable it for a single user only:
+              home-manager.users.${username}.imports = [
+                #...
+                mac-app-util.homeManagerModules.default
+              ];
+            })
             stylix.darwinModules.stylix
             ./modules/darwin
           ]

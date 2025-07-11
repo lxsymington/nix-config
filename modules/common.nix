@@ -36,6 +36,7 @@ in {
       wget
 
       # nix utils
+      nh
       nixpkgs-fmt
 
       # editor

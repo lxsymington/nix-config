@@ -80,7 +80,7 @@ in {
 
     inherit homeDirectory;
 
-    stateVersion = "23.11";
+    stateVersion = "25.11";
 
     shellAliases = {
       jq = "jaq";

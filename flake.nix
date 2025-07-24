@@ -90,10 +90,12 @@
       url = "github:nix-community/nixos-vscode-server";
     };
 
-    zed = {
+    /*
+       zed = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:zed-industries/zed";
     };
+    */
   };
 
   outputs = {
@@ -111,7 +113,7 @@
     stylix,
     vscode-server,
     lxs-nvim,
-    zed,
+    # zed,
     ...
   } @ inputs: let
     inherit (nixpkgs.lib) nixosSystem;
@@ -148,7 +150,7 @@
         nh.overlays.default
         nix-vscode-extensions.overlays.default
         lxs-nvim.overlays.${system}.default
-        zed.overlays.default
+        # zed.overlays.default
       ];
     });
 

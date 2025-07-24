@@ -113,6 +113,7 @@ in {
     ./starship
     ./tmux
     ./vscode
+    # ./zed
     ./zellij
   ];
 

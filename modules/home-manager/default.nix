@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  inherit (inputs.nix-index-database.hmModules) nix-index;
+  inherit (inputs.nix-index-database.homeModules) nix-index;
   GOPATH = "go";
   GOBIN = "${GOPATH}/bin";
 in {

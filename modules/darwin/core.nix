@@ -67,7 +67,6 @@
       upgrade = true;
     };
     casks = [
-      "docker"
       "ghostty"
       "mongodb-compass"
       "neovide"

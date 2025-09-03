@@ -52,6 +52,9 @@ in {
       just
       inputs.mergiraf
 
+      # docker
+      docker
+
       # AI agent
       goose-cli
     ];

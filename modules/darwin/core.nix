@@ -69,7 +69,6 @@
     casks = [
       "ghostty"
       "mongodb-compass"
-      "neovide"
       "postman"
     ];
   };

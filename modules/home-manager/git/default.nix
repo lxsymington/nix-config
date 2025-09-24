@@ -215,31 +215,6 @@
         ".eslintcache"
         ".DS_Store"
       ];
-
-      includes = [
-        {
-          condition = "gitdir:${config.home.homeDirectory}/Development/Seccl/";
-          contents = {
-            user = {
-              email = "luke.xaviersymington@seccl.tech";
-              signingkey = "D580A64AA71C62C3";
-            };
-            gpg = {
-              program = "${pkgs.gnupg}/bin/gpg";
-            };
-            commit = {
-              gpgSign = true;
-            };
-            remote = {
-              origin = {
-                fetch = [
-                  "+refs/heads/*:refs/remotes/origin/*"
-                ];
-              };
-            };
-          };
-        }
-      ];
     };
   };
 }

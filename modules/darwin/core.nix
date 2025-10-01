@@ -36,6 +36,7 @@
     ];
 
     variables = {
+      CARAPACE_BRIDGES = "bash,fish,zsh";
       HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
       HOMEBREW_PREFIX = "/opt/homebrew";
       HOMEBREW_REPOSITORY = "/opt/homebrew";
@@ -67,6 +68,7 @@
       upgrade = true;
     };
     casks = [
+      "docker-desktop"
       "ghostty"
       "mongodb-compass"
       "postman"

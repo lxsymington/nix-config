@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (inputs.nix-index-database.homeModules) nix-index;
-  GOPATH = "go";
+  GOPATH = "${config.home.homeDirectory}/go";
   GOBIN = "${GOPATH}/bin";
 in {
   manual.manpages.enable = true;

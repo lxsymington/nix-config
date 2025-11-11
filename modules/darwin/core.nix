@@ -5,7 +5,9 @@
   username,
   pkgs,
   ...
-}: {
+}: let
+  homebrewRepository = "/opt/homebrew";
+in {
   environment = {
     darwinConfig = "~/.config/nix-darwin";
 
@@ -31,15 +33,15 @@
     ];
 
     systemPath = [
-      "$HOMEBREW_REPOSITORY/bin"
-      "$HOMEBREW_REPOSITORY/sbin"
+      "${homebrewRepository}/bin"
+      "${homebrewRepository}/sbin"
     ];
 
     variables = {
       CARAPACE_BRIDGES = "bash,fish,zsh";
-      HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
-      HOMEBREW_PREFIX = "/opt/homebrew";
-      HOMEBREW_REPOSITORY = "/opt/homebrew";
+      HOMEBREW_CELLAR = "${homebrewRepository}/Cellar";
+      HOMEBREW_PREFIX = homebrewRepository;
+      HOMEBREW_REPOSITORY = homebrewRepository;
       SHELL = "${pkgs.fish}/bin/fish";
       TERMINFO_DIRS = [
         "$HOME/.local/share/terminfo"

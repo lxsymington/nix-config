@@ -24,7 +24,7 @@ in {
       curl
       deadnix
       delta
-      du-dust
+      dust
       emscripten
       fd
       figlet
@@ -71,7 +71,6 @@ in {
       rustup
       shellcheck
       statix
-      sumneko-lua-language-server
       terminal-notifier
       typescript
       volta

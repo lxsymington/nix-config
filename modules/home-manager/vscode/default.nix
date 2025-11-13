@@ -11,7 +11,6 @@
     davidnussio.vscode-jq-playground
     editorconfig.editorconfig
     eg2.tslint
-    equinusocio.moxer-icons
     esbenp.prettier-vscode
     github.copilot
     github.copilot-chat
@@ -62,21 +61,17 @@ in {
 
             "debug.toolBarLocation" = "floating";
 
-            "diffEditor.experimental.useVersion2" = true;
             "diffEditor.experimental.collapseUnchangedRegions" = true;
             "diffEditor.experimental.showMoves" = true;
             "diffEditor.hideUnchangedRegions.enabled" = true;
 
-            "editor.codeActionWidget.includeNearbyQuickfixes" = true;
             "editor.cursorSurroundingLines" = 5;
             "editor.fontLigatures" = true;
             "editor.formatOnSave" = true;
             "editor.inlayHints.fontSize" = 8;
             "editor.inlayHints.padding" = true;
             "editor.inlineSuggest.enabled" = true;
-            "editor.lineHighlightBackground" = "#ffffff0A";
             "editor.minimap.autohide" = true;
-            "editor.multiDocumentOccurencesHighlight" = true;
             "editor.renderLineHighlight" = "none";
             "editor.renderLineHighlightOnlyWhenFocus" = true;
             "editor.smoothScrolling" = true;
@@ -101,7 +96,6 @@ in {
             "githubPullRequests.pushBranch" = "always";
             "githubPullRequests.defaultMergeMethod" = "squash";
 
-            "javascript.inlayHints.enumMemberValues.enabled" = true;
             "javascript.inlayHints.functionLikeReturnTypes.enabled" = true;
             "javascript.inlayHints.parameterNames.enabled" = "all";
             "javascript.inlayHints.parameterTypes.enabled" = true;
@@ -117,7 +111,6 @@ in {
             "liveshare.joinDebugSessionOption" = "Prompt";
             "liveshare.languages.allowGuestCommandControl" = true;
             "liveshare.launcherClient" = "visualStudioCode";
-            "liveshare.presence" = true;
             "liveshare.publishWorkspaceInfo" = true;
 
             "merge-conflict.autoNavigateNextConflict.enabled" = true;

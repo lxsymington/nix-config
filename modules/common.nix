@@ -116,10 +116,10 @@ in {
       };
 
       sizes = {
-        applications = 12;
-        desktop = 10;
-        popups = 10;
-        terminal = 12;
+        applications = 9;
+        desktop = 9;
+        popups = 9;
+        terminal = 9;
       };
     };
 

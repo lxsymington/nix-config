@@ -35,7 +35,59 @@
       ];
 
       userSettings = {
-        icon_theme = "Zed (Default)";
+        git = {
+          inline_blame = {
+            show_commit_summary = true;
+          };
+        };
+        debugger = {
+          stepping_granularity = "statement";
+        };
+        git_panel = {
+          sort_by_path = true;
+        };
+        bottom_dock_layout = "full";
+        preview_tabs = {
+          enable_preview_from_code_navigation = true;
+          enable_preview_from_file_finder = true;
+        };
+        title_bar = {
+          show_menus = true;
+          show_branch_icon = true;
+        };
+        languages = {
+          TypeScript = {
+            preferred_line_length = 100;
+            soft_wrap = "preferred_line_length";
+          };
+        };
+        diagnostics = {
+          inline = {
+            enabled = true;
+          };
+        };
+        completions = {
+          lsp_insert_mode = "replace_subsequence";
+        };
+        show_edit_predictions = true;
+        indent_guides = {
+          coloring = "indent_aware";
+          background_coloring = "disabled";
+        };
+        toolbar = {
+          code_actions = true;
+        };
+        minimap = {
+          show = "never";
+        };
+        relative_line_numbers = true;
+        show_signature_help_after_edits = true;
+        auto_signature_help = true;
+        icon_theme = {
+          mode = "system";
+          light = "Colored Zed Icons Theme Light";
+          dark = "Colored Zed Icons Theme Dark";
+        };
         features = {
           edit_prediction_provider = "zed";
         };
@@ -44,13 +96,13 @@
           inactive_opacity = 0.5;
         };
         agent = {
+          default_profile = "ask";
           always_allow_tool_actions = true;
           play_sound_when_agent_done = true;
           default_model = {
             provider = "zed.dev";
             model = "claude-sonnet-4-thinking";
           };
-          version = "2";
         };
         buffer_font_family = "CommitMono Nerd Font Propo";
         buffer_line_height = {
@@ -58,16 +110,15 @@
         };
         buffer_font_size = lib.mkForce 12;
         centered_layout = {
-          enabled = true;
           left_padding = 0.2;
           right_padding = 0.2;
         };
         code_actions_on_format = {
-          "source.fixAll.biome" = true;
-          "source.organizeImports.biome" = true;
+          source.fixAll.biome = true;
+          source.organizeImports.biome = true;
         };
-        diagnostics = {
-          enabled = true;
+        edit_predictions = {
+          mode = "eager";
         };
         enable_language_server = true;
         format_on_save = "on";
@@ -81,15 +132,13 @@
           show_type_hints = true;
           show_parameter_hints = true;
           show_other_hints = true;
-          show_background = false;
+          show_background = true;
           edit_debounce_ms = 700;
           scroll_debounce_ms = 50;
           toggle_on_modifiers_press = null;
         };
         node = {
           npm_path = "npm";
-          package_manager = "npm";
-          runtime_path = "node";
         };
         lsp = {
           biome = {
@@ -99,8 +148,16 @@
           };
           vtsls = {
             settings = {
-              typescript = {tsserver = {maxTsServerMemory = 16184;};};
-              javascript = {tsserver = {maxTsServerMemory = 16184;};};
+              typescript = {
+                tsserver = {
+                  maxTsServerMemory = 16184;
+                };
+              };
+              javascript = {
+                tsserver = {
+                  maxTsServerMemory = 16184;
+                };
+              };
             };
           };
         };
@@ -110,24 +167,31 @@
           git_status = true;
           activate_on_close = "history";
           show_close_button = "always";
-          show_diagnostics = "errors";
+          show_diagnostics = "all";
         };
         terminal = {
+          toolbar = {
+            breadcrumbs = true;
+          };
+          option_as_meta = true;
           font_family = "CommitMono Nerd Font Propo";
           font_size = 12;
           line_height = {
             custom = 2.0;
           };
         };
-        unnecessary_code_fade = 0.5;
         theme = lib.mkForce {
           mode = "system";
-          light = "One Light";
-          dark = "Kanagawa Wave";
+          light = "Vitesse Refined Light";
+          dark = "Vitesse Refined Dark";
         };
         ui_font_family = lib.mkForce "CommitMono Nerd Font Propo";
         ui_font_size = lib.mkForce 12;
+        unnecessary_code_fade = 0.5;
         vim_mode = true;
+        auto_install_extensions = {
+          vitesse-theme-refined = true;
+        };
       };
     };
   };

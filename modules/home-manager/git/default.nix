@@ -6,13 +6,14 @@
   programs = {
     git = {
       enable = true;
+
       settings = {
         user = {
           email = "lukexaviersymington@gmail.com";
           name = "Luke Xavier Symington";
         };
 
-        aliases = {
+        alias = {
           co = "checkout";
           # Show last commit
           lc = "diff-tree --name-status -r -v HEAD";

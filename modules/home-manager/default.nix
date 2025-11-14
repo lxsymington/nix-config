@@ -48,25 +48,17 @@ in {
       lua
       lua52Packages.luacheck
       manix
-      mongodb-tools
-      mongosh
       multimarkdown
+      nerd-fonts.commit-mono
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.recursive-mono
       nghttp2
       nix-prefetch-git
       nixd
-      nodePackages.prettier
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
-      nodePackages.yaml-language-server
       pandoc
       pcre
       pinentry-tty
       pkg-config
-      (python3.withPackages (python-pkgs:
-        with python-pkgs; [
-          pip
-          setuptools
-        ]))
       ripgrep
       rustup
       shellcheck
@@ -105,21 +97,16 @@ in {
     nix-index
     ./alacritty
     ./fish
-    ./ghostty
     ./git
     ./nushell
-    # ./rio
     ./starship
     ./tmux
-    ./vscode
     ./zed
-    ./zellij
   ];
 
   programs = {
     home-manager = {
       enable = true;
-      path = "${config.home.homeDirectory}/.nixpkgs/modules/home-manager";
     };
 
     bash.enable = true;
@@ -186,10 +173,7 @@ in {
 
     go = {
       enable = true;
-      env = {
-        GOBIN = GOBIN;
-        GOPATH = GOPATH;
-      };
+      env = {inherit GOBIN GOPATH;};
     };
 
     ssh = {

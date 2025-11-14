@@ -10,7 +10,7 @@
 }: let
   theme = import ./colours.nix;
 in {
-  imports = [./primary.nix ./nixpkgs.nix];
+  imports = [./aliases.nix];
 
   documentation = {
     man.enable = true;
@@ -21,7 +21,6 @@ in {
     etc = {
       home-manager.source = "${inputs.home-manager}";
       nixpkgs.source = "${pkgs.path}";
-      stable.source = "${inputs.nixpkgs-stable}";
     };
 
     pathsToLink = ["/share/bash" "/share/fish" "/share/zsh" "/share/nu"];
@@ -33,7 +32,6 @@ in {
       # standard toolset
       uutils-coreutils-noprefix
       curl
-      wget
 
       # nix utils
       nh
@@ -44,9 +42,7 @@ in {
       zed-editor
 
       # helpful shell stuff
-      act
       ast-grep
-      atac
       dum
       jaq
       just

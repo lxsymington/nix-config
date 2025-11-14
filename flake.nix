@@ -3,7 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
 
     darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,33 +92,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixos-vscode-server";
     };
-
-    /*
-       zed = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:zed-industries/zed";
-    };
-    */
   };
 
-  outputs = {
+  outputs = inputs@{
     darwin,
+    flake-parts,
     home-manager,
+    lxs-nvim,
     mac-app-util,
     nh,
     nix-index-database,
     nix-vscode-extensions,
     nixos-wsl,
     nixpkgs,
-    nixpkgs-stable,
     nur,
     self,
     stylix,
     vscode-server,
-    lxs-nvim,
-    # zed,
     ...
-  } @ inputs: let
+  }: let
     inherit (nixpkgs.lib) nixosSystem;
     inherit (darwin.lib) darwinSystem;
     inherit (home-manager.lib) homeManagerConfiguration;
@@ -126,13 +121,13 @@
       if isDarwin system
       then "/Users"
       else "/home";
-    homeDirectory = {
+    buildHomeDirectoryPath = {
       system,
       username,
     }: "${homePrefix system}/${username}";
 
     nixpkgsWithOverlays = system: (import nixpkgs rec {
-      inherit nixpkgs nixpkgs-stable system;
+      inherit nixpkgs system;
       config = {
         allowUnsupportedSystem = true;
         allowUnfree = true;
@@ -140,17 +135,9 @@
       };
       overlays = [
         nur.overlays.default
-        (_final: prev: {
-          # this allows us to reference pkgs.stable
-          stable = import nixpkgs-stable {
-            inherit (prev) system;
-            inherit config;
-          };
-        })
         nh.overlays.default
         nix-vscode-extensions.overlays.default
         lxs-nvim.overlays.${system}.default
-        # zed.overlays.default
       ];
     });
 
@@ -160,11 +147,11 @@
       username,
     }: {
       inherit self hostname inputs nix-index-database username;
-      homeDirectory = homeDirectory {
+      homeDirectory = buildHomeDirectoryPath {
         inherit system username;
       };
       channels = {
-        inherit nixpkgs nixpkgs-stable;
+        inherit nixpkgs;
       };
     };
 
@@ -199,13 +186,17 @@
     }: let
       specialArgs = argDefaults {inherit hostname system username;} // args;
     in
-      darwinSystem {
+      darwinSystem rec {
         inherit system specialArgs;
         pkgs = nixpkgsWithOverlays system;
         modules =
           [
-            mac-app-util.darwinModules.default
             home-manager.darwinModules.home-manager
+            stylix.darwinModules.stylix
+            ./modules/darwin
+          ]
+          ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isAarch64 [
+            mac-app-util.darwinModules.default
             ({...}: {
               # Or to enable it for a single user only:
               home-manager.users.${username}.imports = [
@@ -213,92 +204,89 @@
                 mac-app-util.homeManagerModules.default
               ];
             })
-            stylix.darwinModules.stylix
-            ./modules/darwin
           ]
           ++ extraModules;
       };
 
     mkHomeConfig = {
-      system ? "x86_64-linux",
+      system ? "x86_64-darwin",
       hostname,
       username,
       args ? {},
       extraModules ? [],
     }: let
       specialArgs = argDefaults {inherit hostname system username;} // args;
+      homeDirectory = buildHomeDirectoryPath {
+        inherit system username;
+      };
     in
       homeManagerConfiguration {
-        inherit specialArgs;
-        pkgs = nixpkgsWithOverlays {inherit system;};
+        extraSpecialArgs = specialArgs;
+        pkgs = nixpkgsWithOverlays system;
         modules =
           [
-            stylix.homeManagerModules.stylix
+            stylix.homeModules.stylix
             ./modules/home-manager
             {
               home = {
                 inherit username homeDirectory;
                 sessionVariables = {
-                  NIX_PATH = "nixpkgs=${nixpkgs}:stable=${nixpkgs-stable}\${NIX_PATH:+:}$NIX_PATH";
+                  NIX_PATH = "nixpkgs=${nixpkgs}\${NIX_PATH:+:}$NIX_PATH";
                 };
               };
             }
           ]
           ++ extraModules;
       };
-  in {
-    formatter = {
-      x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-      aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
-      x86_64-darwin = nixpkgs.legacyPackages.x86_64-darwin.alejandra;
-    };
+  in flake-parts.lib.mkFlake { inherit inputs; } (top@{ config, withSystem, moduleWithSystem, ... }: {
+    imports = [
+      inputs.home-manager.flakeModules.home-manager
+    ];
 
-    nixosConfigurations = {
-      nixos = mkNixosConfiguration {
-        hostname = "nixos";
-        username = "lxs";
-        extraModules = [
-          nixos-wsl.nixosModules.wsl
-          ./modules/wsl
-          ./profiles/lxs-personal.nix
-        ];
+    flake = {
+      nixosConfigurations = {
+        nixos = mkNixosConfiguration {
+          hostname = "nixos";
+          username = "lxs";
+          extraModules = [
+            nixos-wsl.nixosModules.wsl
+            ./modules/wsl
+            ./profiles/lxs-personal.nix
+          ];
+        };
       };
-    };
 
-    darwinConfigurations = {
-      Lukes-MacBook-Pro = mkDarwinConfig {
-        hostname = "Lukes-MacBook-Pro";
-        username = "lxs";
-        extraModules = [
-          ./modules/darwin/work.nix
-          ./profiles/lxs-work.nix
-        ];
+      darwinConfigurations = {
+        Lukes-MacBook-Pro = mkDarwinConfig {
+          hostname = "Lukes-MacBook-Pro";
+          username = "lxs";
+          extraModules = [
+            ./modules/darwin/work.nix
+            ./profiles/lxs-work.nix
+          ];
+        };
       };
-      josie-personal-macbook = mkDarwinConfig {
-        system = "x86_64-darwin";
-        hostname = "josie-personal-macbook";
-        username = "lxs";
-        extraModules = [
-          ./profiles/lxs-personal.nix
-        ];
-      };
-      josie-personal-imac = mkDarwinConfig {
-        system = "x86_64-darwin";
-        hostname = "josie-personal-imac";
-        username = "lukesymington";
-        extraModules = [
-          ./profiles/lxs-personal.nix
-        ];
+
+      homeConfigurations = {
+        lukesymington = mkHomeConfig {
+          system = "x86_64-darwin";
+          hostname = "josie-personal-imac";
+          username = "lukesymington";
+          extraModules = [
+            ./profiles/home-manager/lxs-personal.nix
+          ];
+        };
       };
     };
 
-    homeConfigurations = {
-      lxs = mkHomeConfig {
-        system = builtins.currentSystem;
-        hostname = null;
-        username = "lxs";
-        extraModules = [];
-      };
+    systems = [
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+
+    perSystem = { config, pkgs, ... }: {
+      formatter = pkgs.alejandra;
     };
-  };
+  });
 }

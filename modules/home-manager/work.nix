@@ -7,8 +7,17 @@
     packages = with pkgs; [
       auth0-cli
       awscli2
-      # TODO: reinstate this once it's fixed
-      # aws-sam-cli
+      mongodb-tools
+      mongosh
+      nodePackages.prettier
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted
+      nodePackages.yaml-language-server
+      (python3.withPackages (python-pkgs:
+        with python-pkgs; [
+          pip
+          setuptools
+        ]))
       terraform
     ];
 
@@ -25,4 +34,8 @@
       STAGE_ENV = "devlsymington";
     };
   };
+
+  imports = [
+    ./vscode
+  ];
 }

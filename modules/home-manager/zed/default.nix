@@ -114,8 +114,8 @@
           right_padding = 0.2;
         };
         code_actions_on_format = {
-          source.fixAll.biome = true;
-          source.organizeImports.biome = true;
+          "source.fixAll.biome" = true;
+          "source.organizeImports.biome" = true;
         };
         edit_predictions = {
           mode = "eager";
@@ -190,6 +190,7 @@
         unnecessary_code_fade = 0.5;
         vim_mode = true;
         auto_install_extensions = {
+          colored-zed-icons-theme = true;
           vitesse-theme-refined = true;
         };
       };

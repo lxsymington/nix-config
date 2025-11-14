@@ -35,6 +35,7 @@ in {
       glib
       go
       gojq
+      goose-cli
       gopls
       graphviz
       hurl
@@ -47,6 +48,7 @@ in {
       llvm
       lua
       lua52Packages.luacheck
+      lxs-nvim
       manix
       multimarkdown
       nerd-fonts.commit-mono
@@ -65,8 +67,10 @@ in {
       statix
       terminal-notifier
       typescript
+      uutils-coreutils-noprefix
       volta
       xh
+      zed-editor
     ];
 
     inherit homeDirectory;

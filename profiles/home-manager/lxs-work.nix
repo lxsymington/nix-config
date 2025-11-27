@@ -1,4 +1,9 @@
-{homeDirectory, config, pkgs, ...}: {
+{
+  homeDirectory,
+  config,
+  pkgs,
+  ...
+}: {
   programs = {
     git = {
       includes = [

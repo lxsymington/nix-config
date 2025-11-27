@@ -94,7 +94,7 @@
     };
   };
 
-  outputs = inputs@{
+  outputs = inputs @ {
     darwin,
     flake-parts,
     home-manager,
@@ -194,6 +194,7 @@
             home-manager.darwinModules.home-manager
             stylix.darwinModules.stylix
             ./modules/darwin
+            ./modules/nixpkgs.nix
           ]
           ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isAarch64 [
             mac-app-util.darwinModules.default
@@ -238,55 +239,65 @@
           ]
           ++ extraModules;
       };
-  in flake-parts.lib.mkFlake { inherit inputs; } (top@{ config, withSystem, moduleWithSystem, ... }: {
-    imports = [
-      inputs.home-manager.flakeModules.home-manager
-    ];
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} (top @ {
+      config,
+      withSystem,
+      moduleWithSystem,
+      ...
+    }: {
+      imports = [
+        inputs.home-manager.flakeModules.home-manager
+      ];
 
-    flake = {
-      nixosConfigurations = {
-        nixos = mkNixosConfiguration {
-          hostname = "nixos";
-          username = "lxs";
-          extraModules = [
-            nixos-wsl.nixosModules.wsl
-            ./modules/wsl
-            ./profiles/lxs-personal.nix
-          ];
+      flake = {
+        nixosConfigurations = {
+          nixos = mkNixosConfiguration {
+            hostname = "nixos";
+            username = "lxs";
+            extraModules = [
+              nixos-wsl.nixosModules.wsl
+              ./modules/wsl
+              ./profiles/lxs-personal.nix
+            ];
+          };
+        };
+
+        darwinConfigurations = {
+          Lukes-MacBook-Pro = mkDarwinConfig {
+            hostname = "Lukes-MacBook-Pro";
+            username = "lxs";
+            extraModules = [
+              ./modules/darwin/work.nix
+              ./profiles/lxs-work.nix
+            ];
+          };
+        };
+
+        homeConfigurations = {
+          lukesymington = mkHomeConfig {
+            system = "x86_64-darwin";
+            hostname = "josie-personal-imac";
+            username = "lukesymington";
+            extraModules = [
+              ./profiles/home-manager/lxs-personal.nix
+            ];
+          };
         };
       };
 
-      darwinConfigurations = {
-        Lukes-MacBook-Pro = mkDarwinConfig {
-          hostname = "Lukes-MacBook-Pro";
-          username = "lxs";
-          extraModules = [
-            ./modules/darwin/work.nix
-            ./profiles/lxs-work.nix
-          ];
-        };
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+
+      perSystem = {
+        config,
+        pkgs,
+        ...
+      }: {
+        formatter = pkgs.alejandra;
       };
-
-      homeConfigurations = {
-        lukesymington = mkHomeConfig {
-          system = "x86_64-darwin";
-          hostname = "josie-personal-imac";
-          username = "lukesymington";
-          extraModules = [
-            ./profiles/home-manager/lxs-personal.nix
-          ];
-        };
-      };
-    };
-
-    systems = [
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-
-    perSystem = { config, pkgs, ... }: {
-      formatter = pkgs.alejandra;
-    };
-  });
+    });
 }

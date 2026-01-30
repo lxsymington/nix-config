@@ -38,11 +38,6 @@
       url = "github:nix-community/NUR";
     };
 
-    mac-app-util = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:hraban/mac-app-util";
-    };
-
     done = {
       url = "github:franciscolourenco/done";
       flake = false;
@@ -99,7 +94,6 @@
     flake-parts,
     home-manager,
     lxs-nvim,
-    mac-app-util,
     nh,
     nix-index-database,
     nix-vscode-extensions,
@@ -126,7 +120,7 @@
       username,
     }: "${homePrefix system}/${username}";
 
-    nixpkgsWithOverlays = system: (import nixpkgs rec {
+    nixpkgsWithOverlays = system: (import nixpkgs {
       inherit nixpkgs system;
       config = {
         allowUnsupportedSystem = true;
@@ -137,7 +131,7 @@
         nur.overlays.default
         nh.overlays.default
         nix-vscode-extensions.overlays.default
-        lxs-nvim.overlays.${system}.default
+        lxs-nvim.overlays.default
       ];
     });
 
@@ -195,16 +189,6 @@
             stylix.darwinModules.stylix
             ./modules/darwin
             ./modules/nixpkgs.nix
-          ]
-          ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isAarch64 [
-            mac-app-util.darwinModules.default
-            ({...}: {
-              # Or to enable it for a single user only:
-              home-manager.users.${username}.imports = [
-                #...
-                mac-app-util.homeManagerModules.default
-              ];
-            })
           ]
           ++ extraModules;
       };

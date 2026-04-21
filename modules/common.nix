@@ -49,7 +49,8 @@ in {
       inputs.mergiraf
 
       # AI agent
-      goose-cli
+      inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+      inputs.openspec.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 

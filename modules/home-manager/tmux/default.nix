@@ -106,10 +106,6 @@
         # Display string (by default the session name) to the left of the status line
         set-option -g status-left '#[fg=brightwhite bold]󱈤 #{session_name}#[default] '
         set-option -ag status-left '#{?session_alerts,#[fg=orange]󰂚 #{session_alerts},#[fg=green]✓}#[default] '
-        set-option -g status-right '#{cpu_fg_color} #{cpu_percentage}#[default] '
-        set-option -ag status-right '#{ram_fg_color} #{ram_percentage}#[default] '
-        set-option -ag status-right '#[fg=magenta bold]↻ #{continuum_status}'
-        run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
 
         # Window status format and style
         set-option -g renumber-windows on
@@ -127,14 +123,22 @@
       '';
       aggressiveResize = true;
       baseIndex = 1;
+      escapeTime = 10;
       focusEvents = true;
       keyMode = "vi";
       historyLimit = 50000;
       prefix = "C-g";
+      shortcut = "g";
       shell = "${pkgs.fish}/bin/fish";
       terminal = "tmux-256color";
       plugins = with pkgs.tmuxPlugins; [
-        cpu
+        {
+          plugin = cpu;
+          extraConfig = ''
+            set-option -g status-right '#{cpu_fg_color} #{cpu_percentage}#[default] '
+            set-option -ag status-right '#{ram_fg_color} #{ram_percentage}#[default] '
+          '';
+        }
         open
         pain-control
         yank
@@ -192,6 +196,14 @@
             set -g @resurrect-strategy-vim 'session'
             set -g @resurrect-strategy-nvim 'session'
             set -g @resurrect-processes '"nvim->nvim +SLoad"'
+          '';
+        }
+        {
+          plugin = continuum;
+          extraConfig = ''
+            set -g @continuum-restore 'on'
+            # any other continuum settings
+            set-option -ag status-right '#[fg=magenta bold]↻ #{continuum_status}'
           '';
         }
       ];

@@ -35,7 +35,6 @@ in {
       glib
       go
       gojq
-      goose-cli
       gopls
       graphviz
       hurl

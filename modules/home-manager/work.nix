@@ -9,10 +9,10 @@
       awscli2
       mongodb-tools
       mongosh
-      nodePackages.prettier
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
-      nodePackages.yaml-language-server
+      prettier
+      typescript-language-server
+      vscode-langservers-extracted
+      yaml-language-server
       (python3.withPackages (python-pkgs:
         with python-pkgs; [
           pip
@@ -34,8 +34,4 @@
       STAGE_ENV = "devlsymington";
     };
   };
-
-  imports = [
-    ./vscode
-  ];
 }

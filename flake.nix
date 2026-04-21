@@ -58,11 +58,6 @@
       url = "git+https://codeberg.org/mergiraf/mergiraf";
     };
 
-    nix-vscode-extensions = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nix-vscode-extensions";
-    };
-
     pisces = {
       url = "github:laughedelic/pisces";
       flake = false;
@@ -83,9 +78,14 @@
       flake = false;
     };
 
-    vscode-server = {
+    opencode = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nixos-vscode-server";
+      url = "github:anomalyco/opencode";
+    };
+
+    openspec = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Fission-AI/OpenSpec";
     };
   };
 
@@ -96,13 +96,11 @@
     lxs-nvim,
     nh,
     nix-index-database,
-    nix-vscode-extensions,
     nixos-wsl,
     nixpkgs,
     nur,
     self,
     stylix,
-    vscode-server,
     ...
   }: let
     inherit (nixpkgs.lib) nixosSystem;
@@ -130,7 +128,6 @@
       overlays = [
         nur.overlays.default
         nh.overlays.default
-        nix-vscode-extensions.overlays.default
         lxs-nvim.overlays.default
       ];
     });
@@ -165,7 +162,6 @@
           [
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
-            vscode-server.nixosModules.default
             ./modules/nixos
           ]
           ++ extraModules;
@@ -248,8 +244,8 @@
         };
 
         darwinConfigurations = {
-          Lukes-MacBook-Pro = mkDarwinConfig {
-            hostname = "Lukes-MacBook-Pro";
+          FGK6CWXWQN = mkDarwinConfig {
+            hostname = "FGK6CWXWQN";
             username = "lxs";
             extraModules = [
               ./modules/darwin/work.nix

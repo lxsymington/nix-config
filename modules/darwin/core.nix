@@ -70,7 +70,6 @@ in {
       upgrade = true;
     };
     casks = [
-      "docker-desktop"
       "ghostty"
       "mongodb-compass"
       "postman"

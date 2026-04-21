@@ -1,11 +1,6 @@
-{
-  inputs,
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   environment = {
-    systemPackages = with pkgs; [];
+    systemPackages = [];
   };
 
   # bootstrap home manager using system config

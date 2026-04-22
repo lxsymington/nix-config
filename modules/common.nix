@@ -23,10 +23,10 @@ in {
       nixpkgs.source = "${pkgs.path}";
     };
 
-    pathsToLink = ["/share/bash" "/share/fish" "/share/zsh" "/share/nu"];
+    pathsToLink = ["/share/bash" "/share/fish" "/share/zsh"];
 
     # list of acceptable shells in /etc/shells
-    shells = with pkgs; [bash zsh fish nushell];
+    shells = with pkgs; [bash zsh fish];
 
     systemPackages = with pkgs; [
       # standard toolset

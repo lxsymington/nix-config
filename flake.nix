@@ -78,10 +78,12 @@
       flake = false;
     };
 
-    opencode = {
+    /*
+       opencode = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:anomalyco/opencode";
     };
+    */
 
     openspec = {
       inputs.nixpkgs.follows = "nixpkgs";

@@ -62,7 +62,6 @@ in {
     enable = true;
     global = {
       brewfile = true;
-      lockfiles = false;
     };
     onActivation = {
       autoUpdate = true;

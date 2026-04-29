@@ -74,7 +74,7 @@ in {
 
     inherit homeDirectory;
 
-    stateVersion = "25.11";
+    stateVersion = "26.05";
 
     shellAliases = {
       jq = "jaq";

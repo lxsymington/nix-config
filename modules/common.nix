@@ -49,7 +49,7 @@ in {
       inputs.mergiraf
 
       # AI agent
-      inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+      # inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
       inputs.openspec.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };

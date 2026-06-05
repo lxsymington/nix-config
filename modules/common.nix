@@ -50,7 +50,7 @@ in {
 
       # AI agent
       # inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
-      inputs.openspec.packages.${pkgs.stdenv.hostPlatform.system}.default
+      # inputs.openspec.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 

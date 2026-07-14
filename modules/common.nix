@@ -23,10 +23,10 @@ in {
       nixpkgs.source = "${pkgs.path}";
     };
 
-    pathsToLink = ["/share/bash" "/share/fish" "/share/zsh"];
+    pathsToLink = ["/share/bash" "/share/fish" "/share/zsh" "/share/nu"];
 
     # list of acceptable shells in /etc/shells
-    shells = with pkgs; [bash zsh fish];
+    shells = with pkgs; [bash zsh fish nushell];
 
     systemPackages = with pkgs; [
       # standard toolset
@@ -77,16 +77,7 @@ in {
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 
-  programs = {
-    fish = {
-      enable = true;
-      vendor = {
-        config.enable = true;
-        completions.enable = true;
-        functions.enable = true;
-      };
-    };
-  };
+  programs = {};
 
   stylix = {
     enable = true;
@@ -196,6 +187,6 @@ in {
     name = username;
     description = "Luke Xavier Symington";
     home = homeDirectory;
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
   };
 }

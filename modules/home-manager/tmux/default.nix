@@ -129,7 +129,7 @@
       historyLimit = 50000;
       prefix = "C-g";
       shortcut = "g";
-      shell = "${pkgs.fish}/bin/fish";
+      shell = "${pkgs.nushell}/bin/nu";
       terminal = "tmux-256color";
       plugins = with pkgs.tmuxPlugins; [
         {

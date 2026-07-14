@@ -39,11 +39,11 @@ in {
     ];
 
     variables = {
-      CARAPACE_BRIDGES = "bash,fish,zsh";
+      CARAPACE_BRIDGES = "bash,fish,zsh,nu";
       HOMEBREW_CELLAR = "${homebrewRepository}/Cellar";
       HOMEBREW_PREFIX = homebrewRepository;
       HOMEBREW_REPOSITORY = homebrewRepository;
-      SHELL = "${pkgs.fish}/bin/fish";
+      SHELL = "${pkgs.nushell}/bin/nu";
       TERMINFO_DIRS = [
         "$HOME/.local/share/terminfo"
         "/run/current-system/sw/share/terminfo"

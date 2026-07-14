@@ -52,6 +52,7 @@ in {
       lxs-nvim
       manix
       multimarkdown
+      nushell
       nerd-fonts.commit-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.recursive-mono
@@ -107,6 +108,7 @@ in {
     ./ghostty
     ./git
     ./herdr
+    ./nushell
     ./starship
     ./tmux
     ./zed

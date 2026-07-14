@@ -51,7 +51,8 @@ in {
       just
       inputs.mergiraf
 
-      # AI agent
+      # AI agent tools
+      mcp-nixos
       # inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
       # inputs.openspec.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];

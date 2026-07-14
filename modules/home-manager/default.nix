@@ -56,6 +56,7 @@ in {
       nerd-fonts.recursive-mono
       nghttp2
       nix-prefetch-git
+      mcp-nixos
       nixd
       pandoc
       pcre

@@ -59,6 +59,7 @@ in {
       nghttp2
       nix-prefetch-git
       mcp-nixos
+      nil
       nixd
       pandoc
       pcre

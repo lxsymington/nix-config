@@ -70,7 +70,6 @@ in {
       upgrade = true;
     };
     casks = [
-      "ghostty"
       "mongodb-compass"
       "postman"
     ];

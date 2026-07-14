@@ -1,0 +1,35 @@
+active_model = "mistral-medium-3.5"
+
+[[mcp_servers]]
+name = "nixos"
+transport = "stdio"
+command = "uvx"
+args = [
+    "mcp-nixos",
+]
+disabled_tools = []
+
+[[mcp_servers]]
+name = "mq"
+transport = "stdio"
+command = "mq"
+args = [
+    "mcp",
+]
+
+[tools.nixos]
+permission = "always"
+
+[tools.nixos_nix]
+permission = "always"
+
+[tools.bash]
+allowlist = [
+    "git diff",
+    "git ls-files",
+    "git status",
+    "grep",
+    "head",
+    "ls",
+    "nix",
+]

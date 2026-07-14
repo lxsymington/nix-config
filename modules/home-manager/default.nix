@@ -86,9 +86,6 @@ in {
     sessionPath = [
       "$VOLTA_HOME/bin"
       "${config.home.homeDirectory}/${GOBIN}"
-    ];
-
-    path = [
       "${config.home.homeDirectory}/.local/bin"
     ];
 

@@ -1779,26 +1779,6 @@
         "url": "ssh://git@github.com/yioneko/nvim-vtsls"
       }
     },
-    "openspec": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1783522351,
-        "narHash": "sha256-NvOPSgkMGuKU6zx7vWn7EHecpdkOrBpGYsLvjfFLMQU=",
-        "owner": "Fission-AI",
-        "repo": "OpenSpec",
-        "rev": "93e27a755ce5386c66be7f3274a35f70018002bc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Fission-AI",
-        "repo": "OpenSpec",
-        "type": "github"
-      }
-    },
     "pisces": {
       "flake": false,
       "locked": {
@@ -1909,7 +1889,6 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_6",
         "nur": "nur",
-        "openspec": "openspec",
         "pisces": "pisces",
         "replay": "replay",
         "ssh-agent-fish": "ssh-agent-fish",

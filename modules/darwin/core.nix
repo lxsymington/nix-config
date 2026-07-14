@@ -30,6 +30,7 @@ in {
       ncurses
       reattach-to-user-namespace
       volta
+      uv
     ];
 
     systemPath = [

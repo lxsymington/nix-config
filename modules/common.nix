@@ -41,6 +41,9 @@ in {
       lxs-nvim
       zed-editor
 
+      # terminal multiplexer (herdr as tmux alternative)
+      herdr
+
       # helpful shell stuff
       ast-grep
       dum
@@ -81,10 +84,6 @@ in {
         completions.enable = true;
         functions.enable = true;
       };
-    };
-
-    tmux = {
-      enable = true;
     };
   };
 

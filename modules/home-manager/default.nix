@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   homeDirectory,
   inputs,
   ...
@@ -101,6 +102,7 @@ in {
     ./alacritty
     ./fish
     ./git
+    ./herdr
     ./starship
     ./tmux
     ./zed
@@ -112,6 +114,9 @@ in {
     };
 
     bash.enable = true;
+
+    # tmux disabled in favor of herdr
+    tmux.enable = lib.mkForce false;
 
     bat = {
       enable = true;

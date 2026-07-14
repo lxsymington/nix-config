@@ -70,8 +70,8 @@ in {
 
         terminal = {
           shell = {
-            program = "${pkgs.tmux}/bin/tmux";
-            args = ["new-session" "-A" "-s" "default"];
+            program = "${pkgs.herdr}/bin/herdr";
+            args = ["new-session" "-A" "-s" "main"];
           };
         };
 

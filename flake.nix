@@ -85,10 +85,12 @@
     };
     */
 
-    openspec = {
+    /*
+       openspec = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Fission-AI/OpenSpec";
     };
+    */
   };
 
   outputs = inputs @ {

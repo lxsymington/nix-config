@@ -34,6 +34,7 @@ in {
       fzf
       git
       glib
+      ghostty
       go
       gojq
       gopls
@@ -87,6 +88,10 @@ in {
       "${config.home.homeDirectory}/${GOBIN}"
     ];
 
+    path = [
+      "${config.home.homeDirectory}/.local/bin"
+    ];
+
     sessionVariables = {
       EDITOR = "nvim";
       HISTTIMEFORMAT = "%F %T ";
@@ -102,6 +107,7 @@ in {
     nix-index
     ./alacritty
     ./fish
+    ./ghostty
     ./git
     ./herdr
     ./starship

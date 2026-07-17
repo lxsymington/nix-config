@@ -5,7 +5,7 @@
 }: {
   programs = {
     fish = {
-      enable = false;
+      enable = true;
       interactiveShellInit = ''
         fish_vi_key_bindings
 

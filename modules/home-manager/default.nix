@@ -34,7 +34,6 @@ in {
       fzf
       git
       glib
-      ghostty
       go
       gojq
       gopls
@@ -59,17 +58,20 @@ in {
       nghttp2
       nix-prefetch-git
       mcp-nixos
+      inputs.mq.packages.${pkgs.stdenv.hostPlatform.system}.mq
       nil
       nixd
       pandoc
       pcre
       pinentry-tty
       pkg-config
+      repomix
       ripgrep
       rustup
+      scc
       shellcheck
       statix
-      terminal-notifier
+      tokei
       typescript
       uutils-coreutils-noprefix
       volta
@@ -154,6 +156,13 @@ in {
       enable = false;
     };
 
+    difftastic = {
+      enable = true;
+      git = {
+        mode = "difftool";
+      };
+    };
+
     eza = {
       enable = true;
       enableFishIntegration = true;
@@ -169,6 +178,7 @@ in {
     fzf = {
       enable = true;
       enableFishIntegration = true;
+      enableNushellIntegration = false;
     };
 
     gh = {

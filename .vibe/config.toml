@@ -1,20 +1,10 @@
 active_model = "mistral-medium-3.5"
-
-[[mcp_servers]]
-name = "nixos"
-transport = "stdio"
-command = "uvx"
-args = [
-    "mcp-nixos",
+applied_migrations = [
+    "bash_read_only_defaults_v1",
 ]
-disabled_tools = []
-
-[[mcp_servers]]
-name = "mq"
-transport = "stdio"
-command = "mq"
-args = [
-    "mcp",
+mcp_servers = [
+    { name = "nixos", transport = "stdio", command = "mcp-nixos", args = [], disabled_tools = [] },
+    { name = "mq-mcp", transport = "stdio", command = "mq-mcp", args = [] },
 ]
 
 [tools.nixos]
@@ -25,11 +15,57 @@ permission = "always"
 
 [tools.bash]
 allowlist = [
+    "basename",
+    "cat",
+    "cd",
+    "comm",
+    "curl",
+    "cut",
+    "date",
+    "diff",
+    "dirname",
+    "du",
+    "echo",
+    "file",
+    "find",
+    "fmt",
+    "fold",
     "git diff",
     "git ls-files",
+    "git show",
     "git status",
     "grep",
     "head",
+    "join",
+    "less",
     "ls",
+    "md5sum",
+    "more",
     "nix",
+    "nl",
+    "od",
+    "paste",
+    "pwd",
+    "readlink",
+    "sha1sum",
+    "sha256sum",
+    "shasum",
+    "sort",
+    "stat",
+    "sum",
+    "tac",
+    "tail",
+    "tr",
+    "uname",
+    "uniq",
+    "wc",
+    "which",
 ]
+
+[tools.web_fetch]
+allowlist = [
+    "herdr.dev",
+]
+
+[tools.edit]
+permission = "always"

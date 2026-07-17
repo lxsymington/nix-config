@@ -1,9 +1,8 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   programs.ghostty = {
     enable = true;
-    package = pkgs.ghostty;
-    
+    package = pkgs.ghostty-bin;
+
     settings = {
       "adjust-cell-height" = "75%";
       "background-opacity" = "0.95";
@@ -22,7 +21,7 @@
       "window-padding-y" = "20";
       "window-padding-balance" = "true";
     };
-    
+
     enableFishIntegration = true;
   };
 }

@@ -27,6 +27,7 @@ in {
 
     systemPackages = with pkgs; [
       alacritty
+      ghostty-bin
       ncurses
       reattach-to-user-namespace
       volta
@@ -43,7 +44,7 @@ in {
       HOMEBREW_CELLAR = "${homebrewRepository}/Cellar";
       HOMEBREW_PREFIX = homebrewRepository;
       HOMEBREW_REPOSITORY = homebrewRepository;
-      SHELL = "${pkgs.nushell}/bin/nu";
+      SHELL = "${pkgs.fish}/bin/fish";
       TERMINFO_DIRS = [
         "$HOME/.local/share/terminfo"
         "/run/current-system/sw/share/terminfo"
@@ -69,10 +70,6 @@ in {
       cleanup = "zap";
       upgrade = true;
     };
-    casks = [
-      "mongodb-compass"
-      "postman"
-    ];
   };
 
   nix.nixPath = ["darwin=/etc/${config.environment.etc.darwin.target}"];

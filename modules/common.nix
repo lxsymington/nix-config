@@ -46,13 +46,17 @@ in {
 
       # helpful shell stuff
       ast-grep
+      difftastic
       dum
       jaq
       just
       inputs.mergiraf
+      tokei
 
       # AI agent tools
       mcp-nixos
+      inputs.mq.packages.${pkgs.stdenv.hostPlatform.system}.mq
+      rtk
       # inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
       # inputs.openspec.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
@@ -77,7 +81,16 @@ in {
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 
-  programs = {};
+  programs = {
+    fish = {
+      enable = true;
+      vendor = {
+        config.enable = true;
+        completions.enable = true;
+        functions.enable = true;
+      };
+    };
+  };
 
   stylix = {
     enable = true;

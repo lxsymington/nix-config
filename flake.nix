@@ -58,6 +58,16 @@
       url = "git+https://codeberg.org/mergiraf/mergiraf";
     };
 
+    herdr = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ogulcancelik/herdr";
+    };
+
+    mq = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:harehare/mq";
+    };
+
     pisces = {
       url = "github:laughedelic/pisces";
       flake = false;
@@ -96,8 +106,10 @@
   outputs = inputs @ {
     darwin,
     flake-parts,
+    herdr,
     home-manager,
     lxs-nvim,
+    mq,
     nh,
     nix-index-database,
     nixos-wsl,
@@ -133,6 +145,7 @@
         nur.overlays.default
         nh.overlays.default
         lxs-nvim.overlays.default
+        herdr.overlays.default
       ];
     });
 
